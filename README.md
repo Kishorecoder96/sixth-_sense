@@ -34,7 +34,7 @@ A Personal companion device for blind people to help them for navigation,communi
 | Easy OCR | for extract images
 
 ##### Programming Languages
-<img width="48" height="48" src="https://img.icons8.com/fluency/48/python.png" alt="python"/>
+<img width="48" height="48" src="https://img.icons8.com/fluency/48/python.png" alt="python"/><img width="48" height="48" src="https://img.icons8.com/color/48/javascript--v1.png" alt="javascript--v1"/>
 
 ##### Hardware
 
