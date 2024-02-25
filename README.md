@@ -115,6 +115,7 @@ npm start
 ```
 ---
 for python code :
+##### Hint:Python version needs to be 3.10 or lower
 ```python
 pip install -r requirments.txt
 ```
