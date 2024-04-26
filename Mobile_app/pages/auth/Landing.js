@@ -3,20 +3,22 @@ import { Text, View, StyleSheet, Button, ImageBackground } from 'react-native'
 
 import Color from '../../constants/Colors'
 import CustomButton from '../../components/CustomButton'
+import { useTranslation } from 'react-i18next'
 
 
 const LandingPage = props => {
-
+    const { t } = useTranslation()
+    
     return (
     <View style={styles.view}>
             <ImageBackground source={require('../../assets/images/landingBackground.png')} style={styles.bgImg}>
-            <Text style={styles.title}>Vision</Text>
+                <Text style={styles.title}>{t('Sixth Sense')}</Text>
             <View style={styles.buttonView}>
-                <CustomButton onPress={() => { props.navigation.navigate('Register') }} color={Color.four} style={styles.button}>
-                    <Text style={{color: Color.one}}>Register</Text>
+                <CustomButton onPress={() => { props.navigation.navigate('Register') }}  style={styles.button}>
+                        <Text style={{ color: Color.one }}>{t('Register')}</Text>
                 </CustomButton>
-                <CustomButton onPress={() => { props.navigation.navigate('Login') }} color={Color.four} style={styles.button}>
-                    <Text style={{color: Color.one}}>Login</Text>
+                <CustomButton onPress={() => { props.navigation.navigate('Login') }}  style={styles.button}>
+                        <Text style={{ color: Color.one }}>{t('Login')}</Text>
                 </CustomButton>
                 </View>
                 </ImageBackground>
@@ -39,15 +41,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center'
     }, title: {
-        fontSize: 120,
+        fontSize: 100,
         fontWeight: '600',
-        color: Color.one
+        color: Color.two,
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10,
+        textAlign: 'center'
     },
     button: {
         height: 50,
         width: 120,
         color: Color.one,
-        backgroundColor: Color.four,
+        backgroundColor: Color.three,
         alignItems: 'center',
         justifyContent: 'center',
     },
