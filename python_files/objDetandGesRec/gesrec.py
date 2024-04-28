@@ -20,9 +20,9 @@ class HandGestureRecognition:
         self.min_detection_confidence = 0.7
         self.min_tracking_confidence = 0.5
         self.use_brect = True
-        self.cap = cv.VideoCapture(0)
-        self.cap.set(cv.CAP_PROP_FRAME_WIDTH, self.cap_width)
-        self.cap.set(cv.CAP_PROP_FRAME_HEIGHT, self.cap_height)
+        # self.cap = cv.VideoCapture(0)
+        # self.cap.set(cv.CAP_PROP_FRAME_WIDTH, self.cap_width)
+        # self.cap.set(cv.CAP_PROP_FRAME_HEIGHT, self.cap_height)
         self.mp_hands = mp.solutions.hands
         self.hands = self.mp_hands.Hands(
             static_image_mode=self.use_static_image_mode,
@@ -46,11 +46,11 @@ class HandGestureRecognition:
         with open('model/point_history_classifier/point_history_classifier_label.csv', encoding='utf-8-sig') as f:
             self.point_history_classifier_labels = [row[0] for row in csv.reader(f)]
 
-    def run(self):
+    def run(self,image):
         fps = self.cvFpsCalc.get()
         key = 27
         number, self.mode = self.select_mode(key, self.mode)
-        ret, image = self.cap.read()
+        # ret, image = self.cap.read()
     
         image = cv.flip(image, 1)
         debug_image = copy.deepcopy(image)
@@ -62,8 +62,8 @@ class HandGestureRecognition:
         
         debug_image = self.draw_point_history(debug_image, self.point_history)
         debug_image = self.draw_info(debug_image, fps, self.mode, number)
-        cv.imshow('Hand Gesture Recognition', debug_image)
-        return val
+        # cv.imshow('Hand Gesture Recognition', debug_image)
+        return val, debug_image
         
 
     def select_mode(self, key, mode):
