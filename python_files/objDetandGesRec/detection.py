@@ -3,13 +3,18 @@ import argparse
 import cv2
 import numpy as np
 from threading import Thread
+import threading
 import importlib.util
 from time import sleep, time
-from gesrec import HandGestureRecognition
+# from gesrec import HandGestureRecognition
+# from faceEmotion import FaceEmotion
+# from face_distance import FaceDistance
+
 
 class VideoStream:
     def __init__(self,resolution=(640,480),framerate=30):
         self.stream = cv2.VideoCapture(0)
+        # self.facedist = FaceDistance(76.2, 14.3, "ref_image.png", "models/haarcascade_frontalface_default.xml")
         ret = self.stream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
         ret = self.stream.set(3,resolution[0])
         ret = self.stream.set(4,resolution[1])
@@ -36,10 +41,13 @@ class VideoStream:
     def stop(self):
         self.stopped = True
 class Detector:
-    def __init__(self, modeldir, graph='detect.tflite', labels='labelmap.txt', threshold=0.5, resolution='1280x720', edgetpu=False):
+    def __init__(self,voice_assistant, modeldir,graph='detect.tflite', labels='labelmap.txt', threshold=0.5, resolution='1280x720', edgetpu=False):
         self.MODEL_NAME = modeldir
         self.GRAPH_NAME = graph
+        self.voice_assistant = voice_assistant
         self.LABELMAP_NAME = labels
+        self.found_name = None
+        self.found_objects = []
         self.min_conf_threshold = float(threshold)
         resW, resH = resolution.split('x')
         self.imW, self.imH = int(resW), int(resH)
@@ -108,51 +116,18 @@ class Detector:
                 xmax = int(min(self.imW, (boxes[i][3] * self.imW)))
                 cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (10, 255, 0), 2)
                 object_name = self.labels[int(classes[i])]
-                label = '%s: %d%%' % (object_name, int(scores[i]*100))
+                label = '%s' % (object_name)
                 labelSize, baseLine = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
                 label_ymin = max(ymin, labelSize[1] + 10)
                 cv2.rectangle(frame, (xmin, label_ymin-labelSize[1]-10), (xmin+labelSize[0], label_ymin+baseLine-10), (255, 255, 255), cv2.FILLED)
                 cv2.putText(frame, label, (xmin, label_ymin-7), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-                # print(label)
-
+                if len(self.found_objects) > 3:
+                    self.found_objects = []
+                if label in self.found_objects:
+                    continue
+                else:
+                    self.found_objects.append(label)
+                    self.voice_assistant.speak(label)
+                    # print(label)
+                
         return frame
-   
-
-
-def objectDetection():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--modeldir', help='Folder the .tflite file is located in', required=True)
-    parser.add_argument('--graph', help='Name of the .tflite file, if different than detect.tflite', default='detect.tflite')
-    parser.add_argument('--labels', help='Name of the labelmap file, if different than labelmap.txt', default='labelmap.txt')
-    parser.add_argument('--threshold', help='Minimum confidence threshold for displaying detected objects', default=0.5)
-    parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If the webcam does not support the resolution entered, errors may occur.', default='1280x720')
-    parser.add_argument('--edgetpu', help='Use Coral Edge TPU Accelerator to speed up detection', action='store_true')
-    args = parser.parse_args()
-
-    hand_gesture_recognition =HandGestureRecognition(args)
-    
-    detector = Detector(args.modeldir, args.graph, args.labels, args.threshold, args.resolution, args.edgetpu)
-    videostream = VideoStream(resolution=(detector.imW, detector.imH), framerate=30).start()
-    sleep(1)
-
-    while True:
-        frame1 = videostream.read()
-        frame = frame1.copy()
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        frame_resized = cv2.resize(frame_rgb, (detector.width, detector.height))
-        
-        hand = hand_gesture_recognition.run()
-       
-        if (hand == 1):
-            boxes, classes, scores = detector.detect_objects(frame_resized)
-            frame = detector.draw_boxes(frame, boxes, classes, scores)
-        cv2.imshow('Object Detection', frame)
-
-        if cv2.waitKey(1) == ord('q'):
-            break
-
-    cv2.destroyAllWindows()
-    videostream.stop()
-
-if __name__ == "__main__":
-    objectDetection()
