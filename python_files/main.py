@@ -1,5 +1,6 @@
 import time
 import spacy
+import cv2
 import numpy as np
 import threading
 from server import FirebaseManager
@@ -7,7 +8,7 @@ from ocr import OCR
 from piApi import piAPI
 from capture import WebcamCapture
 from voice import VoiceAssistant
-from midas.midas import midasDepthEstimator
+from midas import midasDepthEstimator
 from notification import NotificationSender
 from stepBystep import NavigateUser
 from dateandtime import DateAndTime
@@ -30,7 +31,7 @@ gemini_pro_assistant = GeminiProAssistant(voice_assistant)
 gemini_vision_pro_assistant = GeminiVisionProAssistant(voice_assistant)
 ocr = OCR(voice_assistant)
 notification = NotificationSender(voice_assistant)
-# depthEstimator = midasDepthEstimator(voice_assistant)
+depthEstimator = midasDepthEstimator(voice_assistant)
 
 def process1():
 
@@ -106,26 +107,71 @@ def process1():
                     gemini_pro_assistant.respond(question)
         
 
-# def process2():
-# 	while True:
-# 		pi.getLocation()
-# 		pi.listenGyro()
-# 		navigate.navigate(pi.user_coord)
+def process2():
+	while True:
+		pi.getLocation()
+		pi.listenGyro()
+		navigate.navigate(pi.user_coord)
+          
+
+def process3():
+     
+    camera = cv2.VideoCapture(0)
+    
+    fps = 1 
+    freq = cv2.getTickFrequency()
+
+    while True:
+        t1 = cv2.getTickCount()
+        # Read frame from the webcam
+        ret, img = camera.read() 
+
+        # Estimate depth
+        colorDepth = depthEstimator.estimateDepth(img)
+        
+        # Get depth map
+        depth_map = depthEstimator.inference(depthEstimator.prepareInputForInference(img))
+
+        # Add the depth image over the color image:
+        combinedImg = cv2.addWeighted(img, 0.7, colorDepth, 0.6, 0)
+
+        # Join the input image, the estimated depth, and the combined image
+        img_out = np.hstack((img, colorDepth, combinedImg))
+        # cv2.putText(img_out, "FPS: {}".format(depthEstimator.fps), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+        cv2.putText(img_out, "FPS: {}".format(fps), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 2)
+
+        position = depthEstimator.checkDistanceThreshold(depth_map, img.shape[1])
+
+        cv2.imshow("Depth Image", combinedImg)
+        t2 = cv2.getTickCount()
+        time1 = (t2-t1)/freq
+        fps = 1/time1
+        
 
 
+        # Press key q to stop
+        if cv2.waitKey(1) == ord('q'):
+            break
 
-# def main():
-#     t2 = threading.Thread(target=process1)
-#     t1 = threading.Thread(target=process2)
-#     t1.start()
-#     t2.start()
-#     t1.join()
-#     t2.join()
+    camera.release()
+    cv2.destroyAllWindows()
+
+
+def main():
+    t2 = threading.Thread(target=process1)
+    t1 = threading.Thread(target=process2)
+    t3 = threading.Thread(target=process3)
+    t1.start()
+    t2.start()
+    t3.start()
+    t1.join()
+    t2.join()
+    t3.join()
 
     
 
 if __name__ == "__main__":
-    process1()
+    main()
    
 	
 
