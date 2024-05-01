@@ -20,13 +20,10 @@ class HandGestureRecognition:
         self.min_detection_confidence = 0.7
         self.min_tracking_confidence = 0.5
         self.use_brect = True
-        # self.cap = cv.VideoCapture(0)
-        # self.cap.set(cv.CAP_PROP_FRAME_WIDTH, self.cap_width)
-        # self.cap.set(cv.CAP_PROP_FRAME_HEIGHT, self.cap_height)
         self.mp_hands = mp.solutions.hands
         self.hands = self.mp_hands.Hands(
             static_image_mode=self.use_static_image_mode,
-            max_num_hands=2,
+            max_num_hands=1,
             min_detection_confidence=self.min_detection_confidence,
             min_tracking_confidence=self.min_tracking_confidence,
         )
@@ -50,7 +47,6 @@ class HandGestureRecognition:
         fps = self.cvFpsCalc.get()
         key = 27
         number, self.mode = self.select_mode(key, self.mode)
-        # ret, image = self.cap.read()
     
         image = cv.flip(image, 1)
         debug_image = copy.deepcopy(image)

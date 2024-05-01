@@ -6,15 +6,11 @@ from threading import Thread
 import threading
 import importlib.util
 from time import sleep, time
-# from gesrec import HandGestureRecognition
-# from faceEmotion import FaceEmotion
-# from face_distance import FaceDistance
 
 
 class VideoStream:
     def __init__(self,resolution=(640,480),framerate=30):
         self.stream = cv2.VideoCapture(0)
-        # self.facedist = FaceDistance(76.2, 14.3, "ref_image.png", "models/haarcascade_frontalface_default.xml")
         ret = self.stream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
         ret = self.stream.set(3,resolution[0])
         ret = self.stream.set(4,resolution[1])
@@ -121,8 +117,8 @@ class Detector:
                 label_ymin = max(ymin, labelSize[1] + 10)
                 cv2.rectangle(frame, (xmin, label_ymin-labelSize[1]-10), (xmin+labelSize[0], label_ymin+baseLine-10), (255, 255, 255), cv2.FILLED)
                 cv2.putText(frame, label, (xmin, label_ymin-7), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-                if len(self.found_objects) > 3:
-                    self.found_objects = []
+                # if len(self.found_objects) > 3:
+                #     self.found_objects = []
                 if label in self.found_objects:
                     continue
                 else:

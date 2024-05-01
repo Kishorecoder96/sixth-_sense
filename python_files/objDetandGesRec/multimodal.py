@@ -3,6 +3,8 @@ from gesrec import HandGestureRecognition
 from detection import VideoStream,Detector,argparse
 from time import sleep
 from voice_tts import VoiceAssistant
+from currency import ImageClassifier
+from faceDistance import FaceDetector
 import cv2
 
 voice_assistant = VoiceAssistant()
@@ -20,27 +22,33 @@ def multimodal_perception():
 
     hand_gesture_recognition =HandGestureRecognition(args)
     faceEmotion = FaceEmotion(voice_assistant)
-   
+    facedistance = FaceDetector(known_distance=30, known_width=5.7)
+    currency = ImageClassifier(voice_assistant)
     detector = Detector(voice_assistant,args.modeldir, args.graph, args.labels, args.threshold, args.resolution, args.edgetpu)
     
     sleep(1)
 
     while True:
         frame1 = videostream.read()
-        frame = frame1.copy()
+        # frame1 = frame1.copy()
         frame_rgb = cv2.cvtColor(frame1, cv2.COLOR_BGR2RGB)
         frame_resized = cv2.resize(frame_rgb, (detector.width, detector.height))
-        
-        hand, frame = hand_gesture_recognition.run(frame)
-    
-        faceEmotion.detect_faces(frame)
+        faceEmotion.detect_faces(frame1)
+         
+        distance = facedistance.run(frame1)
+        if distance < 100:
+            faceEmotion.detect_faces(frame1)
+
+        hand, frame = hand_gesture_recognition.run(frame1)
+        # currency.predict(frame)
+        #
 
         if (hand == 1):
             boxes, classes, scores = detector.detect_objects(frame_resized)
            
-            frame = detector.draw_boxes(frame, boxes, classes, scores)
+            frame = detector.draw_boxes(frame1, boxes, classes, scores)
 
-        cv2.imshow('Multimodal Perception', frame)
+        cv2.imshow('Multimodal Perception', frame1)
 
         if cv2.waitKey(1) == ord('q'):
             break
