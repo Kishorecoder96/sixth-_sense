@@ -45,7 +45,7 @@ const Message = () => {
         return (
             <View style={{...styles.msgCard, alignItems: data.caregiver ? 'flex-end' : 'flex-start', backgroundColor:  data.caregiver ? Colors.three: Colors.two}} key={item.id} >
                 <Text style={styles.cardMessage}>{data.message}</Text>
-                        <Text style={{...styles.cardTime, color: data.caregiver && Colors.two}}>{data.caregiver ? moment(data.timestamp).fromNow() :  moment(data.timestamp * 1000).fromNow() }</Text>
+                        <Text style={{...styles.cardTime, color: data.caregiver && Colors.two}}>{data.caregiver ? moment(data.timestamp).fromNow() :  moment(new Date(data.timestamp)).fromNow() }</Text>
                     </View>
         )
     }, [messages])
