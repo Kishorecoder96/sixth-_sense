@@ -23,9 +23,11 @@ const Setting = ({navigation}) => {
     
     const data = [
         {key:'en', value:'English'},
-        {key:'hi', value:'Hindi'},
+        { key: 'hi', value: 'Hindi' },
+        {key:'fr', value:'French'},
+        { key: 'ko', value: 'Korean' },
+        { key: 'es', value: 'Spanish' },
     ]
-
 
     return (
         <View style={style.container}>
