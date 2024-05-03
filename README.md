@@ -104,8 +104,8 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
 19. geopy - it bridges the gap, calculating distances between locations based on their coordinates.
 20. easyocr - it empowers the device to "read" text, converting images of characters to digital text.
 
-## 1 .Machine Learning:
-## 1.1 Optical character Recognition:
+## 1 Machine Learning:
+## 1.1 Optical character Recognition(OCR):
  Introduction
 
 We have integrated optical character recognition (OCR) technology into our system to support visually impaired individuals in accessing textual content from images. This advancement enables users to hear the text embedded within images, thereby enhancing accessibility and fostering greater independence in navigating printed materials. By harnessing OCR capabilities, our solution empowers visually impaired individuals to convert visual information into audible text, facilitating easier comprehension and engagement with written content.
@@ -129,7 +129,7 @@ We have integrated optical character recognition (OCR) technology into our syste
     - If text is detected (length of concatenated text > 0), the voice_assistant object vocalizes the text.
     - In absence of detected text, the voice assistant communicates a default message indicating inability to provide an answer.
  ### 1.2 Natural Language Processing using Spacy:
-  Introduction
+Introduction
 
 We have leveraged the power of spaCy, a natural language processing (NLP) library, to enhance accessibility for visually impaired individuals. By integrating spaCy into our system, we have enabled intuitive interaction through voice commands, allowing users to effortlessly communicate and engage with the system's functionalities. SpaCy's robust NLP capabilities enable us to interpret and understand spoken commands, empowering visually impaired individuals to perform a variety of tasks efficiently and independently. Through tokenization, part-of-speech tagging, named entity recognition, and dependency parsing, spaCy enables us to analyze and process textual data derived from voice input, facilitating seamless communication and interaction with the assistive technology. This integration not only improves accessibility but also fosters greater independence and inclusivity for visually impaired individuals in navigating and accessing information in the digital realm.
 
@@ -150,7 +150,9 @@ We have leveraged the power of spaCy, a natural language processing (NLP) librar
     - Based on the identified actions or entities, conditional statements are used to trigger specific functions or processes.
     - For example, if the command contains the word "photo," the system initiates photo capture using the webcam. If the word "text" is detected in conjunction with "photo," text extraction from the captured image is performed using an Optical Character Recognition (OCR) tool.
     - Similarly, other actions such as sending notifications, sending messages, detecting currency, navigating, retrieving time or date, making calls, creating events, and taking notes are executed based on the identified keywords.
-### 1.3 Speech To Text
+## Voice Assistant:
+![voice assistant](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/speech-speech-background.png)
+### 1.3 Speech To Text:
 
  **Introduction**
 
@@ -437,7 +439,7 @@ In this system, we integrate emotion detection technology with facial recognitio
 5. **Loop Over Frames**:
     - Continuously repeat the face detection and emotion recognition process for each frame captured from the camera feed.
 .
-#### 1.10 Face Recognition
+#### 1.9 Face Recognition
  Introduction
 
 We've engineered a face recognition system designed to enhance their social interactions and overall sense of autonomy. This innovative technology represents a significant leap forward in accessibility, enabling blind individuals to discern and recognize the faces of those in their immediate vicinity. By harnessing the power of artificial intelligence and computer vision, our system provides invaluable assistance to individuals who rely on auditory cues to navigate the world around them.
@@ -466,7 +468,7 @@ We've engineered a face recognition system designed to enhance their social inte
 5. **Face Recognition**:
     - Known faces are recognized using the face_recognition library by comparing face encodings.
     - If a known face is detected, its name is associated with the face.
-#### Face Distance Calculation
+#### 1.10 Face Distance Calculation
 
  Introduction
 
@@ -503,7 +505,7 @@ We've developed a Face Distance System. By seamlessly integrating  face detectio
     - Extract face-related data from the input frame.
     - Calculate the distance to the face in the frame using the focal length and known parameters.
     - Return the calculated distance
-### Object Detection and Gesture Recognition:
+### 1.11 Object Detection and Gesture Recognition:
 ![archi](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/objectDetectionAndGesture-background.png)
 #### 1.9 Gesture Recognition: 
  Introduction
@@ -558,7 +560,7 @@ Our project introduces a groundbreaking gesture recognition system designed to e
 **Integration of TensorFlow Lite Model for Object Detection based on Hand Gestures**
 
 This workflow incorporates object detection based on hand gestures, utilizing a TensorFlow Lite model for efficient inference on our device. Object detection is initiated only when a closed hand gesture is recognized, ensuring that system resources are utilized judiciously based on the user's gestures
-#### 1.11 Object Detection:
+#### 1.12 Object Detection:
 
 
  Introduction
@@ -617,7 +619,7 @@ We've harnessed the potential of object detection technology to revolutionize ac
 
   
 
-### Currency Recognition
+### 1.13 Currency Recognition
 
 
 
@@ -690,7 +692,7 @@ React native - Mobile App
 1. **Previous Functionality**: Initially, blind users could send messages using voice commands like "Send Message," which would be sent to the caregiver app.
 2. **Updated Messaging Tab**: Now, there's a dedicated messaging tab within the app where caregivers can type and send messages directly to blind users.
 3. **Text-to-Speech Conversion**: Messages received by blind users are read aloud using machine learning models that convert text to speech specifically tailored for them.
-4. ![message](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Message.png)
+   
 **Tech Stack**
 
 - **React Native**: Used for developing the mobile app, ensuring cross-platform compatibility.
@@ -738,7 +740,7 @@ Enable caregivers to change the language of the mobile app between Hindi and Eng
 By following these steps, caregivers can seamlessly change the language of the React Native mobile app, providing a localized experience for users in Hindi and English, with extensibility to support additional languages in the future.
 
 
-### Contact 
+### 2.4 Contact 
 
 **Domain:**
 
@@ -775,8 +777,50 @@ This feature enables blind users (sixth sense users) to make calls to contacts s
 
 The feature facilitates seamless communication for blind users by leveraging voice commands and advanced hardware capabilities. Future enhancements aim to add more functionalities and improve user interaction, such as adding voice commands for contact saving directly on the sixth sense hardware.
 ## 3 Hardware
+### Hardware Architecture:
+![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Hardware-connection-background.png)
+The hardware architecture consist of 
+
+- Raspberry Pi 5
+- Pi Camera 2 module
+- Sim 7600X G-H Raspberry Pi hat module
+- Coral USB Accelerator  TPU (Tensor Processing Unit)
+- USB to Aux for headphone
+- Gyroscope (Mpu6050)
+- Vibration Motor
+- 3D Model to house all the components
+
+
+
+ Hardware Connectivity
+
+
+
+The diagram illustrates the connectivity of various sensors and modules to the Raspberry Pi 5. Notably, the Coral TPU and earphones are connected to the Pi's USB port, while the SIM7600 for network connectivity utilizes both UART and USB for bidirectional communication. This setup ensures robust network connectivity and seamless data exchange.
+
+The gyroscope employs the I2C interface for communication with the Raspberry Pi, offering precise motion sensing capabilities. Meanwhile, the camera is linked to the Pi via PCIe, facilitating high-speed data transfer and enabling advanced imaging functionalities.
+
+Additionally, the vibration module interfaces with the Pi's GPIO pins, allowing for tactile feedback and enhancing user interaction. This comprehensive integration of diverse communication protocols and interfaces optimizes the Raspberry Pi 5's functionality across various domains.
+
+ Challenges Faced
+
+1. We attempted to utilize the M.2 Coral TPU A+E Key (https://coral.ai/products/m2-accelerator-ae) in conjunction with the Pineberry Hat AI (https://pineboards.io/products/hat-ai-for-raspberry-pi-5) as an interface between the TPU and Raspberry Pi. Despite investing over 100 hours in configuration and setup, the Coral TPU failed to register as connected. We made multiple adjustments to the Debian OS configuration file, but the TPU remained undetected in the PCIe channel.
+During startup, an error concerning the MSI PCIe Address was also encountered. After exhaustive troubleshooting attempts, we concluded that the M.2 Coral TPU A+E Key might be faulty. Consequently, we reverted to using the USB Coral TPU, which was already in our possession and functioned seamlessly.
+
+
+
+1. Setting up the TPU software for Raspberry Pi presented its own set of challenges, especially considering Google's discontinuation of support since 2019. The PyCoral library, a critical component, was compatible only with Python version 3.9. However, the Picamera2 Python library, essential for camera operations, required Python version 3.11. This compatibility conflict made it impossible to run both libraries simultaneously.
+**Solution**: After extensive research and a night of troubleshooting, we discovered multiple open-source contributions that addressed this issue. These contributions enabled the PyCoral library to function seamlessly on Python version 3.11 and also provided an updated TensorFlow Lite runtime that supported the specific PyCoral version. This breakthrough not only resolved the compatibility hurdles but also ensured smooth integration and operation of the TPU software on the Raspberry Pi.
+2. Initially, obtaining internet connectivity posed a challenge when using the GSM Module. We opted for the Sim 808 Module, which not only facilitated calling, receiving messages, and establishing network connectivity but also offered GPS functionality. However, we encountered limitations with only 2G network access, resulting in sluggish responses from the Gemini API and speech recognition processes.
+    
+    **SIM 808 Module**
+    
+    
+    **Solution:** To address this, we switched to the Sim7600X G-H Raspberry Pi Hat. This alternative not only integrated GPS capabilities but also provided 4G LTE internet connectivity for the Raspberry Pi 5. This upgrade significantly enhanced our system's responsiveness to cloud models, ensuring smoother and faster operations.
+    
+    
 ### 3.1 Fall Detection 
-![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/alert.png)
+![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/alert-background.png)
 The MPU-6050 IMU (Inertial Measurement Unit) is a sensor that combines a 3-axis accelerometer and a 3-axis gyroscope. The accelerometer measures gravitational acceleration, while the gyroscope measures rotational velocity. Additionally, this module includes a temperature sensor. It's commonly used for determining the orientation of a moving object.
 
 MPU6050 Pinout:
