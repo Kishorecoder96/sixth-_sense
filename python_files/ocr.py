@@ -19,6 +19,3 @@ class OCR:
         else:
             self.voice_assistant.speak("Sorry, I can't answer that question.")
 
-
-# ocr = OCR()
-# ocr.extract_text_from_image("/Users/danny/Downloads/heic-5/_3.jpg")

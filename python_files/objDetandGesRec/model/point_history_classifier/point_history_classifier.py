@@ -2,18 +2,20 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import tensorflow as tf
-
+try:
+    from tflite_runtime.interpreter import Interpreter,load_delegate
+except:
+    from tf.lite.python.interpreter import Interpreter, load_delegate
 
 class PointHistoryClassifier(object):
     def __init__(
         self,
-        model_path='model/point_history_classifier/point_history_classifier.tflite',
+        model_path='model/point_history_classifier/point_history_classifier_edgetpu.tflite',
         score_th=0.5,
         invalid_value=0,
         num_threads=1,
     ):
-        self.interpreter = tf.lite.Interpreter(model_path=model_path,
-                                               num_threads=num_threads)
+        self.interpreter = Interpreter(model_path)
 
         self.interpreter.allocate_tensors()
         self.input_details = self.interpreter.get_input_details()

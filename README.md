@@ -1,24 +1,36 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Sixth Sense](#sixth-sense)
-    - [Architecture:](#architecture)
+  - [**Architecture**:](#architecture)
+    - [**Old Architecture**](#old-architecture)
+    - [**New Architecture**](#new-architecture)
     - [Technology Arsenal:](#technology-arsenal)
-  - [1 .Machine Learning:](#1-machine-learning)
-    - [1.1. Optical Character Recognition(OCR)](#11-optical-character-recognitionocr)
-    - [1.2. Natural Language Processing(NLP) using Spacy](#12-natural-language-processingnlp-using-spacy)
-    - [1.3. Optimisation of Code](#13-optimisation-of-code)
-    - [1.4. Gemini](#14-gemini)
-    - [1.5. Multiprocessing using ProcessPoolExecutor](#15-multiprocessing-using-processpoolexecutor)
-    - [1.6. Voice Assistant](#16-voice-assistant)
-    - [1.7. Google Calendar API](#17-google-calendar-api)
-    - [1.8. Distance Warning system using Midas 2.1V small](#18-distance-warning-system-using-midas-21v-small)
+  - [1 Machine Learning:](#1-machine-learning)
+    - [1.1 Optical character Recognition(OCR):](#11-optical-character-recognitionocr)
+    - [1.2 Natural Language Processing using Spacy:](#12-natural-language-processing-using-spacy)
+    - [Voice Assistant:](#voice-assistant)
+      - [1.3 Speech To Text:](#13-speech-to-text)
+      - [1.4 Text To Speech](#14-text-to-speech)
+    - [1.5 Distance Warning System](#15-distance-warning-system)
+    - [1.6 Voice Enabled Calendar Management](#16-voice-enabled-calendar-management)
+    - [1.7 Gemini and gemma](#17-gemini-and-gemma)
+    - [Emotional Detection,Face Recognition and Distance Measurement](#emotional-detectionface-recognition-and-distance-measurement)
+      - [1.8 Emotional Detection:](#18-emotional-detection)
+      - [1.9 Face Recognition](#19-face-recognition)
+      - [1.10 Face Distance Calculation](#110-face-distance-calculation)
+    - [Object Detection and Gesture Recognition:](#object-detection-and-gesture-recognition)
+      - [1.11 Gesture Recognition:](#111-gesture-recognition)
+      - [1.12 Object Detection:](#112-object-detection)
+    - [1.13 Currency Recognition](#113-currency-recognition)
   - [2 Software](#2-software)
     - [2.1 Geofencing](#21-geofencing)
     - [2.2 Messaging](#22-messaging)
     - [2.3 Multi Language Support](#23-multi-language-support)
-    - [Contact](#contact)
+    - [2.4 Contact](#24-contact)
   - [3 Hardware](#3-hardware)
+    - [Hardware Architecture:](#hardware-architecture)
     - [3.1 Fall Detection](#31-fall-detection)
     - [3.2 **Vibration Motor: Enhancing Safety Measures**](#32-vibration-motor-enhancing-safety-measures)
     - [3.3 TPU (Tensor Processing Unit)](#33-tpu-tensor-processing-unit)
@@ -26,17 +38,15 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-
-
 # Sixth Sense
 
 <div style="text-align: center;">
-    <img src="https://github.com/Kishorecoder96/sixth-_sense/blob/main/logo.png" alt="logo" style="width: 100px; height: 100px;">
+    <img src="https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/logo.png" alt="logo" style="width: 100px; height: 100px;">
 </div>
 
-![sixth sense](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/sixth%20sense.png)
+![sixth sense](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20179.png)
  **Generations**:
-![geberation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Logo.png)
+![generation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Logo.png)
 
 
 ## **Architecture**:
@@ -79,9 +89,9 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
     
     
 ### **Old Architecture**
-![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Old%20architecture%20(2).png)
+![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/archi.png)
 ### **New Architecture**
-![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/New%20architecture.png)
+![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/overallArchitecture-background.png)
 ### Technology Arsenal:
 1. Firebase <img width="30" height="20" src="https://img.icons8.com/color/48/firebase.png" alt="firebase"/> - Infrastructure and Security: Provides a reliable and scalable backend with built-in security features for data management and user authentication.
 2. React Native <img width="30" height="20" src="https://img.icons8.com/officel/30/react.png" alt="react"/> - App for Caretaker: Cross-platform mobile application framework ensuring a consistent user experience across different devices and operating systems.
@@ -104,280 +114,241 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
 19. geopy - it bridges the gap, calculating distances between locations based on their coordinates.
 20. easyocr - it empowers the device to "read" text, converting images of characters to digital text.
 
-## 1 .Machine Learning:
-### 1.1. Optical Character Recognition(OCR)
+## 1 Machine Learning:
+## 1.1 Optical character Recognition(OCR):
+ Introduction
 
-**Introduction:**
-The OCR module is specifically designed to assist visually impaired individuals in accessing textual content from images. Leveraging the EasyOCR library, it provides a user-friendly interface for extracting text from various sources, thereby enhancing accessibility and independence for individuals with visual impairments. 
+We have integrated optical character recognition (OCR) technology into our system to support visually impaired individuals in accessing textual content from images. This advancement enables users to hear the text embedded within images, thereby enhancing accessibility and fostering greater independence in navigating printed materials. By harnessing OCR capabilities, our solution empowers visually impaired individuals to convert visual information into audible text, facilitating easier comprehension and engagement with written content.
 
-**Implementation:**
-The OCR module utilizes the EasyOCR library to process images and extract text. It offers a simplified interface for text extraction, requiring minimal user interaction. By leveraging OpenCV for image processing, the module ensures efficient and accurate recognition of textual content from diverse sources, including printed materials, digital documents, and handwritten notes.
+ Requirements
 
-**Benefits for Visually Impaired Individuals:**
+- easyocr
+- pillow
+- cv2
 
-1. **Accessible Information:** The OCR module enables visually impaired individuals to access textual information from a wide range of sources, including books, documents, labels, and signs, which may otherwise be inaccessible to them.
-2. **Independence:** By providing the ability to extract text independently, the module empowers visually impaired users to access information without relying on sighted assistance, promoting self-reliance and confidence.
-3. **Real-Time Feedback:** With its quick and efficient text extraction capabilities, the module offers real-time feedback, allowing users to instantly access and interact with textual content in their environment.
-4. **Multilingual Support:** Supporting multiple languages, the module caters to the diverse linguistic needs of visually impaired individuals, facilitating access to information in their preferred language.
+ Working Flow of Optical Character Recognition
 
-**Integration with Sixth Sense:**
-The OCR module has been integrated with Sixth Sense to enhance its usability and accessibility for visually impaired users. By leveraging our existing assistive technologies, the module extends its functionality and ensures compatibility with diverse user preferences and needs.
+1. **Initialization:**
+    - The OCR class initializes with a voice_assistant object, language settings (defaulted to English and Hindi), and an option to use GPU for processing.
+    - An instance of the easyocr.Reader class is created within the constructor, configured with specified languages and GPU usage.
+2. **Text Extraction from Image:**
+    - The extract_text_from_image method processes an image file path.
+    - It uses OpenCV to read the image and standardizes its dimensions to 800x600 pixels for consistency.
+    - easyocr.Reader's readtext method is invoked to extract text from the resized image, returning a list of tuples with text content and other details.
+    - Extracted text is concatenated into a single string.
+    - If text is detected (length of concatenated text > 0), the voice_assistant object vocalizes the text.
+    - In absence of detected text, the voice assistant communicates a default message indicating inability to provide an answer.
+ ### 1.2 Natural Language Processing using Spacy:
+Introduction
 
-**Voice Command Integration:**
-The OCR module features voice command integration, allowing visually impaired users to interact with the system using voice commands. Users can issue commands such as "take a picture" to capture an image using the device's camera. Additionally, they can say "extract text from the image" to initiate text extraction using the OCR module.
+We have leveraged the power of spaCy, a natural language processing (NLP) library, to enhance accessibility for visually impaired individuals. By integrating spaCy into our system, we have enabled intuitive interaction through voice commands, allowing users to effortlessly communicate and engage with the system's functionalities. SpaCy's robust NLP capabilities enable us to interpret and understand spoken commands, empowering visually impaired individuals to perform a variety of tasks efficiently and independently. Through tokenization, part-of-speech tagging, named entity recognition, and dependency parsing, spaCy enables us to analyze and process textual data derived from voice input, facilitating seamless communication and interaction with the assistive technology. This integration not only improves accessibility but also fosters greater independence and inclusivity for visually impaired individuals in navigating and accessing information in the digital realm.
 
+ Requirements
 
+- spacy
+- en_core_web_sm
 
-###  1.2. Natural Language Processing(NLP) using Spacy
+ Workflow of Spacy
 
-**Overview**
-
-This code implements a voice-controlled assistant system that utilizes natural language processing (NLP) to interpret user commands and perform various tasks. The system integrates functionalities such as image processing, text extraction, notification sending, message sending, and currency detection. The primary goal of using NLP in this context is to enable intuitive interaction with the assistant by understanding and responding to spoken commands.
-
-**Usage of Natural Language Processing (NLP)**
-
-1. **Command Interpretation**:
-    - **Purpose**: NLP is employed to interpret user commands provided through voice input.
-    - **Implementation**: The **`spacy`** library is used to process and analyze the input text, allowing the system to identify key elements such as verbs, nouns, and adjectives.
-    - **Example**: Commands like "take a photo," "send a message," "detect currency," and "alert" are identified and processed using NLP techniques.
-2. **Task Execution Based on Commands**:
-    - **Purpose**: After interpreting user commands, the system executes corresponding tasks based on the identified actions.
-    - **Implementation**: Conditional statements are used to check for specific keywords or phrases indicative of different actions, such as capturing a photo, sending a message, or detecting currency. NLP is leveraged to identify these keywords and trigger the appropriate functions accordingly.
-    - **Example**: If the user mentions "alert," the system sends a notification with an emergency message. Similarly, commands related to sending messages or capturing photos are executed based on NLP-based command interpretation.
-
-**Conclusion**
-
-The integration of natural language processing enables intuitive interaction with the voice-controlled assistant system. By interpreting user commands and executing tasks based on the identified actions, the system provides a seamless user experience. Ongoing enhancements and refinements to the NLP model can further improve the accuracy and effectiveness of command interpretation, enhancing the overall usability of the system.
- 
- 
-### 1.3. Optimisation of Code
-
- Overview
-
-This document outlines the refactoring process for the SixthSense project, focusing on the conversion of the initial script-based implementation into a modular, object-oriented design. The refactor aimed to improve code organization, readability, and maintainability by encapsulating related functionalities into classes and separating concerns into different modules.
-
- Objectives
-
-- **Modularity:** Divide the project into modular components, each responsible for a specific functionality.
-- **Object-oriented design:** Utilize classes and objects to encapsulate related data and behaviors.
-- **Code organization:** Organize the project structure to enhance readability and maintainability.
-- **Separation of concerns:** Decouple different functionalities to improve code clarity and reusability.
-
- Changes Made
-
-1. **Creation of Classes:**
-    - Identified distinct functionalities in the initial script and encapsulated them into individual classes.
-    - Defined classes for WebcamCapture, OCR, Gemini, NotificationSender, MessageSender, and CurrencyDetection.
-2. **Module Separation:**
-    - Split the project into separate modules, each containing related classes and functions.
-    - Modules include capture, ocr, gemini, notification, message, and currency_detection.
-3. **Code Refactoring:**
-    - Refactored the initial script to utilize the newly created classes and modules.
-    - Organized the code into logical sections within each class, following best practices for code readability.
-4. **Dependency Management:**
-    - Ensured proper dependency management by importing required libraries within each module.
-    - Utilized virtual environments or package managers to manage dependencies and versioning.
-5. **Documentation:**
-    - Documented each class and module, outlining its purpose, functionalities, and usage.
-    - Provided inline comments and docstrings to clarify code intent and usage.
-
- Benefits
-
-- **Improved Readability:** The modular structure and object-oriented design make the code more readable and understandable.
-- **Enhanced Maintainability:** Changes or updates to specific functionalities can be made within their respective classes or modules without affecting other parts of the codebase.
-- **Reusability:** Encapsulating functionalities into classes promotes code reuse, allowing similar tasks to be easily implemented in different contexts.
-- **Scalability:** The organized structure facilitates the addition of new features or functionalities in the future without significant code restructuring.
-
- Conclusion
-
-The refactoring process successfully transformed the initial script-based implementation of the SixthSense_Gdsc project into a well-organized, modular codebase. By leveraging classes and modules, the project now offers improved readability, maintainability, and scalability. The separation of concerns and encapsulation of functionalities into classes lay a solid foundation for future development and expansion of the project.
-
----
-
-### 1.4. Gemini
-
- Overview
-
-This documentation outlines the conversion of the original code for optimization purposes, focusing on reducing content size and improving retrieval speed. The primary objectives of this conversion are to streamline the codebase, minimize redundant operations, and enhance overall performance.
-
-
- Changes Made
-
-1. **Class Segmentation**:
-2. **Introduction of Assistant Class**:
-3. **Output Formatting**:
-
- Optimization Strategies
-
-1. **Content Size Reduction**:
-2. **Speed Optimization**:
-
- Performance Evaluation
-
-1. **Content Size Reduction**:
-2. **Speed Optimization**:
-
- Conclusion
-
-The conversion of the code for optimization purposes aims to enhance both content size and retrieval speed. By segmenting the code into classes, limiting response length, and introducing streamlined processing, the refactored version achieves better efficiency and performance. Ongoing monitoring and evaluation will ensure continued optimization and responsiveness.
-
----
-### 1.5. Multiprocessing using ProcessPoolExecutor
-
- Overview
-
-The multiprocessing library in Python provides support for parallelizing tasks across multiple CPU cores or processes. It offers several classes and functions to create and manage concurrent processes, improving efficiency and performance in multiprocessing environments.
-![threading](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/threading.png)
- ProcessPoolExecutor
-
-The **`ProcessPoolExecutor`** is a high-level interface provided by the concurrent.futures module, built on top of the multiprocessing library. It enables concurrent execution of multiple tasks or functions within separate processes, allowing for parallelism and efficient resource utilization.
-
- Usage
-
-1. **Initialization**:
-    - The **`ProcessPoolExecutor`** is initialized with the desired maximum number of worker processes (**`max_workers`**).
-    - `with ProcessPoolExecutor(max_workers=2) as ex:`
-2. **Submit Tasks**:
-    - Tasks or functions are submitted for execution using the **`submit`** method.
-    - `future1 = ex.submit(object_Detection) future = ex.submit(hi)`
-3. **Retrieve Results**:
-    - The **`submit`** method returns a **`Future`** object representing the result of the submitted task.
-    - Results can be retrieved synchronously using the **`result`** method of the **`Future`** object.
-    - `result1 = future1.result() result2 = future.result()`
-4. **Completion**:
-    - The main process waits for the completion of all submitted tasks before proceeding further.
-    - `future1.result() future.result()`
-
- Dependencies
-
-- Python multiprocessing library
-- concurrent.futures module
-
- Notes
-
-- Ensure that tasks submitted to the **`ProcessPoolExecutor`** are designed to be parallelizable and do not rely on shared state or resources that might lead to race conditions.
-- Experiment with different values for **`max_workers`** to find the optimal number of worker processes based on system specifications and workload characteristics.
-
- Conclusion
-
-In summary, the multiprocessing library, coupled with the ProcessPoolExecutor, offers a convenient approach for concurrent task execution in Python, enhancing performance by utilizing multiple CPU cores. By judiciously configuring the executor and task distribution, developers can optimize resource utilization and improve application responsiveness, contributing to efficient parallel processing.
-
-### 1.6. Voice Assistant
+- **Initialization**:
+    - The spaCy model for English language processing (**`en_core_web_sm`**) is loaded.
+- **Command Interpretation**:
+    - The user's voice input (**`voice_input`**) is processed using spaCy's NLP capabilities.
+    - Lemmatized tokens are extracted from the processed text to identify key actions or entities mentioned by the user.
+    - If specific keywords or phrases indicative of different actions are identified, corresponding tasks are executed accordingly.
+- **Conditional Execution of Tasks**:
+    - Based on the identified actions or entities, conditional statements are used to trigger specific functions or processes.
+    - For example, if the command contains the word "photo," the system initiates photo capture using the webcam. If the word "text" is detected in conjunction with "photo," text extraction from the captured image is performed using an Optical Character Recognition (OCR) tool.
+    - Similarly, other actions such as sending notifications, sending messages, detecting currency, navigating, retrieving time or date, making calls, creating events, and taking notes are executed based on the identified keywords.
+## Voice Assistant:
+![voice assistant](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/speech-speech-background.png)
+### 1.3 Speech To Text:
 
  **Introduction**
 
-This documentation outlines a Python script for a speech recognition assistant that listens for specific wake words and responds to user speech using text-to-speech conversion. The script utilizes various libraries for speech recognition and audio manipulation.
-![speech to speech](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/speech%20to%20speech.png)
- **Imports**
+We have built a speech-to-text system tailored for individuals with visual impairments. Our system seamlessly integrates with Google's powerful speech recognition technology, allowing users to convert spoken words into text format. This innovation aims to enhance accessibility and independence for visually impaired individuals in their daily lives. With a focus on online connectivity, our system ensures access to Google's speech-to-text service whenever network connectivity is available. However, we understand that internet connectivity may not always be reliable. In such cases, our system seamlessly switches to a whisper tiny offline model, ensuring uninterrupted assistance for visually impaired individuals, regardless of internet availability.
 
-The script imports the following libraries:
+ Requirements
 
-- **`speech_recognition`** (**`sr`**): Recognizes speech from audio recordings.
-- **`pyaudio`**: Interacts with the computer's audio hardware for recording.
-- **`os`**: Interacts with the operating system.
-- **`time`**: Provides timing functionalities.
-- **`playsound`**: Plays audio files on the system.
-- **`gtts`**: Converts text to speech and saves it as an audio file.
+- Speech Recognition
+- PlaySound
+- torch
+- whisper
 
- **GTTS Function**
+ Working Flow of Google Speech To Text
 
-- **`GTTS(text)`**: Converts text to speech and plays the generated audio using **`playsound`**.
+1. **Initialization:**
+    - The project initializes and sets up necessary components, including importing required libraries and setting up any configurations.
 
- **get_audio Function**
+1. **Audio Input:**
+    - The program captures audio input from the user, typically through a microphone connected to the device.
+2. **Speech Recognition:**
+    - The captured audio data is sent to Google's speech-to-text service for recognition.
+3. **Processing:**
+    - Google's service processes the audio data and converts it into text, using advanced algorithms and models.
+4. **Transcription:**
+    - The recognized text output is returned by Google's service and received by the program.
 
-- **`get_audio()`**: Captures user speech and converts it to text using the **`Recognizer`** instance from **`speech_recognition`**. It listens for audio input from the microphone, records audio, and attempts to recognize the spoken words using Google Speech-to-Text.
+ Working Flow of Whisper Speech To Text
 
- **Main Function**
+1. **Initialization:**
+    - The program starts by parsing command-line arguments using **`argparse`**. These arguments define various parameters such as the model to use, energy threshold for the microphone, and timeouts for recording.
+    - It initializes necessary components like a thread-safe queue for passing audio data, a speech recognizer, and the microphone source.
+2. **Audio Input:**
+    - The program sets up the microphone source, adjusting for ambient noise using **`recorder.adjust_for_ambient_noise()`**.
+3. **Speech Recognition:**
+    - It loads or downloads the specified model using the **`whisper.load_model()`** function.
+    - If running on Linux, it checks for available microphones and selects the one specified in the command-line arguments.
+4. **Processing:**
+    - The program sets up a background thread to continuously capture audio data using **`recorder.listen_in_background()`**.
+    - It converts the raw audio data into a format compatible with the speech recognition model and performs transcription using **`audio_model.transcribe()`**.
+5. **Transcription:**
+    - As audio data is received, it's processed and transcribed in real-time.
+    - The transcription is updated and printed to the console, clearing the console to display the latest transcription.
 
-- **`main()`**: Entry point of the program. Calls **`get_audio()`** to capture and recognize user speech. It then checks if the recognized text contains the wake word "hello". If found, responds with "Hey, how are you?" using **`GTTS`**.
+ Challenges
 
- **Wake Word and Loop**
+1. We encountered challenges while integrating the speech-to-text functionality with our Raspberry Pi. These challenges manifested as errors related to the Jack server not being found and the ALSA card not being detected. Surprisingly, these errors did not occur when running the code individually. However, when attempting to execute the code within another file, a segmentation error occurred, preventing successful execution.|
 
-- **`WAKE = "hello everyone"`**: Defines the wake word that triggers the assistant.
-- The script enters a loop that continuously listens for audio using **`get_audio()`**. If the wake word is detected, the assistant responds and listens for further instructions.
+**Solution:** After extensive investigation and troubleshooting efforts, we discovered that downloading and installing additional files resolved the issues we were encountering. This solution enabled us to overcome the segmentation error and successfully integrate the speech-to-text functionality with our Raspberry Pi setup.
+2. We encountered challenges in providing audio input to the model for triggering functions, primarily due to the continuous listening nature of the speech recognition model. This posed difficulties as our intended functions required specific audio cues to activate. Despite these challenges, we found a solution that allowed us to make it work correctly. 
 
- **Usage**
+S**olution:** Through diligent experimentation and refinement, we were able to implement a method that effectively synchronized the audio input with the desired function triggers, enabling smooth and accurate operation of the system.
 
-To use the speech recognition assistant, run the script and wait for the prompt. Speak the wake word "hello everyone" to trigger the assistant, then give instructions or ask questions as needed.
+### 1.4 Text To Speech
 
-### 1.7. Google Calendar API
+ Introduction
 
-**Introduction**
+We've developed a robust text-to-speech solution utilizing pyttsx3, tailored to aid visually impaired individuals in accessing device outputs audibly. This innovation empowers users to hear device-generated text, enhancing accessibility and promoting independence in engaging with digital content.
 
-This documentation outlines a Python script that integrates with the Google Calendar API to provide virtual assistant functionalities, including accessing calendar events and creating notes using speech recognition and text-to-speech.
+ Requirement
 
-**Imports**
+- pyttsx3
+-  Working Flow of Text To Speech
 
-- Standard library imports: **`datetime`**, **`pickle`**, **`os`**, **`time`**
-- Google Calendar API imports: **`build`** from **`googleapiclient.discovery`**, **`Credentials`**, and **`InstalledAppFlow`** from **`google_auth_oauthlib.flow`**
-- Speech recognition and Text-to-Speech (TTS) imports: **`sr`** for speech recognition, **`pyttsx3`**, and **`gTTS`** for text-to-speech
-- Other imports: **`playsound`** for playing audio files, **`subprocess`** for opening external applications
+1. **Initialization:** To use pyttsx3, you first initialize an instance of the text-to-speech engine using the **`pyttsx3.init()`** method. This initializes the TTS engine with default settings.
+2. **Configuration:** After initialization, you can configure various properties of the TTS engine using methods like **`setProperty()`**. Properties such as speech rate, volume, and voice selection can be adjusted according to preference.
+3. **Speech Synthesis:** Once the engine is initialized and configured, you can use the **`say()`** method to input text that you want to be converted into speech. This method queues the text for speech synthesis.
+4. **Speech Rendering:** The TTS engine processes the queued text and synthesizes it into audible speech using text-to-speech synthesis algorithms.
+5. **Playback:** After the speech synthesis is completed, the generated speech is played back through the device's speakers or audio output.
+6. **Synchronous Operation:** By default, pyttsx3 operates synchronously, meaning that the **`say()`** method blocks until the entire text is spoken. This ensures that the speech is completed before the program proceeds to the next line of code.
 
-**Google Calendar Authentication**
+###  1.5 Distance Warning System
 
-- **`SCOPES`**: Defines the permissions required to access Google Calendar data.
-- **`create_service(client_secret_file, ...)`**: Function to create a service object for interacting with the Google Calendar API. It handles OAuth2 authentication and stores credentials for future use.
+ Introduction
 
- **Helper Functions**
+We have implemented a  distance warning system designed to assist visually impaired individuals in navigating their surroundings safely. Leveraging the advanced depth estimation capabilities of MidasV2 with a single camera setup, our system accurately calculates distances between the user and surrounding obstacles in real-time. With prompt audible alerts generated upon detecting obstacles within a customizable threshold distance, our system ensures timely warnings to prevent potential collisions. Additionally, incorporating an offline model guarantees uninterrupted assistance even in areas with limited internet connectivity, enhancing accessibility and independence for visually impaired individuals.
 
-- **`convert_to_RFC_datetime(year, month, day, hour, minute)`**: Converts date and time information to a format compatible with the Google Calendar API.
-- **`speak(text)`**: Converts text to speech and plays the audio using either **`pyttsx3`** or **`gTTS`**.
+ Requirements
 
-**Voice Class**
+- numpy
+- openCv
+- midasmodel_edgetpu.tflite
+- pyttsx3
 
-- Provides methods for speech recognition and interaction with the virtual assistant:
-    - **`get_audio()`**: Listens for user input and converts it to text using **`sr`** (SpeechRecognition).
-    - **`authenticate_google()`**: Function for an alternative authentication approach (currently commented out).
-    - **`get_events(day, service)`**: Retrieves calendar events for a specific day using the Google Calendar service object.
-    - **`get_date(text)`**: Parses user's spoken text to extract date information in various formats.
-    - **`note(text)`**: Creates a text file with the provided note text and opens it using **`notepad.exe`** (Windows specific).
+ Workingflow of Distance Warning using Depth Estimation
 
- **Main Loop**
+**Initialization:**
 
-- **`WAKE = "hello"`**: Defines the wake word to activate the virtual assistant.
-- **`SERVICE = authenticate_google()`**: Calls the authentication function.
-- The script continuously listens for user input:
-    - Captures user's spoken command.
-    - Processes the command based on keywords related to calendar and note functionalities.
-    - If no matching keywords are found, responds with "I don't understand".
+- In this phase, the necessary components for the operation of the code are initialized. This includes:
+    - Instantiating the **`VoiceAssistant`** and **`midasDepthEstimator`** classes, which are essential for providing auditory feedback and performing depth estimation, respectively.
 
- **Conclusion**
+**Model Initialization:**
 
-This documentation provides an overview of a Python script that integrates with the Google Calendar API to create a virtual assistant capable of accessing calendar events and creating notes using speech recognition and text-to-speech functionalities.
+- Within the **`midasDepthEstimator`** class, the MidasV2 depth estimation model is initialized. This involves:
+    - Loading the pre-trained MidasV2 model from a specified path.
+    - Allocating resources for inference, such as memory space for model parameters and input/output tensors.
 
-### 1.8. Distance Warning system using Midas 2.1V small
+**Webcam Initialization:**
 
-**Introduction:**
-The Depth Estimation module, powered by the MIDAS (Monocular Depth Estimation in Real-Time with Deep Learning on Large-Scale Datasets) model, incorporates a Distance Warning System to assist visually challenged individuals in navigation. This addendum outlines the implementation, benefits, and impact of the distance warning system in conjunction with depth estimation.
+- The code initializes the webcam using OpenCV's **`VideoCapture`** function. This step allows the code to:
+    - Establish a connection with the webcam hardware.
+    - Access the video stream for capturing live frames.
 
-**Implementation:**
-The Distance Warning System is integrated into the existing depth estimation workflow. Upon estimating depth from input images using the MIDAS model, the system analyzes the depth map to identify obstacles in proximity. If an object is detected within a predefined threshold distance, the system triggers an alert to warn the individual about the obstacle's presence.
+**Main Loop:**
 
-**Benefits of the Distance Warning System:**
+- The main loop serves as the core of the program, orchestrating the sequence of operations for each iteration. It includes the following steps:
 
-1. **Enhanced Safety:** The Distance Warning System enhances safety for visually challenged individuals by providing real-time alerts about nearby obstacles, enabling them to navigate with increased awareness and confidence.
-2. **Independence:** By providing timely warnings, the system promotes independence and autonomy for visually challenged individuals, empowering them to navigate environments with reduced reliance on assistance.
-3. **User-Friendly Interface:** The system offers a user-friendly interface, delivering audible or tactile alerts that are easily perceivable and actionable by individuals with visual impairments.
+**Frame Acquisition:**
 
-**Impact and Use Cases:**
+- Within the loop, frames are continuously captured from the webcam using the **`camera.read()`** function. This involves:
+    - Retrieving the next frame from the webcam.
+    - Storing the frame as an image for further processing.
 
-1. **Indoor Navigation:** The Distance Warning System facilitates indoor navigation for visually challenged individuals, enabling them to maneuver through spaces such as homes, offices, and public buildings with greater ease and safety.
-2. **Outdoor Mobility:** In outdoor environments, the system assists individuals in navigating sidewalks, pedestrian crossings, and other urban settings, reducing the risk of collisions with obstacles and hazards.
-3. **Public Transportation:** When accessing public transportation services, the system helps individuals locate boarding points, navigate platforms, and avoid obstacles in transit stations.
+**Depth Estimation:**
 
-**Integration with our Sixth Sense:**
+- The captured frame undergoes depth estimation using the MidasV2 model within the **`midasDepthEstimator`** class. This process includes:
+    - Preprocessing the image to prepare it for input to the model.
+    - Performing inference with the MidasV2 model to estimate depth.
+    - Post-processing the output to generate a depth map representing the relative distances of objects in the scene.
 
-The Distance Warning System has been  integrated with our Sixth Sense to provide seamless access and enhanced functionality. By leveraging existing  technologies in Sixth Sense, the system can reach a wider user base and integrate with other accessibility features.
+**Distance Threshold Check:**
 
-**Conclusion:**
+- After obtaining the depth map, the code analyzes it to check for objects within a predefined distance threshold. This involves:
+    - Converting the depth map into meters to obtain real-world distances.
+    - Comparing the minimum depth value against a predefined threshold distance to determine if an object is too close to the camera.
+    - Issuing a warning via the **`VoiceAssistant`** if an object is detected within the threshold distance.
+    
+     Challenges
+    
+    The primary difficulty stemmed from the constraint of not using sensors like LiDAR or ultrasonic devices. Instead, we opted to develop a warning system solely relying on a single camera. This decision posed several technical hurdles and complexities in determining how to effectively execute the functionality of the system.
+    
+    **Solution:**
+    
+    To address the challenge of developing a warning system without the use of sensors, we devised a novel approach based on depth estimation techniques. By analyzing the depth of objects within the image, we were able to determine the overall depth of the scene. This depth information enabled us to implement a threshold value, beyond which warnings would be triggered to alert the user of potential obstacles.
+    
+    Moreover, to enhance the warning system's effectiveness, we implemented a side warning feature. If the minimum depth detected fell below the threshold, the system would assess the object's position within the scene. If the object was on the left side, the system would advise the user to move right through text-to-speech output. Similarly, if the object was on the right side, the system would recommend moving left. This side-specific warning mechanism provided users with precise guidance on how to navigate around obstacles, further improving the system's utility and user experience.
+  
+### 1.6 Voice Enabled Calendar Management
+Introduction
 
-The integration of the Distance Warning System with the Depth Estimation module leveraging the MIDAS model represents a significant advancement in assistive technology for visually challenged individuals. By combining real-time depth estimation with proactive obstacle detection and warning capabilities, the system contributes to improved mobility, independence, and safety in navigating diverse environments.
+We have integrated Google Calendar API in our Sixth Sense to provide vital resources for visually impaired individuals, enabling them to manage schedules and tasks effortlessly through voice commands. With the ability to create events on specific days and inquire about their schedule for any given day, users gain instant access to crucial information, enhancing their organization and time management skills. Additionally, the feature allowing users to make notes by simply dictating them aloud offers a convenient way to capture important thoughts and reminders.
 
-### 1.9 Gemini and gemma
-     Introduction
+Moreover, our solution incorporates speech-to-text functionality, ensuring seamless interaction for users. When online connectivity is established, Google Speech Recognition is activated, allowing for accurate transcription of spoken commands. However, in cases where online connectivity fails, our system seamlessly switches to Whisper Tiny, ensuring uninterrupted assistance for visually impaired individuals. Through seamless integration with text-to-speech functionality using pyttsx3, our solution ensures accessibility, allowing visually impaired individuals to interact effectively with the system and lead more independent and productive lives.
+
+ Requirements
+
+- datetime
+- pyttsx3
+- Speech Recognition
+- PlaySound
+- torch
+- whisper
+- credentials.json
+- notepad.exe
+
+ Workflow of Calendar Management
+
+1. **Authentication and Setup**:
+    - The script begins by authenticating with the Google Calendar API using OAuth 2.0, allowing access to calendar data.
+    - Necessary libraries and dependencies are imported, including Google Calendar API, text-to-speech (TTS) with `pyttsx3`, and speech recognition with `speech_recognition`.
+    - Constants such as scopes, months, days, and day extensions are defined to aid in date recognition and event creation.
+2. **Speech Recognition**:
+    - The script listens for voice commands using the `speech_recognition` library, capturing user requests for calendar-related actions.
+3. **Request Interpretation**:
+    - User requests are analyzed to determine the desired action, such as querying upcoming events, creating a new event, or making a note.
+    - Specific phrases are recognized to trigger corresponding actions, such as "what do I have" for checking upcoming events and "create an event" for event creation.
+4. **Date Parsing**:
+    - If the user requests information about a specific date, the script parses the user's speech to extract the relevant date information.
+    - Date parsing involves identifying keywords such as days of the week, months, or specific phrases like "today" or "tomorrow" to determine the intended date.
+5. **Calendar Interaction**:
+    - Once the user's request and date are identified, the script interacts with the Google Calendar API to retrieve relevant calendar data.
+    - For queries about upcoming events, the script fetches event details for the specified date range and provides auditory feedback to the user, announcing the events.
+    - In the case of event creation requests, the script prompts the user for event details such as the event name and date. It then creates the event on the user's calendar via the Google Calendar API.
+6. **Note Taking**:
+    - If the user requests to make a note, the script records the spoken text and saves it as a note in a text file for future reference.
+    - The note-taking functionality enhances the user's ability to quickly capture thoughts or reminders using voice commands, improving productivity and organization.
+7. **Voice Feedback**:
+    - Throughout the process, the script provides auditory feedback to the user using text-to-speech (TTS) technology (`pyttsx3`), ensuring a seamless and accessible user experience.
+    - Auditory feedback includes confirmation messages, event details, and note-taking acknowledgments, enabling visually impaired users to interact effectively with the system.
+
+By combining speech recognition, calendar API interaction, and voice feedback mechanisms, the code streamlines calendar management tasks for visually impaired individuals, offering enhanced accessibility and independence in organizing their schedules.
+
+### 1.7 Gemini and gemma
+Introduction
 
 Our project integrates two powerful models, **Gemini** and **Gemma**, to provide assistance to visually impaired individuals. When online connectivity is available, Gemini is initiated to answer questions and provide information effectively. However, in situations where online connectivity is not established, Gemma seamlessly takes over to ensure uninterrupted assistance. This dynamic integration ensures continuous support for visually impaired individuals, regardless of their internet connection status. Additionally, our solution incorporates **Gemini Vision**, enabling users to explore their environment effectively. With Gemini Vision, users can inquire about objects or obstacles in front of them simply by asking questions. Furthermore, users have the ability to take a photo of their surroundings and ask questions about the captured image, enhancing their understanding and interaction with the world around them. This comprehensive approach to accessibility aims to empower visually challenged individuals by providing them with tools to access information, navigate their environment, and interact with their surroundings confidently and independently.
-![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/gemini%20pro%20gemma.png)
+![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/GemmaAndGemini-background.png)
  Requirements
 
 - langchain
@@ -430,13 +401,16 @@ def is_system_offline(self):
 - The response is converted into speech using pyttsx3.
 - The Raspberry Pi 5 device serves as the platform for hosting and executing the Ollama model.
 - Seamless offline interaction is ensured, with responses conveyed through the device's audio output.
-   ### 1.10 Emotional Detection:
+
+### Emotional Detection,Face Recognition and Distance Measurement
+![archi](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/emotionAndFace-background.png)
+   #### 1.8 Emotional Detection:
    
 
  Introduction
 
 In this system, we integrate emotion detection technology with facial recognition to assist visually impaired individuals in perceiving the emotions of people around them. When a known person stands in front of a blind individual, our system utilizes a camera feed to recognize their facial expressions. This recognition process is initiated only when the system identifies a familiar face. Once a face is detected and identified, our technology analyzes the facial expression using advanced emotion detection algorithms. Subsequently, the system converts this emotional insight into spoken words through a speech synthesis engine, enabling the blind individual to understand the emotional state of the person in front of them. Through this innovative integration of technology, we aim to enhance the social interactions and situational awareness of visually impaired individuals, fostering a more inclusive and connected environment.
-![emotional](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Face%20detection%20and%20emotional%20detection.png)
+![emotional](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/emotionAndFace-background.png)
  Requirements
 
 - openCv
@@ -474,7 +448,76 @@ In this system, we integrate emotion detection technology with facial recognitio
     - Return the processed frame with visual annotations (rectangles, text labels) indicating emotions and recognized faces.
 5. **Loop Over Frames**:
     - Continuously repeat the face detection and emotion recognition process for each frame captured from the camera feed.
-### 1.11 Gesture Recognition: 
+.
+#### 1.9 Face Recognition
+ Introduction
+
+We've engineered a face recognition system designed to enhance their social interactions and overall sense of autonomy. This innovative technology represents a significant leap forward in accessibility, enabling blind individuals to discern and recognize the faces of those in their immediate vicinity. By harnessing the power of artificial intelligence and computer vision, our system provides invaluable assistance to individuals who rely on auditory cues to navigate the world around them.
+
+ Requirements
+
+- OpenCV
+- haarcascade_frontalface_default.xml
+- pyttsx3
+
+ Workflow of FaceRecognition
+
+1. **Initialization**:
+    - The **`FaceEmotion`** class initializes with a **`voice_assistant`** parameter, presumably for some voice interaction capability.
+    - It loads a TensorFlow Lite interpreter with a pre-trained emotion detection model (**`modelemotion.tflite`**).
+    - Known face encodings and names are loaded from images in the 'faces/' directory using the face_recognition library.
+2. **Image Preprocessing**:
+    - The **`preprocess_img`** method resizes and normalizes input images to prepare them for inference.
+3. **Emotion Detection**:
+    - The **`brain`** method takes a cropped face image, preprocesses it, feeds it to the TensorFlow Lite model, and returns the predicted emotion.
+    - The model used for emotion detection is a classifier that identifies emotions like anger, disgust, fear, etc.
+4. **Face Detection**:
+    - The **`detect_faces`** method takes a frame from the camera feed and detects faces using OpenCV's Haar Cascade classifier.
+    - For each detected face, it performs emotion detection using the **`brain`** method and draws bounding boxes around the faces with the predicted emotion labels.
+    - It also recognizes known faces by comparing their encodings with the encodings of detected faces using the face_recognition library.
+5. **Face Recognition**:
+    - Known faces are recognized using the face_recognition library by comparing face encodings.
+    - If a known face is detected, its name is associated with the face.
+#### 1.10 Face Distance Calculation
+
+ Introduction
+
+We've developed a Face Distance System. By seamlessly integrating  face detection technology into our solution, we've created a transformative experience that empowers individuals with visual challenges. This system intelligently activates when someone approaches a blind individual within a predefined distance, providing real-time auditory feedback about the identity of the approaching person. Through this groundbreaking approach, we're not only fostering independence but also promoting inclusivity, enabling visually impaired individuals to navigate social interactions with confidence and ease in a more accessible world.
+
+ Requirements
+
+- openCv
+- pyttsx3
+- ref_img.jpeg
+- haarcascade_frontalface_default.xml
+
+ Workflow of Face Distance Measurement
+
+1. **Initialization:**
+    - Import the necessary library, OpenCV (**`cv2`**).
+    - Define the **`FaceDetector`** class.
+    - Initialize class variables including **`known_distance`**, **`known_width`**, color definitions, font types, camera object, and face detector object.
+    - Load the pre-trained face detection model (**`haarcascade_frontalface_default.xml`**).
+2. **Focal Length Calculation:**
+    - Define the **`focal_length`** method to calculate the focal length using the known distance, real width, and width of the object in the reference image.
+3. **Distance Calculation:**
+    - Define the **`distance_finder`** method to calculate the distance to the object using the focal length, real face width, and face width in the frame.
+4. **Face Data Extraction:**
+    - Define the **`face_data`** method to extract face-related data from the input image.
+    - Convert the input image to grayscale.
+    - Use the face detection classifier to detect faces in the image.
+    - Iterate through the detected faces, calculate face width, and determine the center coordinates of each face.
+    - If the **`distance_level`** is less than 10, set it to 10 (a condition for further processing).
+5. **Main Execution:**
+    - Define the **`run`** method to execute the main functionality of the face distance system.
+    - Read a reference image (**`ref_image.jpeg`**) to calibrate the system.
+    - Calculate the focal length using the reference image and known parameters.
+    - Extract face-related data from the input frame.
+    - Calculate the distance to the face in the frame using the focal length and known parameters.
+    - Return the calculated distance
+###  Object Detection and Gesture Recognition:
+![archi](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/objectDetectionAndGesture-background.png)
+#### 1.11 Gesture Recognition: 
  Introduction
 
 Our project introduces a groundbreaking gesture recognition system designed to empower individuals with visual impairments by providing crucial information about their surroundings. This innovative system enables users to interact with their environment through hand gestures, offering real-time object detection feedback. For instance, when a visually impaired individual closes their hand, the system initiates object detection, providing auditory or tactile cues about nearby objects. Conversely, when the hand is opened, the system ceases object detection, ensuring privacy and minimizing distractions. By leveraging gesture recognition technology, our system aims to enhance the independence and safety of visually impaired individuals, enabling them to navigate and interact with their surroundings more confidently and efficiently.
@@ -526,47 +569,8 @@ Our project introduces a groundbreaking gesture recognition system designed to e
 
 **Integration of TensorFlow Lite Model for Object Detection based on Hand Gestures**
 
-This workflow incorporates object detection based on hand gestures, utilizing a TensorFlow Lite model for efficient inference on our device. Object detection is initiated only when a closed hand gesture is recognized, ensuring that system resources are utilized judiciously based on the user's gestures.
-
-### 1.12 Face Distance Calculation
-
- Introduction
-
-We've developed a Face Distance System. By seamlessly integrating  face detection technology into our solution, we've created a transformative experience that empowers individuals with visual challenges. This system intelligently activates when someone approaches a blind individual within a predefined distance, providing real-time auditory feedback about the identity of the approaching person. Through this groundbreaking approach, we're not only fostering independence but also promoting inclusivity, enabling visually impaired individuals to navigate social interactions with confidence and ease in a more accessible world.
-![distance calculation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Face%20detection%20and%20emotional%20detection.png)
- Requirements
-
-- openCv
-- pyttsx3
-- ref_img.jpeg
-- haarcascade_frontalface_default.xml
-
- Workflow of Face Distance Measurement
-
-1. **Initialization:**
-    - Import the necessary library, OpenCV (**`cv2`**).
-    - Define the **`FaceDetector`** class.
-    - Initialize class variables including **`known_distance`**, **`known_width`**, color definitions, font types, camera object, and face detector object.
-    - Load the pre-trained face detection model (**`haarcascade_frontalface_default.xml`**).
-2. **Focal Length Calculation:**
-    - Define the **`focal_length`** method to calculate the focal length using the known distance, real width, and width of the object in the reference image.
-3. **Distance Calculation:**
-    - Define the **`distance_finder`** method to calculate the distance to the object using the focal length, real face width, and face width in the frame.
-4. **Face Data Extraction:**
-    - Define the **`face_data`** method to extract face-related data from the input image.
-    - Convert the input image to grayscale.
-    - Use the face detection classifier to detect faces in the image.
-    - Iterate through the detected faces, calculate face width, and determine the center coordinates of each face.
-    - If the **`distance_level`** is less than 10, set it to 10 (a condition for further processing).
-5. **Main Execution:**
-    - Define the **`run`** method to execute the main functionality of the face distance system.
-    - Read a reference image (**`ref_image.jpeg`**) to calibrate the system.
-    - Calculate the focal length using the reference image and known parameters.
-    - Extract face-related data from the input frame.
-    - Calculate the distance to the face in the frame using the focal length and known parameters.
-    - Return the calculated distance.
-  
-### 1.13 Object Detection:
+This workflow incorporates object detection based on hand gestures, utilizing a TensorFlow Lite model for efficient inference on our device. Object detection is initiated only when a closed hand gesture is recognized, ensuring that system resources are utilized judiciously based on the user's gestures
+#### 1.12 Object Detection:
 
 
  Introduction
@@ -621,12 +625,54 @@ We've harnessed the potential of object detection technology to revolutionize ac
 **9. Threading**:
 - Threading is implemented to handle frame capture and object detection concurrently, enhancing system performance and responsiveness.
 - This asynchronous execution prevents blocking of the main thread, enabling efficient frame processing.
+
+
+  
+
+### 1.13 Currency Recognition
+
+
+
+ Introduction
+
+We've developed a currency detection model tailored to assist visually impaired individuals in swiftly identifying Indian currency denominations. Using cutting-edge image recognition technology, our model offers real-time detection capabilities, instantly recognizing various currency notes. We have used  pyttsx3, a text-to-speech library, enabling the detected currency to be relayed audibly to users. This  not only enhances accessibility but also promotes independence and confidence in managing financial transactions for visually impaired individuals.
+
+ Requirements
+
+- tensorflow
+- numpy
+- openCv
+- pyttsx3
+- currency_edgetpu.tflite
+- currency.txt
+
+ Workflow of Currency Recognition
+
+1. **Initialization**:
+    - The **`ImageClassifier`** class is initialized with a voice assistant object, model path, and label path.
+    - TensorFlow Lite Interpreter is initialized with the provided model path, and labels are loaded from the label path.
+2. **Preprocessing**:
+    - The **`preprocess_image`** method resizes the input image to match the model's input shape.
+    - The resized image is normalized to the range [-1, 1] to prepare it for inference.
+3. **Classification**:
+    - The **`classify_image`** method processes the preprocessed image using the TensorFlow Lite model.
+    - The output data containing classification results is obtained from the interpreter.
+4. **Prediction**:
+    - The **`predict`** method receives an image as input.
+    - The image is classified using the **`classify_image`** method.
+    - The predicted class and confidence score are extracted from the classification results.
+    - If a new currency denomination is detected and not already in the **`currency`** list, it is added to the list.
+    - The voice assistant speaks out the detected currency denomination to the user.
+5. **Currency Detection and Output**:
+    - If the detected currency denomination is new and not already in the **`currency`** list, it is added to the list.
+    - The voice assistant announces the detected currency denomination to the user using pyttsx3 for text-to-speech output.
+
 ## 2 Software
 
 ![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/caregiver%20app.png)
 
 ### 2.1 Geofencing
-
+![geofencing](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20129.png)
 Domain
 Mobile App - React Native
 Feature
@@ -648,7 +694,7 @@ In geofence page, User have the ability to select location of the circle fence o
 haversineFormula(center of circle, sixth sense user location) > radius of the circle
 
 ### 2.2 Messaging 
-
+![message](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20178.png)
 Domain
 React native - Mobile App
 **Messaging Feature Overview**
@@ -656,7 +702,7 @@ React native - Mobile App
 1. **Previous Functionality**: Initially, blind users could send messages using voice commands like "Send Message," which would be sent to the caregiver app.
 2. **Updated Messaging Tab**: Now, there's a dedicated messaging tab within the app where caregivers can type and send messages directly to blind users.
 3. **Text-to-Speech Conversion**: Messages received by blind users are read aloud using machine learning models that convert text to speech specifically tailored for them.
-4. ![message](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Message.png)
+   
 **Tech Stack**
 
 - **React Native**: Used for developing the mobile app, ensuring cross-platform compatibility.
@@ -704,7 +750,7 @@ Enable caregivers to change the language of the mobile app between Hindi and Eng
 By following these steps, caregivers can seamlessly change the language of the React Native mobile app, providing a localized experience for users in Hindi and English, with extensibility to support additional languages in the future.
 
 
-### Contact 
+### 2.4 Contact 
 
 **Domain:**
 
@@ -741,8 +787,50 @@ This feature enables blind users (sixth sense users) to make calls to contacts s
 
 The feature facilitates seamless communication for blind users by leveraging voice commands and advanced hardware capabilities. Future enhancements aim to add more functionalities and improve user interaction, such as adding voice commands for contact saving directly on the sixth sense hardware.
 ## 3 Hardware
+### Hardware Architecture:
+![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Hardware-connection-background.png)
+The hardware architecture consist of 
+
+- Raspberry Pi 5
+- Pi Camera 2 module
+- Sim 7600X G-H Raspberry Pi hat module
+- Coral USB Accelerator  TPU (Tensor Processing Unit)
+- USB to Aux for headphone
+- Gyroscope (Mpu6050)
+- Vibration Motor
+- 3D Model to house all the components
+
+
+
+ Hardware Connectivity
+
+
+
+The diagram illustrates the connectivity of various sensors and modules to the Raspberry Pi 5. Notably, the Coral TPU and earphones are connected to the Pi's USB port, while the SIM7600 for network connectivity utilizes both UART and USB for bidirectional communication. This setup ensures robust network connectivity and seamless data exchange.
+
+The gyroscope employs the I2C interface for communication with the Raspberry Pi, offering precise motion sensing capabilities. Meanwhile, the camera is linked to the Pi via PCIe, facilitating high-speed data transfer and enabling advanced imaging functionalities.
+
+Additionally, the vibration module interfaces with the Pi's GPIO pins, allowing for tactile feedback and enhancing user interaction. This comprehensive integration of diverse communication protocols and interfaces optimizes the Raspberry Pi 5's functionality across various domains.
+
+ Challenges Faced
+
+1. We attempted to utilize the M.2 Coral TPU A+E Key (https://coral.ai/products/m2-accelerator-ae) in conjunction with the Pineberry Hat AI (https://pineboards.io/products/hat-ai-for-raspberry-pi-5) as an interface between the TPU and Raspberry Pi. Despite investing over 100 hours in configuration and setup, the Coral TPU failed to register as connected. We made multiple adjustments to the Debian OS configuration file, but the TPU remained undetected in the PCIe channel.
+During startup, an error concerning the MSI PCIe Address was also encountered. After exhaustive troubleshooting attempts, we concluded that the M.2 Coral TPU A+E Key might be faulty. Consequently, we reverted to using the USB Coral TPU, which was already in our possession and functioned seamlessly.
+
+
+
+1. Setting up the TPU software for Raspberry Pi presented its own set of challenges, especially considering Google's discontinuation of support since 2019. The PyCoral library, a critical component, was compatible only with Python version 3.9. However, the Picamera2 Python library, essential for camera operations, required Python version 3.11. This compatibility conflict made it impossible to run both libraries simultaneously.
+**Solution**: After extensive research and a night of troubleshooting, we discovered multiple open-source contributions that addressed this issue. These contributions enabled the PyCoral library to function seamlessly on Python version 3.11 and also provided an updated TensorFlow Lite runtime that supported the specific PyCoral version. This breakthrough not only resolved the compatibility hurdles but also ensured smooth integration and operation of the TPU software on the Raspberry Pi.
+2. Initially, obtaining internet connectivity posed a challenge when using the GSM Module. We opted for the Sim 808 Module, which not only facilitated calling, receiving messages, and establishing network connectivity but also offered GPS functionality. However, we encountered limitations with only 2G network access, resulting in sluggish responses from the Gemini API and speech recognition processes.
+    
+    **SIM 808 Module**
+    
+    
+    **Solution:** To address this, we switched to the Sim7600X G-H Raspberry Pi Hat. This alternative not only integrated GPS capabilities but also provided 4G LTE internet connectivity for the Raspberry Pi 5. This upgrade significantly enhanced our system's responsiveness to cloud models, ensuring smoother and faster operations.
+    
+    
 ### 3.1 Fall Detection 
-![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/alert.png)
+![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/alert-background.png)
 The MPU-6050 IMU (Inertial Measurement Unit) is a sensor that combines a 3-axis accelerometer and a 3-axis gyroscope. The accelerometer measures gravitational acceleration, while the gyroscope measures rotational velocity. Additionally, this module includes a temperature sensor. It's commonly used for determining the orientation of a moving object.
 
 MPU6050 Pinout:
@@ -888,3 +976,4 @@ Different TPU and board benchmark of MobileNet v1 and MobileNet v2 model inferen
 
 
 Power consumption of different board and coral TPU
+

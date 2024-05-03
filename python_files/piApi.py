@@ -9,23 +9,22 @@ from gsmmodem.exceptions import InterruptedException, CommandError
 import gpiod
 
 
-
 class piAPI():
 	def __init__(self, db,voice_assistant):
 		print('pi API initiated')
 		self.voice_assistant = voice_assistant
-		self.serial = serial.Serial('/dev/ttyAMA0',115200)
 		self.db = db
+	
 		self.setUpGPS()
 		self.user_coord = [0,0]
+		self.GPSActive = True
 	
 		self.setupGyro()
 		self.fallDetected = False
 			
 		self.setupVibrate()
 		
-	
-		self.GSMActive = True
+		self.GSMActive = False
 	
 	def send_at(self,command,back,timeout):
 		rec_buff = ''
@@ -47,18 +46,23 @@ class piAPI():
 			return 0
 			
 	def setUpGPS(self):
+		self.serial = serial.Serial('/dev/ttyAMA0',115200, timeout = 3)
 		print('Start GPS session...')
 		self.send_at('AT+CGPS=1,1','OK',1)
+		self.serial.write(('AT+CGPSINFOCFG=1,2\r\n').encode('ISO-8859-1'))
+		self.GPSActive = True
 	
 	def stopGPS(self):
+		self.GPSActive = False
 		print('Stop GPS session...')
 		self.send_at('AT+CGPS=0,1','OK',1)
+		self.serial.close()
 	
 	#to get gps coordinate
 	def getLocation(self):
 		data = ''
-		self.serial.write(('AT+CGPSINFOCFG=3,2\r\n').encode('ISO-8859-1'))
-		data = self.serial.readline().decode('ISO-8859-1')
+		#self.serial.write(('AT+CGPSINFOCFG=3,2\r\n').encode('ISO-8859-1'))
+		data = self.serial.read(self.serial.inWaiting()).decode('ISO-8859-1')
 		if data[0:6] == "$GPRMC":
 			newmsg = pynmea2.parse(data)
 			lat = newmsg.latitude
@@ -67,7 +71,7 @@ class piAPI():
 			self.user_coord = [lng, lat]
 			self.db.sendGPS(self.user_coord)
 			return [lng,lat]
-			
+		
 	
 	def setupGSM(self):	
 		print('initiate GSM')
@@ -87,40 +91,49 @@ class piAPI():
 		if Number == None or Number == '00000':
 			self.voice_assistant.speak('enter a valid number')
 			return
+		self.stopGPS()
+		self.setupGSM()
 		print('Dialing number: {0}'.format(Number))
-		call = self.modem.dial(Number)
+		self.call = self.modem.dial(Number)
 		print('Waiting for call to be answered/rejected')
 		wasAnswered = False
-		while call.active:
-			if call.answered:
+		while self.call.active:
+			if self.call.answered:
 				wasAnswered = True
-				if call.active: 	
+				if self.call.active: 
 					self.voice_assistant.speak('call is attended')
 				else:
+					wasAnswered = False
 					self.voice_assistant.speak('Call has been ended by remote party')
-			else:
-				time.sleep(0.5)
 		if not wasAnswered:
 			self.voice_assistant.speak('Call was not answered by remote party')
 		self.modem.close()
+		self.setUpGPS()
+	
+	def hangPhone(self):
+		if (self.call):
+			self.call.hangup()
 		
 	#To send SMS
 	def sendSms(self, Number, Message):
+		self.stopGPS()
+		self.setupGSM()
 		response = self.modem.sendSms(Number, Message, True)
 		if type(response) == SentSms:
 			self.voice_assistant.speak('SMS Delivered.')
 		else:
 			self.voice_assistant.speak('SMS Could not be sent')
 		self.modem.close()
+		self.setUpGPS()
 		
 	def handleIncomingCall(self,call):
+		
 		if call.ringCount == 1:
 			self.voice_assistant.speak('Incoming call from:', call.number)
 		elif call.ringCount >= 2:
 			call.answer()
 		else:
 			self.voice_assistant.speak(' Call from {0} is still ringing...'.format(call.number))
-		self.modem.close()
 		
 	def setupGyro(self):
 		print('Initiate GYRO')
@@ -144,10 +157,13 @@ class piAPI():
 		self.led_line = chip.get_line(vibration_pin)
 		self.led_line.request(consumer="LED", type=gpiod.LINE_REQ_DIR_OUT)
 
-	def vibrateMotor(self, time):
+	def vibrateMotor(self, t):
 		try:
 			self.led_line.set_value(1)
-			time.sleep(time)
+			time.sleep(t)
 			self.led_line.set_value(0)
 		finally:
 			self.led_line.release()
+	
+
+   
