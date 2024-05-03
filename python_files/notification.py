@@ -22,14 +22,3 @@ class NotificationSender:
         response = requests.post(self.url, json=payload, headers=self.headers)
         self.voice_assistant.speak("Alert message sent")
 
-# Example usage
-# sender = NotificationSender(
-#     sub_id="sub-id-1",
-#     app_id=19745,
-#     app_token="iV4ceRtjBYygvWfLa5Bu3z"
-# )
-
-# sender.send_notification(
-#     title="Alert!! Alert!!",
-#     message="Emergency"
-# )

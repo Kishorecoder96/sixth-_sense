@@ -20,9 +20,6 @@ class HandGestureRecognition:
         self.min_detection_confidence = 0.7
         self.min_tracking_confidence = 0.5
         self.use_brect = True
-        # self.cap = cv.VideoCapture(0)
-        # self.cap.set(cv.CAP_PROP_FRAME_WIDTH, self.cap_width)
-        # self.cap.set(cv.CAP_PROP_FRAME_HEIGHT, self.cap_height)
         self.mp_hands = mp.solutions.hands
         self.hands = self.mp_hands.Hands(
             static_image_mode=self.use_static_image_mode,
@@ -62,7 +59,6 @@ class HandGestureRecognition:
         
         debug_image = self.draw_point_history(debug_image, self.point_history)
         debug_image = self.draw_info(debug_image, fps, self.mode, number)
-        # cv.imshow('Hand Gesture Recognition', debug_image)
         return val, debug_image
         
 
@@ -406,8 +402,4 @@ def get_args():
     args = parser.parse_args()
     return args
 
-# def main():
-#     args = get_args()
-#     hand_gesture_recognition = HandGestureRecognition(device=0, width=960, height=540,min_detection_confidence=0.7,min_trracking_confidence=0.5)
-#     hand_gesture_recognition.run()
 

@@ -1,28 +1,23 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 import numpy as np
 import tensorflow as tf
 import importlib.util
+try:
+    from tflite_runtime.interpreter import Interpreter
+except:
+    from tf.lite.python.interpreter import Interpreter
 
 
 class KeyPointClassifier(object):
     def __init__(
         self,
-        model_path='model/keypoint_classifier/keypoint_classifier.tflite',
+        model_path='model/keypoint_classifier/keypoint_classifier_edgetpu.tflite',
         num_threads=1,
     ):
         self.use_TPU = False
         pkg = importlib.util.find_spec('tflite_runtime')
-        if pkg:
-            from tflite_runtime.interpreter import Interpreter
-            if self.use_TPU:
-                from tflite_runtime.interpreter import load_delegate
-        else:
-            from tensorflow.lite.python.interpreter import Interpreter
-            if self.use_TPU:
-                from tensorflow.lite.python.interpreter import load_delegate
-        self.interpreter = Interpreter(model_path=model_path,
-                                               num_threads=num_threads)
+       
+        self.interpreter = Interpreter(model_path)
 
         self.interpreter.allocate_tensors()
         self.input_details = self.interpreter.get_input_details()

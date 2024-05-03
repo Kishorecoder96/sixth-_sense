@@ -5,18 +5,21 @@ import tensorflow as tf
 from skimage.transform import resize
 import face_recognition
 
+try:
+    from tflite_runtime.interpreter import Interpreter
+except:
+    from tf.lite.python.interpreter import Interpreter
 
-class FaceEmotion():
+class faceEmotion():
     def __init__(self,voice_assistant):
         self.voice_assistant = voice_assistant
-        # self.cap = cv2.VideoCapture(0)
         self.known_face_encodings = []
         self.dummy_names = []
         self.known_face_names = []
         self.found_name = None
         self.name = None
         self.emo = None
-        self.interpreter = tf.lite.Interpreter("model/models/modelemotion.tflite")
+        self.interpreter = Interpreter("model/faceEmoModel/modelemotion_edgetpu.tflite")
         self.interpreter.allocate_tensors()
         self.input_details = self.interpreter.get_input_details()[0]
         self.output_details = self.interpreter.get_output_details()[0]
@@ -52,7 +55,7 @@ class FaceEmotion():
         return img[y:y+h, x:x+w]
 
     def detect_faces(self, frame):
-        cascPath = "model/models/haarcascade_frontalface_default.xml"
+        cascPath = "model/faceEmoModel/haarcascade_frontalface_default.xml"
         faceCascade = cv2.CascadeClassifier(cascPath)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -91,9 +94,8 @@ class FaceEmotion():
                         if self.name in self.dummy_names:
                             continue
                         else:
-
                             self.dummy_names.append(self.name)
-        
+                            print(f"{self.name} is in front of you and he is {self.emo}")
                             self.voice_assistant.speak(f"{self.name} is in front of you and he is {self.emo}")
                     return frame
                     
@@ -105,5 +107,3 @@ class FaceEmotion():
         input_data = np.expand_dims(normalized_frame, axis=0)
         return input_data
 
-# facemo = FaceEmotion()
-# facemo.detect_faces()
