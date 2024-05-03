@@ -668,9 +668,43 @@ We've developed a currency detection model tailored to assist visually impaired 
 
 ## 2 Software
 
+### 2.1 Realtime Tracking:
 ![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/caregiver%20app.png)
 
-### 2.1 Geofencing
+Feature
+
+In our mobile app, caregivers can monitor the location of Sixth Sense users in real-time using the GPS module in the Sim7600 device. We utilize Firebase to ensure seamless real-time tracking. Additionally, we've integrated the Direction API for convenient navigation to Sixth Sense users.
+
+Tech Stack
+
+- React Native
+- React native google map
+- firebase
+- Google maps API
+- direction API
+- Native-Alert
+
+Working
+
+1. **GPS Module (Sim7600):**
+    - The Sim7600 module is a GPS/GNSS module that provides accurate location data.
+    - It communicates with satellites to determine the device's current coordinates (latitude and longitude).
+    - This data is then sent to the mobile app for processing and display.
+2. **Firebase Realtime Database:**
+    - Firebase is used as a backend service to store and sync location data in real-time.
+    - When the GPS module sends new location updates, these updates are immediately sent to Firebase.
+    - Caregivers and authorized users can access this data through the mobile app, ensuring they have up-to-date information on the Sixth Sense user's location.
+3. **Direction API Integration:**
+    - The Direction API is integrated into the app to provide navigation assistance.
+    - When a caregiver wants to reach the Sixth Sense user, they can input their location and the destination (Sixth Sense user's location) into the app.
+    - The Direction API calculates the best route, considering factors like traffic conditions and distance, and provides turn-by-turn navigation instructions to the caregiver.
+4. **Real-Time Monitoring Process:**
+    - The caregiver opens the mobile app and accesses the Sixth Sense monitoring feature.
+    - The app continuously fetches the latest location data from Firebase, showing the real-time location of the Sixth Sense user on a map.
+    - If the caregiver needs to navigate to the user, they can initiate the navigation feature within the app, which utilizes the Direction API for route guidance.
+
+Overall, this system ensures that caregivers can monitor the Sixth Sense user's location in real-time, enabling them to provide timely assistance and support as needed.
+### 2.2 Geofencing
 ![geofencing](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20129.png)
 Domain
 Mobile App - React Native
@@ -717,7 +751,36 @@ React native - Mobile App
 
 This setup provides an efficient way for caregivers to communicate with blind users using text messages, with the app handling message storage, retrieval, and text-to-speech conversion seamlessly.
 
-### 2.3 Multi Language Support 
+### 2.4 People
+ Feature
+
+Place where caregiver can upload people faces with name. its is used in ml part to recognize who is front of them with emotion
+
+ Tech Stack
+
+- React Native
+- Firebase
+
+ Working
+
+1. **Face Upload Feature:**
+    - In the mobile app, caregivers have a dedicated section where they can upload photos of individuals along with their corresponding names.
+    - Caregivers capture or upload images directly from their device's camera or gallery.
+    - They input the person's name or any relevant information associated with them.
+2. **ML Model for Facial Recognition and Emotion Detection:**
+    - The app integrates a trained ML model for facial recognition and emotion detection.
+    - This model is capable of recognizing faces in images and analyzing facial expressions to determine emotions such as happiness, sadness, anger, etc.
+3. **Integration of Face Database:**
+    - The uploaded images and corresponding names are stored in a face database within the app's backend system.
+    - This database acts as a reference for the ML model during the recognition process.
+4. **Facial Recognition and Emotion Detection Process:**
+    - When the app's camera is activated or an image is uploaded, the ML model is invoked to analyze the faces present in the image.
+    - The model compares the detected faces with the images stored in the face database to identify individuals.
+    - Simultaneously, it analyzes facial expressions to determine the emotional state of the person(s) in the image.
+5. **Output and User Interaction:**
+    - The app displays the recognized person's name along with their detected emotions on the user interface.
+    - Caregivers can view this information in real-time, helping them understand the emotional state of the individual they are interacting with.
+### 2.5 Multi Language Support 
 
 ---
 
@@ -749,7 +812,7 @@ Enable caregivers to change the language of the mobile app between Hindi and Eng
 By following these steps, caregivers can seamlessly change the language of the React Native mobile app, providing a localized experience for users in Hindi and English, with extensibility to support additional languages in the future.
 
 
-### 2.4 Contact 
+### 2.6 Contact 
 
 **Domain:**
 
