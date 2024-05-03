@@ -505,9 +505,9 @@ We've developed a Face Distance System. By seamlessly integrating  face detectio
     - Extract face-related data from the input frame.
     - Calculate the distance to the face in the frame using the focal length and known parameters.
     - Return the calculated distance
-### 1.11 Object Detection and Gesture Recognition:
+###  Object Detection and Gesture Recognition:
 ![archi](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/objectDetectionAndGesture-background.png)
-#### 1.9 Gesture Recognition: 
+#### 1.11 Gesture Recognition: 
  Introduction
 
 Our project introduces a groundbreaking gesture recognition system designed to empower individuals with visual impairments by providing crucial information about their surroundings. This innovative system enables users to interact with their environment through hand gestures, offering real-time object detection feedback. For instance, when a visually impaired individual closes their hand, the system initiates object detection, providing auditory or tactile cues about nearby objects. Conversely, when the hand is opened, the system ceases object detection, ensuring privacy and minimizing distractions. By leveraging gesture recognition technology, our system aims to enhance the independence and safety of visually impaired individuals, enabling them to navigate and interact with their surroundings more confidently and efficiently.
