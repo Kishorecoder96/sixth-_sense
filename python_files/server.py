@@ -5,10 +5,11 @@ import datetime
 import re
 import requests
 import os
+from time import time
 
 
 class FirebaseManager:
-    def __init__(self, voice_assistant,credential_file = 'secret.json'):
+    def __init__(self,voice_assistant,credential_file = 'secret.json'):
         self.voice_assistant = voice_assistant
         self.secret = 'Wert'
         self.user_id = 'Wert'
@@ -27,8 +28,10 @@ class FirebaseManager:
         timestamp = current_datetime.timestamp()
         collection.add({
             "message": Message,
-            "timestamp": timestamp
+            "timestamp": time() * 1000,
+            "caregiver": False
         })
+        self.voice_assistant.speak('Message sent')
 
     #just add the text to speech command here both getMessage and getPeoples get initialized when the class is created
     def getMessage(self):
@@ -76,11 +79,10 @@ class FirebaseManager:
     def getPeoples(self):
         def getData(data,d,h):
             for i in data:
-                if (os.path.isfile('people/{}.jpg'.format(i._data['name'])) == False):
+                if (os.path.isfile('./objDetandGesRec/faces/{}.jpg'.format(i._data['name'])) == False):
                     self.downloadImage(i._data)
                 
         self.db.collection('visionUser').document(self.secret).collection('peoples').on_snapshot(getData)
 
 
-   
-# dba = FirebaseManager()
+
