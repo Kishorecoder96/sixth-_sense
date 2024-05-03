@@ -200,7 +200,7 @@ The refactoring process successfully transformed the initial script-based implem
 
 This documentation outlines the conversion of the original code for optimization purposes, focusing on reducing content size and improving retrieval speed. The primary objectives of this conversion are to streamline the codebase, minimize redundant operations, and enhance overall performance.
 
-![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/gemini%20pro%20gemma.png)
+
  Changes Made
 
 1. **Class Segmentation**:
@@ -373,6 +373,253 @@ The Distance Warning System has been  integrated with our Sixth Sense to provide
 
 The integration of the Distance Warning System with the Depth Estimation module leveraging the MIDAS model represents a significant advancement in assistive technology for visually challenged individuals. By combining real-time depth estimation with proactive obstacle detection and warning capabilities, the system contributes to improved mobility, independence, and safety in navigating diverse environments.
 
+### 1.9 Gemini and gemma
+     Introduction
+
+Our project integrates two powerful models, **Gemini** and **Gemma**, to provide assistance to visually impaired individuals. When online connectivity is available, Gemini is initiated to answer questions and provide information effectively. However, in situations where online connectivity is not established, Gemma seamlessly takes over to ensure uninterrupted assistance. This dynamic integration ensures continuous support for visually impaired individuals, regardless of their internet connection status. Additionally, our solution incorporates **Gemini Vision**, enabling users to explore their environment effectively. With Gemini Vision, users can inquire about objects or obstacles in front of them simply by asking questions. Furthermore, users have the ability to take a photo of their surroundings and ask questions about the captured image, enhancing their understanding and interaction with the world around them. This comprehensive approach to accessibility aims to empower visually challenged individuals by providing them with tools to access information, navigate their environment, and interact with their surroundings confidently and independently.
+![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/gemini%20pro%20gemma.png)
+ Requirements
+
+- langchain
+- google.generativeai
+- pillow
+- langchain_google_genai
+- ollama
+
+ Workflow of Gemini and Gemma
+
+ **System Connectivity Status**
+
+- `is_system_offline` method crucial for determining system's online status.
+- It attempts socket connection to a well-known external server like Google DNS.
+- Uses `create_connection` function from `socket` module.
+- Connection made with server IP "8.8.8.8" and port 53.
+- If successful, returns `False`, affirming online status.
+- If connection fails (e.g., network issues), catches `OSError` and returns `True`, indicating offline status.
+- Provides robust means to assess connectivity vital for network-dependent applications.
+- Offers straightforward mechanism to ascertain online/offline status.
+- Enables applications to adapt based on connectivity, ensuring optimal performance in diverse network environments.
+
+```python
+def is_system_offline(self):
+        try:
+            # Attempt to create a socket connection to a known external server (Google DNS).
+            socket.create_connection(("8.8.8.8", 53))
+            return False
+        except OSError:
+            return True
+```
+
+ **Adaptive Assistance for Online Connectivity**
+
+- If `is_system_offline` evaluates to `False`, indicating that the system is online, the Gemini and GeminiVisionProAssistant classes are initiated to provide assistance to visually impaired users.
+- The GeminiProAssistant class utilizes the LangChain Google Generative AI API to respond to user queries by triggering the Gemini model.
+- With online connectivity established, the Gemini model generates concise responses based on user queries, extracting the first four words for clarity, which are then relayed to the user through the voice assistant.
+- The GeminiVisionProAssistant class offers image description capabilities for visually impaired users, generating concise descriptions of images when triggered with an image file path.
+- Similar to the GeminiProAssistant, if an internet connection is available, the Gemini Pro Vision model is invoked to analyze images and provide descriptive responses relayed to the user through the voice assistant.
+- Robust error handling mechanisms ensure that any unforeseen issues are appropriately managed, with the voice assistant communicating any encountered errors.
+- These integrated functionalities aim to empower visually impaired individuals by providing accurate and concise information through text and image-based interactions, enhancing accessibility and independence in daily tasks and information retrieval.
+- Additionally, the input is acquired through speech to text using Google's speech recognition, and the output is spoken out with pyttsx3, ensuring seamless interaction and accessibility for visually impaired users.
+
+ **Seamless Interaction in Offline Mode**
+
+- When `is_system_offline` is `True`, indicating offline status, the Ollama model on Raspberry Pi 5 operates independently.
+- The interaction begins with a user question, triggering the Ollama model.
+- Tiny Whisper speech recognition converts the spoken query into text.
+- The Ollama model processes the text input, formulating a response internally.
+- The response is converted into speech using pyttsx3.
+- The Raspberry Pi 5 device serves as the platform for hosting and executing the Ollama model.
+- Seamless offline interaction is ensured, with responses conveyed through the device's audio output.
+  1.10 ### Emotional Detection:
+   
+
+ Introduction
+
+In this system, we integrate emotion detection technology with facial recognition to assist visually impaired individuals in perceiving the emotions of people around them. When a known person stands in front of a blind individual, our system utilizes a camera feed to recognize their facial expressions. This recognition process is initiated only when the system identifies a familiar face. Once a face is detected and identified, our technology analyzes the facial expression using advanced emotion detection algorithms. Subsequently, the system converts this emotional insight into spoken words through a speech synthesis engine, enabling the blind individual to understand the emotional state of the person in front of them. Through this innovative integration of technology, we aim to enhance the social interactions and situational awareness of visually impaired individuals, fostering a more inclusive and connected environment.
+
+ Requirements
+
+- openCv
+- numpy
+- face recognition
+- tensorflow
+- pyttsx3
+- haarcascade_frontalface_default.xml
+- modelemotion_edgetpu.tflite
+
+ Workflow of Emotion Detection
+
+1. **Initialization**:
+    - Instantiate the **`FaceEmotion`** class with a **`voice_assistant`** object.
+    - Load the emotion detection model (**`modelemotion.tflite`**) into the TensorFlow Lite interpreter.
+    - Load known face encodings and names from the **`faces/`** directory.
+    - Define a list of emotions corresponding to different facial expressions.
+2. **Face Detection and Emotion Recognition Loop**:
+    - Capture a frame from the camera feed.
+    - Use the Haar cascade classifier to detect faces in the frame.
+    - For each detected face:
+        - Crop the face region.
+        - Preprocess the face image.
+        - Utilize the TensorFlow Lite model to recognize emotions from the preprocessed face image.
+        - Display rectangles around detected faces and show the recognized emotion as text.
+        - Conduct face recognition using the **`face_recognition`** library:
+            - Compute face encodings for faces in the frame.
+            - Compare face encodings with known face encodings.
+            - If a match is found, display the name of the recognized person.
+        - Provide verbal feedback using the voice assistant, announcing the recognized person's name and detected emotion.
+3. **Preprocessing and Model Inference**:
+    - Preprocess the input frame to fit the model input size (resize to 64x64 pixels, normalization).
+    - Prepare the preprocessed frame for inference by converting it to the required format.
+4. **Return Processed Frame**:
+    - Return the processed frame with visual annotations (rectangles, text labels) indicating emotions and recognized faces.
+5. **Loop Over Frames**:
+    - Continuously repeat the face detection and emotion recognition process for each frame captured from the camera feed.
+1.11 ### Gesture Recognition: 
+ Introduction
+
+Our project introduces a groundbreaking gesture recognition system designed to empower individuals with visual impairments by providing crucial information about their surroundings. This innovative system enables users to interact with their environment through hand gestures, offering real-time object detection feedback. For instance, when a visually impaired individual closes their hand, the system initiates object detection, providing auditory or tactile cues about nearby objects. Conversely, when the hand is opened, the system ceases object detection, ensuring privacy and minimizing distractions. By leveraging gesture recognition technology, our system aims to enhance the independence and safety of visually impaired individuals, enabling them to navigate and interact with their surroundings more confidently and efficiently.
+
+ Requirements
+
+- mediapipe
+- numpy
+- openCv
+
+ Workflow of Gesture Recognition
+
+1. **Initialization**:
+    - Import necessary libraries and modules.
+    - Define parameters and settings for the gesture recognition system.
+    - Load pre-trained models for hand landmarks detection and classification.
+    - Initialize object detection module.
+2. **Run Method Invocation**:
+    - The **`run()`** method is invoked with an image frame as input.
+    - The current frames per second (FPS) are calculated.
+    - The user can toggle between different modes and numbers using specific key inputs.
+3. **Image Processing**:
+    - Flip the input image horizontally to match the user's perspective.
+    - Convert the image from BGR to RGB format for compatibility with the hand detection model.
+    - Process the image using the MediaPipe Hands library to detect hand landmarks and handedness.
+4. **Gesture Recognition**:
+    - Extract hand landmarks and bounding rectangles for each detected hand.
+    - Pre-process the landmark points for classification.
+    - Classify hand gestures using a keypoint classifier and a point history classifier.
+    - Update the gesture history based on the detected gestures.
+    - If a closed hand gesture is detected, proceed to object detection. If an open hand gesture is detected, skip object detection.
+5. **Object Detection**:
+    - If a closed hand gesture is detected, initialize object detection to identify objects in the surrounding environment.
+    - Perform object detection using the initialized module.
+    - Provide feedback or relevant information to the user based on the detected objects.
+6. **Visualization**:
+    - Draw bounding rectangles around detected hands and landmarks on the image frame.
+    - Display information such as handedness, hand sign, and finger gesture on the image.
+    - Visualize the point history to track the movement trajectory of specific landmarks.
+7. **User Interaction**:
+    - Allow the user to toggle between different modes for logging hand gestures and point history.
+    - Enable the user to specify a number for logging purposes.
+8. **Logging**:
+    - Log the normalized landmark points and finger gestures to CSV files based on the selected mode and number.
+9. **Output**:
+    - Return the hand sign ID as the output of the **`run()`** method.
+    - Provide the debug image with visual annotations for display or further processing.
+
+**Integration of TensorFlow Lite Model for Object Detection based on Hand Gestures**
+
+This workflow incorporates object detection based on hand gestures, utilizing a TensorFlow Lite model for efficient inference on our device. Object detection is initiated only when a closed hand gesture is recognized, ensuring that system resources are utilized judiciously based on the user's gestures.
+
+### 1.12 Face Distance Calculation
+
+ Introduction
+
+We've developed a Face Distance System. By seamlessly integrating  face detection technology into our solution, we've created a transformative experience that empowers individuals with visual challenges. This system intelligently activates when someone approaches a blind individual within a predefined distance, providing real-time auditory feedback about the identity of the approaching person. Through this groundbreaking approach, we're not only fostering independence but also promoting inclusivity, enabling visually impaired individuals to navigate social interactions with confidence and ease in a more accessible world.
+
+ Requirements
+
+- openCv
+- pyttsx3
+- ref_img.jpeg
+- haarcascade_frontalface_default.xml
+
+ Workflow of Face Distance Measurement
+
+1. **Initialization:**
+    - Import the necessary library, OpenCV (**`cv2`**).
+    - Define the **`FaceDetector`** class.
+    - Initialize class variables including **`known_distance`**, **`known_width`**, color definitions, font types, camera object, and face detector object.
+    - Load the pre-trained face detection model (**`haarcascade_frontalface_default.xml`**).
+2. **Focal Length Calculation:**
+    - Define the **`focal_length`** method to calculate the focal length using the known distance, real width, and width of the object in the reference image.
+3. **Distance Calculation:**
+    - Define the **`distance_finder`** method to calculate the distance to the object using the focal length, real face width, and face width in the frame.
+4. **Face Data Extraction:**
+    - Define the **`face_data`** method to extract face-related data from the input image.
+    - Convert the input image to grayscale.
+    - Use the face detection classifier to detect faces in the image.
+    - Iterate through the detected faces, calculate face width, and determine the center coordinates of each face.
+    - If the **`distance_level`** is less than 10, set it to 10 (a condition for further processing).
+5. **Main Execution:**
+    - Define the **`run`** method to execute the main functionality of the face distance system.
+    - Read a reference image (**`ref_image.jpeg`**) to calibrate the system.
+    - Calculate the focal length using the reference image and known parameters.
+    - Extract face-related data from the input frame.
+    - Calculate the distance to the face in the frame using the focal length and known parameters.
+    - Return the calculated distance.
+  
+### 1.13 Object Detection:
+
+
+ Introduction
+
+We've harnessed the potential of object detection technology to revolutionize accessibility for the visually impaired community. By integrating state-of-the-art object detection algorithms into our system, we've created a seamless experience where users can effortlessly perceive their surroundings through auditory feedback. Object detection enables our system to identify and describe nearby objects in real-time, providing users with vital information about their environment. This innovative approach not only enhances independence but also promotes inclusivity by empowering visually impaired individuals to navigate the world with confidence and ease. Through cutting-edge technology and a commitment to accessibility, we're bridging the gap between sighted and non-sighted individuals, creating a more inclusive society for all.
+
+ Requirements
+
+- numpy
+- threading
+- openCv
+- pyttsx3
+- objectDetect_edgetpu.tflite
+- labelmap.txt
+
+ Workflow of Object Detection
+
+---
+
+**1. Initialization**:
+
+- The `VideoStream` class is instantiated to capture live video frames from the camera.
+- An instance of the `Detector` class is created to perform object detection on the captured frames using the MobileNetV2 model.
+
+**2. Frame Capture and Processing**:
+- The `VideoStream` class continuously grabs frames from the camera feed.
+- Each captured frame is forwarded to the `Detector` class for object detection analysis.
+
+**3. Gesture Recognition**:
+- Before initiating object detection, the system checks for the presence of specific gestures, such as a closed hand gesture.
+- If a closed hand gesture is recognized, object detection is initiated; otherwise, the system continues to capture frames without processing for object detection.
+
+**4. Object Detection**:
+- The `Detector` class utilizes a TensorFlow Lite model(edgeTPU), specifically MobileNetV2, to recognize objects within each frame.
+- The model processes the frame, identifying objects and their corresponding confidence scores.
+- Detected objects are marked with bounding boxes and labeled on the frame.
+
+**5. User Feedback**:
+- Using `pyttsx3`, a text-to-speech (TTS) module, the system converts the labels of detected objects into audible feedback for visually impaired users.
+- To avoid redundancy, the system maintains a record of previously announced objects.
+
+**6. Displaying Results**:
+- The detected objects are visually highlighted on the frame by drawing bounding rectangles around them.
+- The annotated frame, with bounding boxes and labels, is displayed in real-time to provide visual feedback to the user.
+
+**7. Continuous Operation**:
+- The system operates continuously, capturing, processing, and detecting objects in each incoming frame from the camera.
+
+**8. Resource Management**:
+- The system manages resources efficiently, ensuring the camera stream is properly released, and the system gracefully shuts down upon termination or interruption.
+
+**9. Threading**:
+- Threading is implemented to handle frame capture and object detection concurrently, enhancing system performance and responsiveness.
+- This asynchronous execution prevents blocking of the main thread, enabling efficient frame processing.
 ## 2 Software
 
 ![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/threading.png)
