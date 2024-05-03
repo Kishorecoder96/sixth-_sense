@@ -89,7 +89,7 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
     
     
 ### **Old Architecture**
-![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/archi.png)
+![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Old%20architecture%20(2).png)
 ### **New Architecture**
 ![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/overallArchitecture-background.png)
 ### Technology Arsenal:
@@ -410,7 +410,6 @@ def is_system_offline(self):
  Introduction
 
 In this system, we integrate emotion detection technology with facial recognition to assist visually impaired individuals in perceiving the emotions of people around them. When a known person stands in front of a blind individual, our system utilizes a camera feed to recognize their facial expressions. This recognition process is initiated only when the system identifies a familiar face. Once a face is detected and identified, our technology analyzes the facial expression using advanced emotion detection algorithms. Subsequently, the system converts this emotional insight into spoken words through a speech synthesis engine, enabling the blind individual to understand the emotional state of the person in front of them. Through this innovative integration of technology, we aim to enhance the social interactions and situational awareness of visually impaired individuals, fostering a more inclusive and connected environment.
-![emotional](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/emotionAndFace-background.png)
  Requirements
 
 - openCv
@@ -576,7 +575,7 @@ This workflow incorporates object detection based on hand gestures, utilizing a 
  Introduction
 
 We've harnessed the potential of object detection technology to revolutionize accessibility for the visually impaired community. By integrating state-of-the-art object detection algorithms into our system, we've created a seamless experience where users can effortlessly perceive their surroundings through auditory feedback. Object detection enables our system to identify and describe nearby objects in real-time, providing users with vital information about their environment. This innovative approach not only enhances independence but also promotes inclusivity by empowering visually impaired individuals to navigate the world with confidence and ease. Through cutting-edge technology and a commitment to accessibility, we're bridging the gap between sighted and non-sighted individuals, creating a more inclusive society for all.
-![object](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Object.png)
+
  Requirements
 
 - numpy
