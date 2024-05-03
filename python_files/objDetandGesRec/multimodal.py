@@ -12,7 +12,6 @@ import threading
 import numpy as np
 from main import midas
 
-voice_assistant = VoiceAssistant()
 
 class VideoStream():
     def __init__(self):
@@ -27,7 +26,7 @@ class VideoStream():
 
 
 class multimodal_perception():
-    def __init__(self):
+    def __init__(self,voice_assistant):
         parser = argparse.ArgumentParser()
         parser.add_argument('--modeldir', help='Folder the .tflite file is located in', required=True)
         parser.add_argument('--graph', help='Name of the .tflite file, if different than detect.tflite', default='ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite')
@@ -36,6 +35,7 @@ class multimodal_perception():
         parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If the webcam does not support the resolution entered, errors may occur.', default='1280x720')
         parser.add_argument('--edgetpu', help='Use Coral Edge TPU Accelerator to speed up detection', action='store_true', default=True)
         args = parser.parse_args()
+        self.voice_assistant = voice_assistant
         self.mask = cv2.imread("mask.jpeg")
         self.hand_gesture_recognition = HandGestureRecognition(args)
         self.faceEmotion = faceEmotion(voice_assistant)
