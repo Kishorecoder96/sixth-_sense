@@ -81,7 +81,7 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
 ### **Old Architecture**
 ![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/archi.png)
 ### **New Architecture**
-![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/archi2.png)
+![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/overallArchitecture-background.png)
 ### Technology Arsenal:
 1. Firebase <img width="30" height="20" src="https://img.icons8.com/color/48/firebase.png" alt="firebase"/> - Infrastructure and Security: Provides a reliable and scalable backend with built-in security features for data management and user authentication.
 2. React Native <img width="30" height="20" src="https://img.icons8.com/officel/30/react.png" alt="react"/> - App for Caretaker: Cross-platform mobile application framework ensuring a consistent user experience across different devices and operating systems.
@@ -391,6 +391,7 @@ def is_system_offline(self):
 - Seamless offline interaction is ensured, with responses conveyed through the device's audio output.
 
 ### Emotional Detection,Face Recognition and Distance Measurement
+![archi](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/emotionAndFace-background.png)
    #### 1.8 Emotional Detection:
    
 
@@ -435,6 +436,75 @@ In this system, we integrate emotion detection technology with facial recognitio
     - Return the processed frame with visual annotations (rectangles, text labels) indicating emotions and recognized faces.
 5. **Loop Over Frames**:
     - Continuously repeat the face detection and emotion recognition process for each frame captured from the camera feed.
+.
+#### 1.10 Face Recognition
+ Introduction
+
+We've engineered a face recognition system designed to enhance their social interactions and overall sense of autonomy. This innovative technology represents a significant leap forward in accessibility, enabling blind individuals to discern and recognize the faces of those in their immediate vicinity. By harnessing the power of artificial intelligence and computer vision, our system provides invaluable assistance to individuals who rely on auditory cues to navigate the world around them.
+
+ Requirements
+
+- OpenCV
+- haarcascade_frontalface_default.xml
+- pyttsx3
+
+ Workflow of FaceRecognition
+
+1. **Initialization**:
+    - The **`FaceEmotion`** class initializes with a **`voice_assistant`** parameter, presumably for some voice interaction capability.
+    - It loads a TensorFlow Lite interpreter with a pre-trained emotion detection model (**`modelemotion.tflite`**).
+    - Known face encodings and names are loaded from images in the 'faces/' directory using the face_recognition library.
+2. **Image Preprocessing**:
+    - The **`preprocess_img`** method resizes and normalizes input images to prepare them for inference.
+3. **Emotion Detection**:
+    - The **`brain`** method takes a cropped face image, preprocesses it, feeds it to the TensorFlow Lite model, and returns the predicted emotion.
+    - The model used for emotion detection is a classifier that identifies emotions like anger, disgust, fear, etc.
+4. **Face Detection**:
+    - The **`detect_faces`** method takes a frame from the camera feed and detects faces using OpenCV's Haar Cascade classifier.
+    - For each detected face, it performs emotion detection using the **`brain`** method and draws bounding boxes around the faces with the predicted emotion labels.
+    - It also recognizes known faces by comparing their encodings with the encodings of detected faces using the face_recognition library.
+5. **Face Recognition**:
+    - Known faces are recognized using the face_recognition library by comparing face encodings.
+    - If a known face is detected, its name is associated with the face.
+#### Face Distance Calculation
+
+ Introduction
+
+We've developed a Face Distance System. By seamlessly integrating  face detection technology into our solution, we've created a transformative experience that empowers individuals with visual challenges. This system intelligently activates when someone approaches a blind individual within a predefined distance, providing real-time auditory feedback about the identity of the approaching person. Through this groundbreaking approach, we're not only fostering independence but also promoting inclusivity, enabling visually impaired individuals to navigate social interactions with confidence and ease in a more accessible world.
+
+ Requirements
+
+- openCv
+- pyttsx3
+- ref_img.jpeg
+- haarcascade_frontalface_default.xml
+
+ Workflow of Face Distance Measurement
+
+1. **Initialization:**
+    - Import the necessary library, OpenCV (**`cv2`**).
+    - Define the **`FaceDetector`** class.
+    - Initialize class variables including **`known_distance`**, **`known_width`**, color definitions, font types, camera object, and face detector object.
+    - Load the pre-trained face detection model (**`haarcascade_frontalface_default.xml`**).
+2. **Focal Length Calculation:**
+    - Define the **`focal_length`** method to calculate the focal length using the known distance, real width, and width of the object in the reference image.
+3. **Distance Calculation:**
+    - Define the **`distance_finder`** method to calculate the distance to the object using the focal length, real face width, and face width in the frame.
+4. **Face Data Extraction:**
+    - Define the **`face_data`** method to extract face-related data from the input image.
+    - Convert the input image to grayscale.
+    - Use the face detection classifier to detect faces in the image.
+    - Iterate through the detected faces, calculate face width, and determine the center coordinates of each face.
+    - If the **`distance_level`** is less than 10, set it to 10 (a condition for further processing).
+5. **Main Execution:**
+    - Define the **`run`** method to execute the main functionality of the face distance system.
+    - Read a reference image (**`ref_image.jpeg`**) to calibrate the system.
+    - Calculate the focal length using the reference image and known parameters.
+    - Extract face-related data from the input frame.
+    - Calculate the distance to the face in the frame using the focal length and known parameters.
+    - Return the calculated distance
+### Object Detection and Gesture Recognition:
+![archi](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/objectDetectionAndGesture-background.png)
 #### 1.9 Gesture Recognition: 
  Introduction
 
@@ -487,38 +557,7 @@ Our project introduces a groundbreaking gesture recognition system designed to e
 
 **Integration of TensorFlow Lite Model for Object Detection based on Hand Gestures**
 
-This workflow incorporates object detection based on hand gestures, utilizing a TensorFlow Lite model for efficient inference on our device. Object detection is initiated only when a closed hand gesture is recognized, ensuring that system resources are utilized judiciously based on the user's gestures.
-#### Face Recognition
- Introduction
-
-We've engineered a face recognition system designed to enhance their social interactions and overall sense of autonomy. This innovative technology represents a significant leap forward in accessibility, enabling blind individuals to discern and recognize the faces of those in their immediate vicinity. By harnessing the power of artificial intelligence and computer vision, our system provides invaluable assistance to individuals who rely on auditory cues to navigate the world around them.
-
- Requirements
-
-- OpenCV
-- haarcascade_frontalface_default.xml
-- pyttsx3
-
- Workflow of FaceRecognition
-
-1. **Initialization**:
-    - The **`FaceEmotion`** class initializes with a **`voice_assistant`** parameter, presumably for some voice interaction capability.
-    - It loads a TensorFlow Lite interpreter with a pre-trained emotion detection model (**`modelemotion.tflite`**).
-    - Known face encodings and names are loaded from images in the 'faces/' directory using the face_recognition library.
-2. **Image Preprocessing**:
-    - The **`preprocess_img`** method resizes and normalizes input images to prepare them for inference.
-3. **Emotion Detection**:
-    - The **`brain`** method takes a cropped face image, preprocesses it, feeds it to the TensorFlow Lite model, and returns the predicted emotion.
-    - The model used for emotion detection is a classifier that identifies emotions like anger, disgust, fear, etc.
-4. **Face Detection**:
-    - The **`detect_faces`** method takes a frame from the camera feed and detects faces using OpenCV's Haar Cascade classifier.
-    - For each detected face, it performs emotion detection using the **`brain`** method and draws bounding boxes around the faces with the predicted emotion labels.
-    - It also recognizes known faces by comparing their encodings with the encodings of detected faces using the face_recognition library.
-5. **Face Recognition**:
-    - Known faces are recognized using the face_recognition library by comparing face encodings.
-    - If a known face is detected, its name is associated with the face.
-    - 
-### Object Detection and Gesture Recognition:
+This workflow incorporates object detection based on hand gestures, utilizing a TensorFlow Lite model for efficient inference on our device. Object detection is initiated only when a closed hand gesture is recognized, ensuring that system resources are utilized judiciously based on the user's gestures
 #### 1.11 Object Detection:
 
 
