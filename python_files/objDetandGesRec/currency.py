@@ -2,12 +2,16 @@
 import cv2
 import numpy as np
 import tensorflow as tf
+try:
+    from tflite_runtime.interpreter import Interpreter,load_delegate
+except:
+    from tf.lite.python.interpreter import Interpreter,load_delegate
 
-class ImageClassifier:
-    def __init__(self, voice_assistant,model_path = 'currency.tflite', label_path = 'currency.txt'):
+class CurrencyRecognizer:
+    def __init__(self, voice_assistant,model_path = 'model/currencyModel/currency.tflite', label_path = 'model/currencyModel/currency.txt'):
         self.voice_assistant = voice_assistant
         self.currency = []
-        self.interpreter = tf.lite.Interpreter(model_path=model_path)
+        self.interpreter = Interpreter(model_path=model_path)
         self.interpreter.allocate_tensors()
         self.labels = open(label_path, 'r').read().splitlines()
 
@@ -30,8 +34,8 @@ class ImageClassifier:
         results = self.classify_image(image)
         predicted_class = np.argmax(results)
         confidence_score = results[0][predicted_class]
-        # cv2.putText(image, f'Label: {self.labels[predicted_class]}, Confidence: {confidence_score}', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-        # cv2.imshow('Frame', image)
+        cv2.putText(image, f'Label : {self.labels[predicted_class]} ', (450, 100), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 255), 4)
+
         if len(self.currency )  > 1:
                 self.currency = []
         if (self.labels[predicted_class] == "10")and("10" not in self.currency)  :

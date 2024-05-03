@@ -1,27 +1,13 @@
 import requests
 from geopy import distance
 
-#coords [lng, lat]
-test_user = [80.1923155341089, 13.087384660288127, ]
-test_loc = [ 80.1612290030796, 13.081351234586313,]
-
-#first when it is called by caregiver set this user_steo_navigation true
-user_step_navigation = True
-#if user tells stop navigation
-user_step_navigation = False
-
 class NavigateUser:
     def __init__(self,voice_assistant):
         self.accessToken = 'pk.eyJ1IjoiaHVyc3VuIiwiYSI6ImNsc3Q2N2FocjFvbGIyaXBzbWM2Z2w1NGMifQ.tlgUONgceoguAL2oKuqgdQ'
         self.user_step_navigation = False
         self.voice_assistant = voice_assistant
+        self.user_coord = [80.18016943867312,13.078225002745956]
     
-        # cred = credentials.Certificate("secret.json # Enter you .json file")
-        # firebase_admin.initialize_app(cred)
-        # db = firestore.client()
-        # secret = 'Wret'
-        # collection = db.collection('visionUser').document('Wert')  # create collection
-            
         
     #user calls for navigation by giving location name eg: 'Navigate Mogappair east grace market'
     def setupNavigation(self, address):
@@ -36,17 +22,16 @@ class NavigateUser:
 
         if (res.status_code == 200):
             self.user_step_navigation = True
+            data = res.json()
+            self.prev_dist = 0
+            routes = data['routes']
+            self.total_distance = data['routes'][0]['distance'] 
+            self.steps = routes[0]['legs'][0]['steps']
+            self.voice_assistant.speak(self.steps[0]['maneuver']['instruction'])
         else:
             self.user_step_navigation = False
             self.voice_assistant.speak('cant find the address call the command again')
         
-   
-        data = res.json()
-        self.prev_dist = 0
-        routes = data['routes']
-        self.total_distance = data['routes'][0]['distance'] 
-        self.steps = routes[0]['legs'][0]['steps']
-        self.voice_assistant.speak(self.steps[0]['maneuver']['instruction'])
     
     def stopNavigation(self):
         self.user_step_navigation = False
@@ -65,7 +50,5 @@ class NavigateUser:
                 else:
                     self.voice_assistant.speak('You have reached your Destination')
                     self.user_step_navigation = False
-            if (dist > self.prev_dist):
-                self.voice_assistant.speak('Going in wrong Direction')
 
             self.prev_dist = dist

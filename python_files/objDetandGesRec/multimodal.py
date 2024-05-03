@@ -1,61 +1,62 @@
-from faceEmotion import FaceEmotion
+from faceEmotion import faceEmotion
 from gesrec import HandGestureRecognition
-from detection import VideoStream,Detector,argparse
+from detection import Detector,argparse
 from time import sleep
 from voice_tts import VoiceAssistant
-from currency import ImageClassifier
-from faceDistance import FaceDetector
 import cv2
+from face_distance import FaceDetector
+from currency import CurrencyRecognizer
+from picamera2 import Picamera2
+import time
+import threading
+import numpy as np
+from main import midas
 
 voice_assistant = VoiceAssistant()
 
-videostream = VideoStream(framerate=30).start()
-def multimodal_perception():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--modeldir', help='Folder the .tflite file is located in', required=True)
-    parser.add_argument('--graph', help='Name of the .tflite file, if different than detect.tflite', default='detect.tflite')
-    parser.add_argument('--labels', help='Name of the labelmap file, if different than labelmap.txt', default='labelmap.txt')
-    parser.add_argument('--threshold', help='Minimum confidence threshold for displaying detected objects', default=0.5)
-    parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If the webcam does not support the resolution entered, errors may occur.', default='1280x720')
-    parser.add_argument('--edgetpu', help='Use Coral Edge TPU Accelerator to speed up detection', action='store_true')
-    args = parser.parse_args()
-
-    hand_gesture_recognition =HandGestureRecognition(args)
-    faceEmotion = FaceEmotion(voice_assistant)
-    facedistance = FaceDetector(known_distance=30, known_width=5.7)
-    currency = ImageClassifier(voice_assistant)
-    detector = Detector(voice_assistant,args.modeldir, args.graph, args.labels, args.threshold, args.resolution, args.edgetpu)
+class VideoStream():
+    def __init__(self):
+        self.picam2 = Picamera2()
+        self.picam2.configure(self.picam2.create_preview_configuration(main={"format": 'XRGB8888', "size": (640, 480)},controls={"FrameRate": 8,"FrameDurationLimits": (40000, 40000)}))
+        self.picam2.start()
+        self.getFrame()
     
-    sleep(1)
+    def getFrame(self):
+        self.frame = self.picam2.capture_array()
+        return self.frame
 
-    while True:
-        frame1 = videostream.read()
-        # frame1 = frame1.copy()
-        frame_rgb = cv2.cvtColor(frame1, cv2.COLOR_BGR2RGB)
-        frame_resized = cv2.resize(frame_rgb, (detector.width, detector.height))
-        faceEmotion.detect_faces(frame1)
-         
-        distance = facedistance.run(frame1)
-        if distance < 100:
-            faceEmotion.detect_faces(frame1)
 
-        hand, frame = hand_gesture_recognition.run(frame1)
-        # currency.predict(frame)
-        #
-
+class multimodal_perception():
+    def __init__(self):
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--modeldir', help='Folder the .tflite file is located in', required=True)
+        parser.add_argument('--graph', help='Name of the .tflite file, if different than detect.tflite', default='ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite')
+        parser.add_argument('--labels', help='Name of the labelmap file, if different than labelmap.txt', default='labelmap.txt')
+        parser.add_argument('--threshold', help='Minimum confidence threshold for displaying detected objects', default=0.5)
+        parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If the webcam does not support the resolution entered, errors may occur.', default='1280x720')
+        parser.add_argument('--edgetpu', help='Use Coral Edge TPU Accelerator to speed up detection', action='store_true', default=True)
+        args = parser.parse_args()
+        self.mask = cv2.imread("mask.jpeg")
+        self.hand_gesture_recognition = HandGestureRecognition(args)
+        self.faceEmotion = faceEmotion(voice_assistant)
+        self.currecyRecognition = CurrencyRecognizer(voice_assistant)
+        self.feceDistance = FaceDetector(known_distance=30,known_width=5.7)
+        self.detector = Detector(voice_assistant,args.modeldir, args.graph, args.labels, args.threshold, args.resolution, args.edgetpu)
+        
+    def run(self, frame1):
+        frame = np.array(frame1)
+        mask = cv2.resize(self.mask, (frame.shape[1], frame.shape[0]))
+        imgRegion = cv2.bitwise_and(frame, mask)
+        frame_rgb = cv2.cvtColor(imgRegion, cv2.COLOR_BGR2RGB)
+        frame_resized = cv2.resize(frame_rgb, (self.detector.width, self.detector.height))
+        
+    
+        hand, frame = self.hand_gesture_recognition.run(frame)
+        self.faceEmotion.detect_faces(frame)
+        self.currecyRecognition.predict(frame)
         if (hand == 1):
-            boxes, classes, scores = detector.detect_objects(frame_resized)
-           
-            frame = detector.draw_boxes(frame1, boxes, classes, scores)
+            boxes, classes, scores = self.detector.detect_objects(frame_resized)
+               
+            frame = self.detector.draw_boxes(frame, boxes, classes, scores)
 
-        cv2.imshow('Multimodal Perception', frame1)
-
-        if cv2.waitKey(1) == ord('q'):
-            break
-
-    cv2.destroyAllWindows()
-    videostream.stop()
-
-
-if __name__ == "__main__":
-    multimodal_perception()
+   
