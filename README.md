@@ -36,7 +36,7 @@
 
 ![sixth sense](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20179.png)
  **Generations**:
-![geberation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20174.png)
+![geberation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Logo.png)
 
 
 ## **Architecture**:
