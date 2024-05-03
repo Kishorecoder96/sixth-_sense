@@ -89,7 +89,7 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
     
     
 ### **Old Architecture**
-![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Old%20architecture%20(2).png)
+![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Old%20architecture.png)
 ### **New Architecture**
 ![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/overallArchitecture-background.png)
 ### Technology Arsenal:
@@ -238,7 +238,7 @@ We've developed a robust text-to-speech solution utilizing pyttsx3, tailored to 
  Introduction
 
 We have implemented a  distance warning system designed to assist visually impaired individuals in navigating their surroundings safely. Leveraging the advanced depth estimation capabilities of MidasV2 with a single camera setup, our system accurately calculates distances between the user and surrounding obstacles in real-time. With prompt audible alerts generated upon detecting obstacles within a customizable threshold distance, our system ensures timely warnings to prevent potential collisions. Additionally, incorporating an offline model guarantees uninterrupted assistance even in areas with limited internet connectivity, enhancing accessibility and independence for visually impaired individuals.
-
+![Distance](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/navigation2.png)
  Requirements
 
 - numpy
