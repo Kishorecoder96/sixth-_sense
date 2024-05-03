@@ -89,7 +89,7 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
     
     
 ### **Old Architecture**
-![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Old%20architecture.png)
+![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Old%20architecture%20(2).png)
 ### **New Architecture**
 ![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/overallArchitecture-background.png)
 ### Technology Arsenal:
