@@ -34,7 +34,7 @@
     <img src="https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/logo.png" alt="logo" style="width: 100px; height: 100px;">
 </div>
 
-![sixth sense](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/sixth%20sense.png)
+![sixth sense](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20179.png)
  **Generations**:
 ![geberation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Logo.png)
 
@@ -660,7 +660,7 @@ We've developed a currency detection model tailored to assist visually impaired 
 ![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/caregiver%20app.png)
 
 ### 2.1 Geofencing
-
+![geofencing](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20129.png)
 Domain
 Mobile App - React Native
 Feature
@@ -682,7 +682,7 @@ In geofence page, User have the ability to select location of the circle fence o
 haversineFormula(center of circle, sixth sense user location) > radius of the circle
 
 ### 2.2 Messaging 
-
+![message](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20178.png)
 Domain
 React native - Mobile App
 **Messaging Feature Overview**
