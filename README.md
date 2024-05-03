@@ -1,31 +1,41 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Sixth Sense](#sixth-sense)
-    - [Architecture:](#architecture)
+  - [**Architecture**:](#architecture)
+    - [**Old Architecture**](#old-architecture)
+    - [**New Architecture**](#new-architecture)
     - [Technology Arsenal:](#technology-arsenal)
-  - [1 .Machine Learning:](#1-machine-learning)
-    - [1.1. Optical Character Recognition(OCR)](#11-optical-character-recognitionocr)
-    - [1.2. Natural Language Processing(NLP) using Spacy](#12-natural-language-processingnlp-using-spacy)
-    - [1.3. Optimisation of Code](#13-optimisation-of-code)
-    - [1.4. Gemini](#14-gemini)
-    - [1.5. Multiprocessing using ProcessPoolExecutor](#15-multiprocessing-using-processpoolexecutor)
-    - [1.6. Voice Assistant](#16-voice-assistant)
-    - [1.7. Google Calendar API](#17-google-calendar-api)
-    - [1.8. Distance Warning system using Midas 2.1V small](#18-distance-warning-system-using-midas-21v-small)
+  - [1 Machine Learning:](#1-machine-learning)
+  - [1.1 Optical character Recognition(OCR):](#11-optical-character-recognitionocr)
+    - [1.2 Natural Language Processing using Spacy:](#12-natural-language-processing-using-spacy)
+  - [Voice Assistant:](#voice-assistant)
+    - [1.3 Speech To Text:](#13-speech-to-text)
+    - [1.4 Text To Speech](#14-text-to-speech)
+    - [1.5 Distance Warning System](#15-distance-warning-system)
+    - [1.6 Voice Enabled Calendar Management](#16-voice-enabled-calendar-management)
+    - [1.7 Gemini and gemma](#17-gemini-and-gemma)
+    - [Emotional Detection,Face Recognition and Distance Measurement](#emotional-detectionface-recognition-and-distance-measurement)
+      - [1.8 Emotional Detection:](#18-emotional-detection)
+      - [1.9 Face Recognition](#19-face-recognition)
+      - [1.10 Face Distance Calculation](#110-face-distance-calculation)
+    - [Object Detection and Gesture Recognition:](#object-detection-and-gesture-recognition)
+      - [1.11 Gesture Recognition:](#111-gesture-recognition)
+      - [1.12 Object Detection:](#112-object-detection)
+    - [1.13 Currency Recognition](#113-currency-recognition)
   - [2 Software](#2-software)
     - [2.1 Geofencing](#21-geofencing)
     - [2.2 Messaging](#22-messaging)
     - [2.3 Multi Language Support](#23-multi-language-support)
-    - [Contact](#contact)
+    - [2.4 Contact](#24-contact)
   - [3 Hardware](#3-hardware)
+    - [Hardware Architecture:](#hardware-architecture)
     - [3.1 Fall Detection](#31-fall-detection)
     - [3.2 **Vibration Motor: Enhancing Safety Measures**](#32-vibration-motor-enhancing-safety-measures)
     - [3.3 TPU (Tensor Processing Unit)](#33-tpu-tensor-processing-unit)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-
 
 
 # Sixth Sense
@@ -36,7 +46,7 @@
 
 ![sixth sense](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20179.png)
  **Generations**:
-![geberation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Logo.png)
+![generation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Logo.png)
 
 
 ## **Architecture**:
@@ -966,3 +976,4 @@ Different TPU and board benchmark of MobileNet v1 and MobileNet v2 model inferen
 
 
 Power consumption of different board and coral TPU
+
