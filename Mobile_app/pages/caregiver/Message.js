@@ -1,7 +1,7 @@
 import React ,{ useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity } from 'react-native'
-import { onSnapshot, query, orderBy, collection, addDoc } from 'firebase/firestore'
+import { onSnapshot, query, orderBy, collection, addDoc, deleteDoc, doc } from 'firebase/firestore'
 import * as yup from 'yup'
 import { useForm, Controller } from 'react-hook-form'
 import { MaterialIcons } from '@expo/vector-icons';
@@ -43,10 +43,17 @@ const Message = () => {
         const data = item?.data()
 
         return (
-            <View style={{...styles.msgCard, alignItems: data.caregiver ? 'flex-end' : 'flex-start', backgroundColor:  data.caregiver ? Colors.three: Colors.two}} key={item.id} >
+            <TouchableOpacity onLongPress={ () => {
+                deleteDoc(doc(db, "visionUser", currentUser?.visionUser, "messages", item.id ));
+            }}>
+   <View style={{...styles.msgCard, alignItems: data.caregiver ? 'flex-end' : 'flex-start', backgroundColor:  data.caregiver ? Colors.three: Colors.two}} key={item.id} onLongPress={ () => {
+                deleteDoc(doc(db, "visionUser", currentUser?.visionUser, "messages", item.id ));
+            }}>
                 <Text style={styles.cardMessage}>{data.message}</Text>
-                        <Text style={{...styles.cardTime, color: data.caregiver && Colors.two}}>{data.caregiver ? moment(data.timestamp).fromNow() :  moment(data.timestamp * 1000).fromNow() }</Text>
+                <Text style={{...styles.cardTime, color: data.caregiver && Colors.two}}>{data.caregiver ? moment(data.timestamp).fromNow() :  moment(data.timestamp).fromNow() }</Text>
                     </View>
+            </TouchableOpacity>
+         
         )
     }, [messages])
     const sendMessage = async (data) => {

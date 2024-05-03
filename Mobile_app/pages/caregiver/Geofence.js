@@ -14,8 +14,6 @@ import Loader from '../../components/Loader'
 import { calcDistAtoB } from '../../utils/calcCoordinate'
 import { useTranslation } from 'react-i18next'
 
-
-
 const GeoFence = () => {
     const currentUser = useUserStore((state) => state.currentUser)
     const sixthSenseUser = useUserStore((state) => state.sixthSenseUser)
@@ -55,9 +53,9 @@ const GeoFence = () => {
         }
     } , [distance, radius])
 
-    const handleSubmit = useCallback(async() => {
+    const handleSubmit = useCallback(async () => {
         setLoading(true)
-        await setDoc( doc(db,'visionUser', currentUser.visionUser), {radius, geoFence: coord}, {merge: true})
+        await setDoc(doc(db, 'visionUser', currentUser.visionUser), { radius, geoFence: coord, inBound: !inBound }, { merge: true })
         setLoading(false)
     }, [currentUser, radius, coord])
 
@@ -69,7 +67,7 @@ const GeoFence = () => {
                 <Marker coordinate={coord}>
                 <MaterialCommunityIcons name="map-marker-radius" size={34} color={Colors.three} />
                 </Marker>
-                <Circle radius={radius} center={coord} strokeWidth={2} strokeColor={Colors.three} fillColor="rgba(144, 210, 109, 0.5)"/>
+                <Circle radius={radius} center={coord} strokeWidth={2} strokeColor={Colors.three} fillColor={inBound ? "rgba(144, 210, 109, 0.5)": "rgba(244,0,0, 0.5)"} />
                 <Polyline coordinates={[{ latitude: coord?.latitude, longitude: coord?.longitude }, { latitude: sixthSenseUser?.coords.latitude, longitude: sixthSenseUser?.coords.longitude }]} strokeWidth={3} strokeColor={Colors.three} lineDashPattern={[1, 1]} style={{ position: 'relative' }} />
                 <Marker coordinate={coord}>
             <Text style={{color: Colors.one, fontWeight: 600}}>{distance.toFixed(2)} km</Text>

@@ -1,12 +1,11 @@
 import React, {useCallback, useEffect, useState} from "react";
-import { View, StyleSheet, Image, TextInput, ScrollView, Button, ActivityIndicator, TouchableOpacity, Text, FlatList, Alert } from 'react-native'
-import {  onSnapshot, collection, addDoc} from "firebase/firestore";
+import { View, StyleSheet, Image, TextInput, TouchableOpacity, Text, FlatList, Alert } from 'react-native'
+import {  onSnapshot, collection, addDoc, deleteDoc, doc } from "firebase/firestore";
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useForm, Controller } from "react-hook-form"
 import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup"
-
 import { uploadToFirebase } from "../../utils/firebaseStorage";
 import useUserStore from '../../store/userStore'
 import { db } from "../../firebaseConfig";
@@ -49,10 +48,15 @@ const People = () => {
         const data = item?.data()
       
         return (
+            <TouchableOpacity onLongPress={ () => {
+                deleteDoc(doc(db, "visionUser", currentUser?.visionUser, "peoples", item.id ));
+            }}>
             <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', gap: 20, marginBottom: 10}} key={item.id}>
                 <Image source={{ uri: data.image }} style={{height: 80, width: 80, borderRadius: 10}} />
                 <Text style={{fontSize: 22,fontWeight:'400'}}>{data.name}</Text>
             </View>
+            </TouchableOpacity>
+
         )
     }
 

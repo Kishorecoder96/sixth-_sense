@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {addDoc, collection, doc, getDoc, onSnapshot } from "firebase/firestore";
-import {View, Text, Image, StyleSheet, TextInput, FlatList}from 'react-native'
+import {addDoc, collection, doc, getDoc, onSnapshot, deleteDoc } from "firebase/firestore";
+import {View, Text, Image, StyleSheet, TextInput, FlatList, TouchableOpacity}from 'react-native'
 import {db} from '../../firebaseConfig'
 import useUserStore from "../../store/userStore";
 import * as yup from 'yup'
@@ -61,10 +61,15 @@ const Profile = () => {
         const data = item?.data()
       
         return (
-            <View style={{width: '100%', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, backgroundColor: Colors.two, borderRadius: 10, paddingHorizontal: 15, paddingVertical: 5}} key={item.id}>
+            <TouchableOpacity onLongPress={ () => {
+                deleteDoc(doc(db, "visionUser", currentUser?.visionUser, "contacts", item.id ));
+            }}>
+       <View style={{width: '100%', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 10, backgroundColor: Colors.two, borderRadius: 10, paddingHorizontal: 15, paddingVertical: 5}} key={item.id}>
                 <Text style={{ fontSize: 22, fontWeight: '400', color: Colors.three }}>{data.name}</Text>
                 <Text style={{fontSize: 16,fontWeight:'400',color: Colors.one}}>{data.phoneNumber}</Text>
             </View>
+            </TouchableOpacity>
+     
         )
     }
 
@@ -100,7 +105,7 @@ const Profile = () => {
                         </CustomButton>
                     </View>
                     <View style={styles.allContact}>
-                        <Text style={{ ...styles.header, fontSize: 22, color: Colors.two }}>{t('All')} {t('Contact')}</Text>
+                        <Text style={{ ...styles.header,        marginBottom:10, fontSize: 22, color: Colors.two }}>{t('All')} {t('Contact')}</Text>
                         <FlatList
                             data={contacts}
          keyExtractor={item => item.id}
@@ -154,7 +159,7 @@ const styles = StyleSheet.create({
     },
     header: {
         fontWeight: 'bold',
-        color: Colors.three
+        color: Colors.three,
     },
     contact: {
         flex: 1,

@@ -7,7 +7,16 @@ const resources = {
     },
     hi: {
       translation: require('./hi.json'),
-    }
+  },
+  fr: {
+    translation: require('./french.json'),
+  },
+  ko: {
+    translation: require('./korean.json'),
+  },
+  es: {
+    translation: require('./spanish.json'),
+  }
   }
   
   i18next.use(initReactI18next).init({

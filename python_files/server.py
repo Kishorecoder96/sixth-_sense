@@ -16,6 +16,7 @@ class FirebaseManager:
         cred = credentials.Certificate(credential_file)
         firebase_admin.initialize_app(cred)
         self.db = firestore.client()
+        
         #getMessage and getPeoples get initialized when the class is created
         self.getMessage()
         self.getPeoples()

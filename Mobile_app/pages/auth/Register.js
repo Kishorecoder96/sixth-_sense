@@ -96,7 +96,13 @@ const Register = () => {
                         age: disabledAge,
                         image: uploadResp.downloadUrl,
                         caregiver: user.uid,
-                        coords: new GeoPoint(0,0)
+                        coords: new GeoPoint(0, 0),
+                        geoFence: {
+                            latitude: 0,
+                            longitude: 0
+                        },
+                        radius: 0,
+                        inBoundFalse: true
                     })
                 }).catch((error) => {
                     const errorCode = error.code;
