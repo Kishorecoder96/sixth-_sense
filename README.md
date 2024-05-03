@@ -35,12 +35,12 @@
 </div>
 
 ![sixth sense](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/sixth%20sense.png)
-#### Generations:
+ **Generations**:
 ![geberation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Logo.png)
 
 
-### Architecture:
-# Architecture
+## **Architecture**:
+
 
 The hardware architecture consist of 
 
@@ -57,14 +57,14 @@ The hardware architecture consist of
 
 
 
-## Hardware Connectivity
+ **Hardware Connectivity**
 The diagram illustrates the connectivity of various sensors and modules to the Raspberry Pi 5. Notably, the Coral TPU and earphones are connected to the Pi's USB port, while the SIM7600 for network connectivity utilizes both UART and USB for bidirectional communication. This setup ensures robust network connectivity and seamless data exchange.
 
 The gyroscope employs the I2C interface for communication with the Raspberry Pi, offering precise motion sensing capabilities. Meanwhile, the camera is linked to the Pi via PCIe, facilitating high-speed data transfer and enabling advanced imaging functionalities.
 
 Additionally, the vibration module interfaces with the Pi's GPIO pins, allowing for tactile feedback and enhancing user interaction. This comprehensive integration of diverse communication protocols and interfaces optimizes the Raspberry Pi 5's functionality across various domains.
 
-## Challenges Faced
+ Challenges Faced
 
 1. We attempted to utilize the M.2 Coral TPU A+E Key (https://coral.ai/products/m2-accelerator-ae) in conjunction with the Pineberry Hat AI (https://pineboards.io/products/hat-ai-for-raspberry-pi-5) as an interface between the TPU and Raspberry Pi. Despite investing over 100 hours in configuration and setup, the Coral TPU failed to register as connected. We made multiple adjustments to the Debian OS configuration file, but the TPU remained undetected in the PCIe channel.
 During startup, an error concerning the MSI PCIe Address was also encountered. After exhaustive troubleshooting attempts, we concluded that the M.2 Coral TPU A+E Key might be faulty. Consequently, we reverted to using the USB Coral TPU, which was already in our possession and functioned seamlessly.
@@ -78,9 +78,9 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
     **Solution:** To address this, we switched to the Sim7600X G-H Raspberry Pi Hat. This alternative not only integrated GPS capabilities but also provided 4G LTE internet connectivity for the Raspberry Pi 5. This upgrade significantly enhanced our system's responsiveness to cloud models, ensuring smoother and faster operations.
     
     
-#### Old Architecture
+### **Old Architecture**
 ![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Old%20architecture%20(2).png)
-#### New Architecture
+### **New Architecture**
 ![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/New%20architecture.png)
 ### Technology Arsenal:
 1. Firebase <img width="30" height="20" src="https://img.icons8.com/color/48/firebase.png" alt="firebase"/> - Infrastructure and Security: Provides a reliable and scalable backend with built-in security features for data management and user authentication.
@@ -430,13 +430,13 @@ def is_system_offline(self):
 - The response is converted into speech using pyttsx3.
 - The Raspberry Pi 5 device serves as the platform for hosting and executing the Ollama model.
 - Seamless offline interaction is ensured, with responses conveyed through the device's audio output.
-  1.10 ### Emotional Detection:
+   ### 1.10 Emotional Detection:
    
 
  Introduction
 
 In this system, we integrate emotion detection technology with facial recognition to assist visually impaired individuals in perceiving the emotions of people around them. When a known person stands in front of a blind individual, our system utilizes a camera feed to recognize their facial expressions. This recognition process is initiated only when the system identifies a familiar face. Once a face is detected and identified, our technology analyzes the facial expression using advanced emotion detection algorithms. Subsequently, the system converts this emotional insight into spoken words through a speech synthesis engine, enabling the blind individual to understand the emotional state of the person in front of them. Through this innovative integration of technology, we aim to enhance the social interactions and situational awareness of visually impaired individuals, fostering a more inclusive and connected environment.
-
+![emotional](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Face%20detection%20and%20emotional%20detection.png)
  Requirements
 
 - openCv
@@ -474,10 +474,11 @@ In this system, we integrate emotion detection technology with facial recognitio
     - Return the processed frame with visual annotations (rectangles, text labels) indicating emotions and recognized faces.
 5. **Loop Over Frames**:
     - Continuously repeat the face detection and emotion recognition process for each frame captured from the camera feed.
-1.11 ### Gesture Recognition: 
+### 1.11 Gesture Recognition: 
  Introduction
 
 Our project introduces a groundbreaking gesture recognition system designed to empower individuals with visual impairments by providing crucial information about their surroundings. This innovative system enables users to interact with their environment through hand gestures, offering real-time object detection feedback. For instance, when a visually impaired individual closes their hand, the system initiates object detection, providing auditory or tactile cues about nearby objects. Conversely, when the hand is opened, the system ceases object detection, ensuring privacy and minimizing distractions. By leveraging gesture recognition technology, our system aims to enhance the independence and safety of visually impaired individuals, enabling them to navigate and interact with their surroundings more confidently and efficiently.
+
 
  Requirements
 
@@ -532,7 +533,7 @@ This workflow incorporates object detection based on hand gestures, utilizing a 
  Introduction
 
 We've developed a Face Distance System. By seamlessly integrating  face detection technology into our solution, we've created a transformative experience that empowers individuals with visual challenges. This system intelligently activates when someone approaches a blind individual within a predefined distance, providing real-time auditory feedback about the identity of the approaching person. Through this groundbreaking approach, we're not only fostering independence but also promoting inclusivity, enabling visually impaired individuals to navigate social interactions with confidence and ease in a more accessible world.
-
+![distance calculation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Face%20detection%20and%20emotional%20detection.png)
  Requirements
 
 - openCv
@@ -571,7 +572,7 @@ We've developed a Face Distance System. By seamlessly integrating  face detectio
  Introduction
 
 We've harnessed the potential of object detection technology to revolutionize accessibility for the visually impaired community. By integrating state-of-the-art object detection algorithms into our system, we've created a seamless experience where users can effortlessly perceive their surroundings through auditory feedback. Object detection enables our system to identify and describe nearby objects in real-time, providing users with vital information about their environment. This innovative approach not only enhances independence but also promotes inclusivity by empowering visually impaired individuals to navigate the world with confidence and ease. Through cutting-edge technology and a commitment to accessibility, we're bridging the gap between sighted and non-sighted individuals, creating a more inclusive society for all.
-
+![object](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Object.png)
  Requirements
 
 - numpy
@@ -622,7 +623,7 @@ We've harnessed the potential of object detection technology to revolutionize ac
 - This asynchronous execution prevents blocking of the main thread, enabling efficient frame processing.
 ## 2 Software
 
-![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/threading.png)
+![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/caregiver%20app.png)
 
 ### 2.1 Geofencing
 
