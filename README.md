@@ -64,8 +64,8 @@
 ## Executing the Code:
   ####  For Software:
   **Login Credentials**:
-  Email:hursunss@gmail.com
-  Password:Lifegood
+  - Email:hursunss@gmail.com
+  - Password:Lifegood
   1. Download the library and run the code:
    ```bash
         npm install
