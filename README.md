@@ -31,7 +31,7 @@
       - [1.12 Object Detection:](#112-object-detection)
     - [1.13 Currency Recognition](#113-currency-recognition)
     - [1.14 Optimizing Code using Threading](#114-optimizing-code-using-threading)
-  - [Introduction](#introduction)
+    
   - [2 Hardware](#2-hardware)
     - [Hardware Architecture:](#hardware-architecture)
     - [2.1 SIM7600 G-H Module](#21-sim7600-g-h-module)
@@ -63,6 +63,9 @@
 
 ## Executing the Code:
   ####  For Software:
+  **Login Credentials**:
+  Email:hursunss@gmail.com
+  Password:Lifegood
   1. Download the library and run the code:
    ```bash
         npm install
@@ -83,7 +86,7 @@ pip install -r requirements.txt
 ```
  4.To run the file:
 ```
-python main.py —modeldir objDetandGesRec/model/custom_mo
+python main.py -—modeldir objDetandGesRec/model/custom_model_lite
 ```
 ## **Architecture**:
     
