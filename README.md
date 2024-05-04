@@ -68,7 +68,7 @@ conda activate sense
 ```bash
 pip install -r requirements.txt
 ```
-4.To run the file:
+ 4.To run the file:
 ```
 python main.py —modeldir objDetandGesRec/model/custom_mo
 ```
@@ -823,8 +823,54 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
     
     **Solution:** To address this, we switched to the Sim7600X G-H Raspberry Pi Hat. This alternative not only integrated GPS capabilities but also provided 4G LTE internet connectivity for the Raspberry Pi 5. This upgrade significantly enhanced our system's responsiveness to cloud models, ensuring smoother and faster operations.
     
+### 2.1 SIM7600 G-H Module
+
+ **Overview**
+
+- The SIM7600G Raspberry Pi HAT is a versatile add-on board that facilitates cellular communication for the Raspberry Pi 5. It integrates the SIM7600G module, providing capabilities for making calls, sending messages, and accessing cellular data 4 G LTE Network
+![archi](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/sim7600g.png)
+<aside>
+💡 This provide 4g LTE Network which allow us to run Speech - Text and Gemini LLM Online with faster Response which improves user experience
+
+</aside>
+
+ **Hardware Setup**
+
+- **Physical Connection**: Carefully attach the SIM7600G HAT to the Raspberry Pi 5 GPIO header, ensuring proper alignment.
+- **Power Supply**: Use a stable power supply capable of providing sufficient current to both the Raspberry Pi and the SIM7600G module. Voltage requirements and current consumption should be considered to prevent power-related issues.
+- **SIM Card Installation**: Insert a compatible SIM card into the SIM card slot on the module, ensuring it is properly seated.
+
+ **Software Setup**
+
+- **Driver Installation**: Install the necessary drivers and software libraries for the SIM7600G module on the Raspberry Pi 5.
+- **Serial Communication Configuration**: Configure the Raspberry Pi to communicate with the SIM7600G module via serial communication. Set up serial port settings, such as baud rate and data bits, to match the module's specifications.
+- **Python Library Installation**: Install the Python library provided by the manufacturer to interface with the SIM7600G module. This library simplifies communication with the module and provides high-level functions for call, message, and data operations.
+
+Features
+
+ **Making Calls:**
+
+- **Functionality**: Utilize the provided Python library to initiate outgoing calls from the Raspberry Pi.
+- **Usage**: Call the designated phone number by invoking the appropriate function from the library, passing the phone number as an argument.
+- **Error Handling**: Implement error handling mechanisms to manage potential issues, such as network unavailability or call failure.
+
+ **Sending Messages:**
+
+- **Functionality**: Send SMS messages from the Raspberry Pi using the SIM7600G module.
+- **Usage**: Invoke the messaging function from the Python library, providing the recipient's phone number and the message content as parameters.
+- **Confirmation**: Confirm successful message transmission and handle any errors encountered during the process.
+
+ **Cellular Data Connection:**
+
+- **Establishment**: Set up a cellular data connection to enable internet access on the Raspberry Pi.
+- **Configuration**: Configure the Access Point Name (APN) settings for the cellular network provider.
+
+ Challenges
+
+- **Power Management**: Addressing power supply challenges to ensure stable operation of both the Raspberry Pi and the SIM7600G module.
+- Configuring PI 5 for PPP Protocol (point to point protocol) to establish 4G LTE internet connection with pi
     
-### 2.1 Fall Detection 
+### 2.2 Fall Detection 
 ![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/alert-background.png)
 The MPU-6050 IMU (Inertial Measurement Unit) is a sensor that combines a 3-axis accelerometer and a 3-axis gyroscope. The accelerometer measures gravitational acceleration, while the gyroscope measures rotational velocity. Additionally, this module includes a temperature sensor. It's commonly used for determining the orientation of a moving object.
 
@@ -884,20 +930,13 @@ Results:
 Using a gyroscope sensor for fall detection shows promising outcomes in accuracy improvement and reduction of false positives and negatives in fall detection systems. By combining accelerometers and gyroscopes, algorithms have been developed to enhance accuracy while minimizing errors.
 
 
-### 2.2 **Vibration Motor: Enhancing Safety Measures**
+### 2.3 **Vibration Motor: Enhancing Safety Measures**
 
 In the realm of safety measures, the vibration motor emerges as a crucial component to alert users promptly in various scenarios, such as detecting obstacles or receiving notifications from caregivers.
 
  **Introduction**
 
 Vibration motors are compact devices designed to generate vibrations when powered, making them ideal for alert systems. These motors are particularly useful in situations where audible alarms might not be practical or when users need discreet notifications.
-
- **Understanding the DC Vibration Motor Module**
-
-
-
-
-
 **Key Features:**
 
 - **Operating Voltage (VDC):** 3 ~ 5.3
@@ -937,7 +976,7 @@ Connecting the vibration motor to a Raspberry Pi or Arduino is relatively straig
 
 In conclusion, vibration motors are invaluable tools for enhancing safety and providing timely notifications in various applications. Whether it's alerting users to obstacles, ensuring their safety, or facilitating caregiver communication, these compact devices offer versatile solutions with minimal intrusion and maximal effectiveness.
 
-### 2.3 TPU (Tensor Processing Unit)
+### 2.4 TPU (Tensor Processing Unit)
 
 We employ TPU (Tensor Processing Unit) technology to enhance the local execution performance of ML (Machine Learning) Lite models. This implementation not only optimizes the execution speed but also alleviates the computational load on the CPU. This strategic offloading of tasks to the TPU enables us to concurrently run resource-intensive models such as text-to-speech and speech-to-text transformations on the CPU while efficiently managing continuous tasks like object detection on the TPU. This segregation of tasks ensures that each component operates at its peak efficiency, contributing to overall system performance and responsiveness.
 
@@ -967,7 +1006,6 @@ We developed our object detection and gesture recognition models as EdgeTPU TFLi
 *Benchmarks**
 
 Different TPU and board benchmark of MobileNet v1 and MobileNet v2 model inference speed.
-
 
 
 Power consumption of different board and coral TPU
