@@ -46,9 +46,32 @@
 
 ![sixth sense](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20179.png)
  **Generations**:
-![generation](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/Logo.png)
 
 
+## Executing the Code:
+  ####  For Software:
+  Download the library and run the code:
+   ```bash
+        npm install
+        npm start
+   ```
+#### For Machine Learning:
+Create a new conda environment named sense by running:
+```bash
+conda create -n sense python=3.11
+```
+Activate the environment:
+```bash
+conda activate sense
+```
+To install the requirements:
+```bash
+pip install -r requirements.txt
+```
+To run the file:
+```
+python main.py —modeldir objDetandGesRec/model/custom_mo
+```
 ## **Architecture**:
 
 
@@ -92,6 +115,7 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
 ![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Old%20architecture%20(2).png)
 ### **New Architecture**
 ![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/overallArchitecture-background.png)
+![features](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Features.png)
 ### Technology Arsenal:
 1. Firebase <img width="30" height="20" src="https://img.icons8.com/color/48/firebase.png" alt="firebase"/> - Infrastructure and Security: Provides a reliable and scalable backend with built-in security features for data management and user authentication.
 2. React Native <img width="30" height="20" src="https://img.icons8.com/officel/30/react.png" alt="react"/> - App for Caretaker: Cross-platform mobile application framework ensuring a consistent user experience across different devices and operating systems.
@@ -666,188 +690,6 @@ We've developed a currency detection model tailored to assist visually impaired 
     - If the detected currency denomination is new and not already in the **`currency`** list, it is added to the list.
     - The voice assistant announces the detected currency denomination to the user using pyttsx3 for text-to-speech output.
 
-## 2 Software
-
-### 2.1 Realtime Tracking:
-![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/caregiver%20app.png)
-
-Feature
-
-In our mobile app, caregivers can monitor the location of Sixth Sense users in real-time using the GPS module in the Sim7600 device. We utilize Firebase to ensure seamless real-time tracking. Additionally, we've integrated the Direction API for convenient navigation to Sixth Sense users.
-
-Tech Stack
-
-- React Native
-- React native google map
-- firebase
-- Google maps API
-- direction API
-- Native-Alert
-
-Working
-
-1. **GPS Module (Sim7600):**
-    - The Sim7600 module is a GPS/GNSS module that provides accurate location data.
-    - It communicates with satellites to determine the device's current coordinates (latitude and longitude).
-    - This data is then sent to the mobile app for processing and display.
-2. **Firebase Realtime Database:**
-    - Firebase is used as a backend service to store and sync location data in real-time.
-    - When the GPS module sends new location updates, these updates are immediately sent to Firebase.
-    - Caregivers and authorized users can access this data through the mobile app, ensuring they have up-to-date information on the Sixth Sense user's location.
-3. **Direction API Integration:**
-    - The Direction API is integrated into the app to provide navigation assistance.
-    - When a caregiver wants to reach the Sixth Sense user, they can input their location and the destination (Sixth Sense user's location) into the app.
-    - The Direction API calculates the best route, considering factors like traffic conditions and distance, and provides turn-by-turn navigation instructions to the caregiver.
-4. **Real-Time Monitoring Process:**
-    - The caregiver opens the mobile app and accesses the Sixth Sense monitoring feature.
-    - The app continuously fetches the latest location data from Firebase, showing the real-time location of the Sixth Sense user on a map.
-    - If the caregiver needs to navigate to the user, they can initiate the navigation feature within the app, which utilizes the Direction API for route guidance.
-
-Overall, this system ensures that caregivers can monitor the Sixth Sense user's location in real-time, enabling them to provide timely assistance and support as needed.
-### 2.2 Geofencing
-![geofencing](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20129.png)
-Domain
-Mobile App - React Native
-Feature
-In the mobile app the caregiver now have the ability to monitor the blind by setting a circle of radius x position in a map, whenever the the sixth-sense user (blind) leave or move out of the circle the caregiver will receive a alert notification saying the user has left the safezone. this feature allows the caregiver to be alert and proactive even if they are not using the mobile phone thus can improve safety of the blind by taking immediate active and setup.
- Tech Stack
-
-- React Native
-- React native google map
-- expo-task-manager
-- expo-backgroundfetch
-- firebase
-
- Working
-
-In geofence page, User have the ability to select location of the circle fence on the map by clicking where they want to, after choosing a position the user will have radius slider this give user ability to increase and decrease the radius of the circle after hitting save this will get stored in firebase. the main logic is comparing the distance from the center of the circle and the sixth sense user location (blind) with the radius of the circle. if the distance is more than the radius then the blind is out of the safe zone else the user is inside the safe zone. the distance is calculated using haversine formula 
-
- Formula
-
-haversineFormula(center of circle, sixth sense user location) > radius of the circle
-
-### 2.2 Messaging 
-![message](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20178.png)
-Domain
-React native - Mobile App
-**Messaging Feature Overview**
-
-1. **Previous Functionality**: Initially, blind users could send messages using voice commands like "Send Message," which would be sent to the caregiver app.
-2. **Updated Messaging Tab**: Now, there's a dedicated messaging tab within the app where caregivers can type and send messages directly to blind users.
-3. **Text-to-Speech Conversion**: Messages received by blind users are read aloud using machine learning models that convert text to speech specifically tailored for them.
-   
-**Tech Stack**
-
-- **React Native**: Used for developing the mobile app, ensuring cross-platform compatibility.
-- **Firebase**: Utilized for real-time data storage and synchronization, specifically for storing messages sent between caregivers and blind users.
-- **File**: Likely used for storing additional data or configurations related to the messaging feature.
-**Working Process**
-
-1. **Caregiver Message Input**: Caregivers have an input field where they can type messages.
-2. **Message Sending**: Once a caregiver sends a message, it is sent to Firebase for storage and synchronization.
-3. **Message Reception by Blind Users**: The Program running on the blind user's device continuously checks the message collection in Firebase for any new messages from caregivers.
-4. **Inbox Handling**: When a new message is received, it's stored in a data structure resembling a Last-In-First-Out (LIFO) queue or stack, essentially creating an inbox for the blind user.
-5. **Message Reading**: When the blind user requests to read messages, the app reads the messages from the inbox in LIFO order, ensuring they hear the most recent message first.
-
-This setup provides an efficient way for caregivers to communicate with blind users using text messages, with the app handling message storage, retrieval, and text-to-speech conversion seamlessly.
-
-### 2.4 People
- Feature
-
-Place where caregiver can upload people faces with name. its is used in ml part to recognize who is front of them with emotion
-
- Tech Stack
-
-- React Native
-- Firebase
-
- Working
-
-1. **Face Upload Feature:**
-    - In the mobile app, caregivers have a dedicated section where they can upload photos of individuals along with their corresponding names.
-    - Caregivers capture or upload images directly from their device's camera or gallery.
-    - They input the person's name or any relevant information associated with them.
-2. **ML Model for Facial Recognition and Emotion Detection:**
-    - The app integrates a trained ML model for facial recognition and emotion detection.
-    - This model is capable of recognizing faces in images and analyzing facial expressions to determine emotions such as happiness, sadness, anger, etc.
-3. **Integration of Face Database:**
-    - The uploaded images and corresponding names are stored in a face database within the app's backend system.
-    - This database acts as a reference for the ML model during the recognition process.
-4. **Facial Recognition and Emotion Detection Process:**
-    - When the app's camera is activated or an image is uploaded, the ML model is invoked to analyze the faces present in the image.
-    - The model compares the detected faces with the images stored in the face database to identify individuals.
-    - Simultaneously, it analyzes facial expressions to determine the emotional state of the person(s) in the image.
-5. **Output and User Interaction:**
-    - The app displays the recognized person's name along with their detected emotions on the user interface.
-    - Caregivers can view this information in real-time, helping them understand the emotional state of the individual they are interacting with.
-### 2.5 Multi Language Support 
-
----
-
- Domain
-
-React Native - Mobile App
-
-**Objective:**
-
-Enable caregivers to change the language of the mobile app between Hindi and English, with provisions for adding more languages in the future.
-
-**Tech Stack:**
-
-- React Native
-- i18n-js
-- i18next
-- react-i18next
-
-**Implementation:**
-
-1. **Install Dependencies:** Begin by installing the necessary packages using npm or yarn.
-2. **Setup i18n Configuration:** Create an **`i18n.js`** file to configure i18n, define available languages (e.g., English and Hindi), and set up default and fallback languages.
-3. **Create Language JSON Files:** In a **`locales`** folder, create JSON files for each supported language (e.g., **`en.json`** for English and **`hi.json`** for Hindi) containing key-value pairs for translated strings.
-4. **Implement Language Switching:** In React Native components, use the **`useTranslation`** hook from **`react-i18next`** to access translations. Implement language switch buttons or dropdowns that call **`i18n.changeLanguage`** to switch between languages.
-5. **Testing and Deployment:** Test the language switching functionality thoroughly to ensure translations are displayed correctly based on the selected language. Deploy the app with multi-language support enabled.
-
-**Conclusion:**
-
-By following these steps, caregivers can seamlessly change the language of the React Native mobile app, providing a localized experience for users in Hindi and English, with extensibility to support additional languages in the future.
-
-
-### 2.6 Contact 
-
-**Domain:**
-
-Raspberry Pi 5 - Hardware and React Native - Mobile App
-
-**Feature:**
-
-This feature enables blind users (sixth sense users) to make calls to contacts stored in a database through a caregiver app using voice commands. The mic detects the command **“Call <Name of the user stored in caregiver app>”**, converts speech to text, and initiates the call via a GSM module, all managed on the sixth sense hardware. The mobile app provides an interface for adding contacts due to the blind user's difficulty in manual entry.
-
-**Tech Stack:**
-
-- React Native
-- Firebase
-- SIM 808 Module
-
-**Future Scope:**
-
-- [ ]  Implementing contact saving functionality on the sixth sense hardware.
-- [ ]  Adding voice commands for blind users to save contacts.
-
-**Working:**
-
-1. **Command Initiation:**
-    - The blind user initiates the call cycle by voicing the command, e.g., **“Call Hursun”**.
-    - A machine learning (ML) model translates the voice command to text.
-2. **Database Lookup:**
-    - The text data is cross-checked against the database to verify if the contact name exists.
-    - If found, the corresponding phone number is retrieved.
-3. **Call Initiation:**
-    - The retrieved phone number is used to initiate a call via the GSM SIM 808 module on the sixth sense hardware.
-    - Multiple functions like call initiation, hang up, and other call-related actions are supported.
-
-**Enhancements:**
-
-The feature facilitates seamless communication for blind users by leveraging voice commands and advanced hardware capabilities. Future enhancements aim to add more functionalities and improve user interaction, such as adding voice commands for contact saving directly on the sixth sense hardware.
 ## 3 Hardware
 ### Hardware Architecture:
 ![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Hardware-connection-background.png)
@@ -1038,4 +880,187 @@ Different TPU and board benchmark of MobileNet v1 and MobileNet v2 model inferen
 
 
 Power consumption of different board and coral TPU
+## 2 Software
+
+### 2.1 Realtime Tracking:
+![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/caregiver%20app.png)
+
+Feature
+
+In our mobile app, caregivers can monitor the location of Sixth Sense users in real-time using the GPS module in the Sim7600 device. We utilize Firebase to ensure seamless real-time tracking. Additionally, we've integrated the Direction API for convenient navigation to Sixth Sense users.
+
+Tech Stack
+
+- React Native
+- React native google map
+- firebase
+- Google maps API
+- direction API
+- Native-Alert
+
+Working
+
+1. **GPS Module (Sim7600):**
+    - The Sim7600 module is a GPS/GNSS module that provides accurate location data.
+    - It communicates with satellites to determine the device's current coordinates (latitude and longitude).
+    - This data is then sent to the mobile app for processing and display.
+2. **Firebase Realtime Database:**
+    - Firebase is used as a backend service to store and sync location data in real-time.
+    - When the GPS module sends new location updates, these updates are immediately sent to Firebase.
+    - Caregivers and authorized users can access this data through the mobile app, ensuring they have up-to-date information on the Sixth Sense user's location.
+3. **Direction API Integration:**
+    - The Direction API is integrated into the app to provide navigation assistance.
+    - When a caregiver wants to reach the Sixth Sense user, they can input their location and the destination (Sixth Sense user's location) into the app.
+    - The Direction API calculates the best route, considering factors like traffic conditions and distance, and provides turn-by-turn navigation instructions to the caregiver.
+4. **Real-Time Monitoring Process:**
+    - The caregiver opens the mobile app and accesses the Sixth Sense monitoring feature.
+    - The app continuously fetches the latest location data from Firebase, showing the real-time location of the Sixth Sense user on a map.
+    - If the caregiver needs to navigate to the user, they can initiate the navigation feature within the app, which utilizes the Direction API for route guidance.
+
+Overall, this system ensures that caregivers can monitor the Sixth Sense user's location in real-time, enabling them to provide timely assistance and support as needed.
+### 2.2 Geofencing
+![geofencing](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20129.png)
+Domain
+Mobile App - React Native
+Feature
+In the mobile app the caregiver now have the ability to monitor the blind by setting a circle of radius x position in a map, whenever the the sixth-sense user (blind) leave or move out of the circle the caregiver will receive a alert notification saying the user has left the safezone. this feature allows the caregiver to be alert and proactive even if they are not using the mobile phone thus can improve safety of the blind by taking immediate active and setup.
+ Tech Stack
+
+- React Native
+- React native google map
+- expo-task-manager
+- expo-backgroundfetch
+- firebase
+
+ Working
+
+In geofence page, User have the ability to select location of the circle fence on the map by clicking where they want to, after choosing a position the user will have radius slider this give user ability to increase and decrease the radius of the circle after hitting save this will get stored in firebase. the main logic is comparing the distance from the center of the circle and the sixth sense user location (blind) with the radius of the circle. if the distance is more than the radius then the blind is out of the safe zone else the user is inside the safe zone. the distance is calculated using haversine formula 
+
+ Formula
+
+haversineFormula(center of circle, sixth sense user location) > radius of the circle
+
+### 2.2 Messaging 
+![message](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20178.png)
+Domain
+React native - Mobile App
+**Messaging Feature Overview**
+
+1. **Previous Functionality**: Initially, blind users could send messages using voice commands like "Send Message," which would be sent to the caregiver app.
+2. **Updated Messaging Tab**: Now, there's a dedicated messaging tab within the app where caregivers can type and send messages directly to blind users.
+3. **Text-to-Speech Conversion**: Messages received by blind users are read aloud using machine learning models that convert text to speech specifically tailored for them.
+   
+**Tech Stack**
+
+- **React Native**: Used for developing the mobile app, ensuring cross-platform compatibility.
+- **Firebase**: Utilized for real-time data storage and synchronization, specifically for storing messages sent between caregivers and blind users.
+- **File**: Likely used for storing additional data or configurations related to the messaging feature.
+**Working Process**
+
+1. **Caregiver Message Input**: Caregivers have an input field where they can type messages.
+2. **Message Sending**: Once a caregiver sends a message, it is sent to Firebase for storage and synchronization.
+3. **Message Reception by Blind Users**: The Program running on the blind user's device continuously checks the message collection in Firebase for any new messages from caregivers.
+4. **Inbox Handling**: When a new message is received, it's stored in a data structure resembling a Last-In-First-Out (LIFO) queue or stack, essentially creating an inbox for the blind user.
+5. **Message Reading**: When the blind user requests to read messages, the app reads the messages from the inbox in LIFO order, ensuring they hear the most recent message first.
+
+This setup provides an efficient way for caregivers to communicate with blind users using text messages, with the app handling message storage, retrieval, and text-to-speech conversion seamlessly.
+
+### 2.4 People
+ Feature
+
+Place where caregiver can upload people faces with name. its is used in ml part to recognize who is front of them with emotion
+
+ Tech Stack
+
+- React Native
+- Firebase
+
+ Working
+
+1. **Face Upload Feature:**
+    - In the mobile app, caregivers have a dedicated section where they can upload photos of individuals along with their corresponding names.
+    - Caregivers capture or upload images directly from their device's camera or gallery.
+    - They input the person's name or any relevant information associated with them.
+2. **ML Model for Facial Recognition and Emotion Detection:**
+    - The app integrates a trained ML model for facial recognition and emotion detection.
+    - This model is capable of recognizing faces in images and analyzing facial expressions to determine emotions such as happiness, sadness, anger, etc.
+3. **Integration of Face Database:**
+    - The uploaded images and corresponding names are stored in a face database within the app's backend system.
+    - This database acts as a reference for the ML model during the recognition process.
+4. **Facial Recognition and Emotion Detection Process:**
+    - When the app's camera is activated or an image is uploaded, the ML model is invoked to analyze the faces present in the image.
+    - The model compares the detected faces with the images stored in the face database to identify individuals.
+    - Simultaneously, it analyzes facial expressions to determine the emotional state of the person(s) in the image.
+5. **Output and User Interaction:**
+    - The app displays the recognized person's name along with their detected emotions on the user interface.
+    - Caregivers can view this information in real-time, helping them understand the emotional state of the individual they are interacting with.
+### 2.5 Multi Language Support 
+
+---
+
+ Domain
+
+React Native - Mobile App
+
+**Objective:**
+
+Enable caregivers to change the language of the mobile app between Hindi and English, with provisions for adding more languages in the future.
+
+**Tech Stack:**
+
+- React Native
+- i18n-js
+- i18next
+- react-i18next
+
+**Implementation:**
+
+1. **Install Dependencies:** Begin by installing the necessary packages using npm or yarn.
+2. **Setup i18n Configuration:** Create an **`i18n.js`** file to configure i18n, define available languages (e.g., English and Hindi), and set up default and fallback languages.
+3. **Create Language JSON Files:** In a **`locales`** folder, create JSON files for each supported language (e.g., **`en.json`** for English and **`hi.json`** for Hindi) containing key-value pairs for translated strings.
+4. **Implement Language Switching:** In React Native components, use the **`useTranslation`** hook from **`react-i18next`** to access translations. Implement language switch buttons or dropdowns that call **`i18n.changeLanguage`** to switch between languages.
+5. **Testing and Deployment:** Test the language switching functionality thoroughly to ensure translations are displayed correctly based on the selected language. Deploy the app with multi-language support enabled.
+
+**Conclusion:**
+
+By following these steps, caregivers can seamlessly change the language of the React Native mobile app, providing a localized experience for users in Hindi and English, with extensibility to support additional languages in the future.
+
+
+### 2.6 Contact 
+
+**Domain:**
+
+Raspberry Pi 5 - Hardware and React Native - Mobile App
+
+**Feature:**
+
+This feature enables blind users (sixth sense users) to make calls to contacts stored in a database through a caregiver app using voice commands. The mic detects the command **“Call <Name of the user stored in caregiver app>”**, converts speech to text, and initiates the call via a GSM module, all managed on the sixth sense hardware. The mobile app provides an interface for adding contacts due to the blind user's difficulty in manual entry.
+
+**Tech Stack:**
+
+- React Native
+- Firebase
+- SIM 808 Module
+
+**Future Scope:**
+
+- [ ]  Implementing contact saving functionality on the sixth sense hardware.
+- [ ]  Adding voice commands for blind users to save contacts.
+
+**Working:**
+
+1. **Command Initiation:**
+    - The blind user initiates the call cycle by voicing the command, e.g., **“Call Hursun”**.
+    - A machine learning (ML) model translates the voice command to text.
+2. **Database Lookup:**
+    - The text data is cross-checked against the database to verify if the contact name exists.
+    - If found, the corresponding phone number is retrieved.
+3. **Call Initiation:**
+    - The retrieved phone number is used to initiate a call via the GSM SIM 808 module on the sixth sense hardware.
+    - Multiple functions like call initiation, hang up, and other call-related actions are supported.
+
+**Enhancements:**
+
+The feature facilitates seamless communication for blind users by leveraging voice commands and advanced hardware capabilities. Future enhancements aim to add more functionalities and improve user interaction, such as adding voice commands for contact saving directly on the sixth sense hardware.
+
 
