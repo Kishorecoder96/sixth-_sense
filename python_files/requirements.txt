@@ -26,6 +26,7 @@ transformers
 pyaudio
 webrtcvad
 serial
+ollama
 pynmea2
 python-gsmmodem-new
 gpiod

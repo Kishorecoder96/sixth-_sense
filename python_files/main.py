@@ -1,5 +1,6 @@
 import time
-import spacy
+import spacy 
+import ollama
 import numpy as np
 import threading
 from server import FirebaseManager
@@ -83,15 +84,11 @@ def process1():
                 elif "what do i have" in voice_input.lower()  or ("create a event" in voice_input.lower() ) or ("make a note" in voice_input.lower() ):
                     event.find(voice_input.lower())
 
-                # elif 'currency' in [token.lemma_ for token in doc]:
-                #     webcam = WebcamCapture(voice_assistant)
-                #     image_path = webcam.capture_photo()
-                #     currency_detector.detect_currency(image_path)
                     
                 elif 'navigate' in [token.lemma_ for token in doc]:
                     voice_assistant.speak("Tell me the destination")
                     route = stt()
-                    navigate.setupNavigation('Mogappair erischeme')
+                    navigate.setupNavigation(route)
                     if "stop" in [token.lemma_ for token in doc]:
                          navigate.stopNavigation()
                 
@@ -108,8 +105,8 @@ def process1():
                      if contact:
                          pi.callPhone(contact['phoneNumber'])
                          
-                elif "question" in [token.lemma_ for token in doc]:
-                #else:
+               
+                else:
                     voice_assistant.speak("yes sir")
                     question = stt()
                     if (is_offline):
@@ -141,7 +138,7 @@ def process3():
 
 def process4():
     
-    multimodal = multimodal_perception()
+    multimodal = multimodal_perception(voice_assistant)
     while True:
         video.getFrame()
         multimodal.run(video.frame)
