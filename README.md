@@ -50,25 +50,25 @@
 
 ## Executing the Code:
   ####  For Software:
-  Download the library and run the code:
+  1. Download the library and run the code:
    ```bash
         npm install
         npm start
    ```
 #### For Machine Learning:
-Create a new conda environment named sense by running:
+1. Create a new conda environment named sense by running:
 ```bash
 conda create -n sense python=3.11
 ```
-Activate the environment:
+2. Activate the environment:
 ```bash
 conda activate sense
 ```
-To install the requirements:
+3. To install the requirements:
 ```bash
 pip install -r requirements.txt
 ```
-To run the file:
+4.To run the file:
 ```
 python main.py —modeldir objDetandGesRec/model/custom_mo
 ```
@@ -115,28 +115,75 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
 ![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Old%20architecture%20(2).png)
 ### **New Architecture**
 ![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/overallArchitecture-background.png)
+### Features
 ![features](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Features.png)
 ### Technology Arsenal:
-1. Firebase <img width="30" height="20" src="https://img.icons8.com/color/48/firebase.png" alt="firebase"/> - Infrastructure and Security: Provides a reliable and scalable backend with built-in security features for data management and user authentication.
-2. React Native <img width="30" height="20" src="https://img.icons8.com/officel/30/react.png" alt="react"/> - App for Caretaker: Cross-platform mobile application framework ensuring a consistent user experience across different devices and operating systems.
-3. Pi OS <img width="30" height="20" src="https://img.icons8.com/color/48/raspberry.png" alt="raspberry"/>- Lightweight and Automation: Optimized operating system for Raspberry Pi devices, conserving resources and enabling automation tasks.
-4. Gemini  - Personal Companion: Core intelligence system offering environmental awareness, navigation, alerts, and voice messaging for personalized assistance.
-5. OpenCV <img width="30" height="20" src="https://img.icons8.com/color/48/opencv.png" alt="opencv"/>- Face Recognition: Utilized for facial recognition functionalities to enhance security and provide personalized assistance.
-6. Torch - Speech to Text: Enables voice command interaction through speech-to-text conversion, enhancing accessibility and user experience.
-7. OCR <img width="30" height="20" src="https://img.icons8.com/material/24/printed-ocr.png" alt="printed-ocr"/>- Extracting Images: Extracts text from images to improve comprehension and facilitate data processing.
-8. Google Maps API <img width="30" height="20" src="https://img.icons8.com/color/48/google-maps-new.png" alt="google-maps-new"/>- Directions API: Integrates reliable navigation information from Google Maps for safe and efficient travel planning.
-9. Google Calendar API <img width="30" height="20" src="https://img.icons8.com/color/48/google-calendar--v2.png" alt="google-calendar--v2"/>:provide virtual assistant functionalities, including accessing calendar events and creating notes using speech recognition and text-to-speech.
-10. Coral TPU <img width="30" height="20" src="https://img.icons8.com/office/30/coral.png" alt="coral"/>- Accelerated Machine Learning: Integrates Coral TPU for accelerated machine learning tasks, enhancing performance and efficiency.
-11. TensorFlow Lite - Lightweight Machine Learning: Utilizes TensorFlow Lite for deploying machine learning models on resource-constrained devices, optimizing performance on edge devices.
-12. MediaPipe - MediaPipe is chosen for its real-time hand tracking and gesture recognition capabilities, allowing the device to understand hand movements and translate them into action
-13. Google Speech-To-Text <img width="30" height="20" src="https://img.icons8.com/ios-glyphs/30/speech-to-text.png" alt="speech-to-text"/>-  converts speech to text for situations where an internet connection allows real-time processing for greater accuracy and features. 
-14. Whisper Speech-To-Text <img width="30" height="20" src="https://img.icons8.com/ios-filled/50/whisper.png" alt="whisper"/> - For offline use, our device employs a built-in speech recognition model for real-time speech-to-text conversion, ensuring functionality without an internet connection
-15. pyttsx3 - converts text to speech on your device itself (locally), providing voice feedback without needing an internet connection. 
-16. langchain -  acts as a bridge, smoothing communication between the user and Gemini. It refines the questions and requests for optimal understanding by the large language model.
-17. Face-Recognition <img width="30" height="20" src="https://img.icons8.com/external-flat-circular-vectorslab/68/external-Face-Recognition-interior-flat-circular-vectorslab.png" alt="external-Face-Recognition-interior-flat-circular-vectorslab"/>- it recognizes faces, helping identify people visually imapired individual meet.
-18. pyaudio - it acts as a microphone, capturing spoken words for the device to understand.
-19. geopy - it bridges the gap, calculating distances between locations based on their coordinates.
-20. easyocr - it empowers the device to "read" text, converting images of characters to digital text.
+
+
+#### Google Products
+
+1. **Firebase** <img width="30" height="20" src="https://img.icons8.com/color/48/firebase.png" alt="firebase">
+   - **Infrastructure and Security:** Provides a reliable and scalable backend with built-in security features for data management and user authentication.
+
+2. **Google Maps API** <img width="30" height="20" src="https://img.icons8.com/color/48/google-maps-new.png" alt="google-maps-new">
+   - **Directions API:** Integrates reliable navigation information from Google Maps for safe and efficient travel planning.
+
+3. **Google Calendar API** <img width="30" height="20" src="https://img.icons8.com/color/48/google-calendar--v2.png" alt="google-calendar--v2">
+   - **Virtual Assistant Functionalities:** Provides virtual assistant functionalities, including accessing calendar events and creating notes using speech recognition and text-to-speech.
+
+4. **Gemini**
+   - **Personal Companion:** Core intelligence system offering environmental awareness, navigation, alerts, and voice messaging for personalized assistance.
+
+5. **Coral TPU** <img width="30" height="20" src="https://img.icons8.com/office/30/coral.png" alt="coral">
+   - **Accelerated Machine Learning:** Integrates Coral TPU for accelerated machine learning tasks, enhancing performance and efficiency.
+
+6. **TensorFlow Lite**
+   - **Lightweight Machine Learning:** Utilizes TensorFlow Lite for deploying machine learning models on resource-constrained devices, optimizing performance on edge devices.
+
+7. **MediaPipe**
+   - **Real-time Hand Tracking and Gesture Recognition:** Chosen for its real-time hand tracking and gesture recognition capabilities, allowing the device to understand hand movements and translate them into action.
+
+8. **Google Speech-To-Text** <img width="30" height="20" src="https://img.icons8.com/ios-glyphs/30/speech-to-text.png" alt="speech-to-text">
+   - **Real-time Speech-to-Text Conversion:** Converts speech to text for situations where an internet connection allows real-time processing for greater accuracy and features.
+
+#### Other Technologies
+
+9. **React Native** <img width="30" height="20" src="https://img.icons8.com/officel/30/react.png" alt="react">
+   - **App for Caretaker:** Cross-platform mobile application framework ensuring a consistent user experience across different devices and operating systems.
+
+10. **Pi OS** <img width="30" height="20" src="https://img.icons8.com/color/48/raspberry.png" alt="raspberry">
+    - **Lightweight and Automation:** Optimized operating system for Raspberry Pi devices, conserving resources and enabling automation tasks.
+
+11. **OpenCV** <img width="30" height="20" src="https://img.icons8.com/color/48/opencv.png" alt="opencv">
+    - **Face Recognition:** Utilized for facial recognition functionalities to enhance security and provide personalized assistance.
+
+12. **Torch**
+    - **Speech to Text:** Enables voice command interaction through speech-to-text conversion, enhancing accessibility and user experience.
+
+13. **OCR** <img width="30" height="20" src="https://img.icons8.com/material/24/printed-ocr.png" alt="printed-ocr">
+    - **Extracting Images:** Extracts text from images to improve comprehension and facilitate data processing.
+
+14. **Whisper Speech-To-Text** <img width="30" height="20" src="https://img.icons8.com/ios-filled/50/whisper.png" alt="whisper">
+    - **Offline Speech Recognition:** Employed for real-time speech-to-text conversion without an internet connection.
+
+15. **pyttsx3**
+    - **Text to Speech Conversion:** Converts text to speech on the device itself, providing voice feedback without an internet connection.
+
+16. **langchain**
+    - **Optimizing Communication:** Acts as a bridge, refining questions and requests for optimal understanding by the large language model.
+
+17. **Face-Recognition** <img width="30" height="20" src="https://img.icons8.com/external-flat-circular-vectorslab/68/external-Face-Recognition-interior-flat-circular-vectorslab.png" alt="external-Face-Recognition-interior-flat-circular-vectorslab">
+    - **Visual Identification:** Recognizes faces, helping visually impaired individuals to identify people.
+
+18. **pyaudio**
+    - **Microphone Interface:** Captures spoken words for the device to understand.
+
+19. **geopy**
+    - **Location-Based Services:** Calculates distances between locations based on their coordinates.
+
+20. **easyocr**
+    - **Text Recognition:** Empowers the device to "read" text, converting images of characters to digital text.
+
 
 ## 1 Machine Learning:
 ## 1.1 Optical character Recognition(OCR):
@@ -689,8 +736,52 @@ We've developed a currency detection model tailored to assist visually impaired 
 5. **Currency Detection and Output**:
     - If the detected currency denomination is new and not already in the **`currency`** list, it is added to the list.
     - The voice assistant announces the detected currency denomination to the user using pyttsx3 for text-to-speech output.
+### 1.14 Optimizing Code using Threading
 
-## 3 Hardware
+## Introduction
+
+Our system employs multithreading to concurrently manage diverse modules. One thread oversees Gemini, Gemma, speech-to-speech, and OCR functionalities, ensuring seamless communication and text recognition. Another thread interfaces with PiApi to handle sensor data, including call, SMS, and location information, vital for navigation. A third thread employs depth estimation via Midas for precise distance calculation, aiding in obstacle avoidance. Finally, a fourth thread along with **Coral TPU (Tensor Processing unit)** orchestrates emotion detection, face recognition, gesture recognition, and object detection through Face Distance, enhancing user interaction and environmental awareness. This modular approach optimizes system performance, responsiveness, and functionality for visually impaired individuals.
+![threading](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/thread-background.webp)
+Workflow
+
+1. **Initialization:**
+    - Begin by initializing the system and all necessary modules.
+2. **Thread 1: Gemini, Gemma, Speech-to-speech, OCR:**
+    - Start the first thread to manage Gemini, Gemma, speech-to-speech conversion, and optical character recognition (OCR). These modules handle tasks related to text recognition, speech synthesis, and processing.
+    
+    <aside>
+    💡 Gemini vision pro and Speech to speech is online with the help of **GSM Sim 7600 G H 4g LTE** due to its poor performance in offline but we also managed add offline backup using Whisper Tiny API for speech to speech and Gemma 2B 4qint for LLM capability
+    
+    </aside>
+    
+3. **Thread 2: PiApi for Sensor Interface:**
+    - Launch the second thread dedicated to PiApi, which serves as the interface for all sensors and modules connected with Raspberry Pi 5.
+    - Manage functionalities such as call handling, SMS processing, vibration alerts, location tracking, and utilizing the gyroscope module for fall detection.
+4. **Thread 3: Distance Estimation with Midas:**
+    - Initialize the third thread for distance estimation utilizing depth estimation through Midas.
+    - This thread focuses on tasks related to estimating distances between objects and the visually impaired individual.
+5. **Thread 4: Emotion Detection, Face Recognition, and Gesture/Object Recognition:**
+    - Emotion detection systems swiftly categorize emotions like happiness, sadness, and anger, while face recognition capabilities ensure precise identification of individuals from digital images or video frames.
+    - Our pioneering Face Distance technique measures facial feature distances to accurately infer emotions, enhancing our emotional detection capabilities significantly.
+    - Gesture recognition interprets human gestures for applications like sign language translation, and object detection swiftly classifies objects within images or video streams.
+    
+    <aside>
+    💡 Utilizing EdgeTpu Tflite models optimizes AI performance on Edge devices, ensuring smooth operation and responsiveness even in resource-constrained environments.
+    
+    </aside>
+    
+    - Seamless integration with Edge devices like Raspberry Pi with EdgeTpu and Google Coral devices, along with frameworks like TensorFlow Lite, simplifies deployment and management, maximizing AI potential in real-world applications.
+6. **Integration and Interaction:**
+    - Ensure seamless integration and interaction between threads to facilitate smooth communication and operation.
+    - Enable each thread to share relevant data and insights as required for comprehensive system functionality.
+
+Challenges
+
+- Managing data sharing between Thread 3 and Thread 4 posed challenges, especially regarding access to Picamera2 data, necessitating a common data passing approach to ensure seamless integration of functionalities.
+- Given resource constraints, optimizing code became imperative. Leveraging Tflite for most ML models significantly improved performance and outcomes, aligning with our goal of efficient resource utilization and enhanced results.
+- Error handling to avoid Thread failure
+
+## 2 Hardware
 ### Hardware Architecture:
 ![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Hardware-connection-background.png)
 The hardware architecture consist of 
@@ -733,7 +824,7 @@ During startup, an error concerning the MSI PCIe Address was also encountered. A
     **Solution:** To address this, we switched to the Sim7600X G-H Raspberry Pi Hat. This alternative not only integrated GPS capabilities but also provided 4G LTE internet connectivity for the Raspberry Pi 5. This upgrade significantly enhanced our system's responsiveness to cloud models, ensuring smoother and faster operations.
     
     
-### 3.1 Fall Detection 
+### 2.1 Fall Detection 
 ![](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/alert-background.png)
 The MPU-6050 IMU (Inertial Measurement Unit) is a sensor that combines a 3-axis accelerometer and a 3-axis gyroscope. The accelerometer measures gravitational acceleration, while the gyroscope measures rotational velocity. Additionally, this module includes a temperature sensor. It's commonly used for determining the orientation of a moving object.
 
@@ -793,7 +884,7 @@ Results:
 Using a gyroscope sensor for fall detection shows promising outcomes in accuracy improvement and reduction of false positives and negatives in fall detection systems. By combining accelerometers and gyroscopes, algorithms have been developed to enhance accuracy while minimizing errors.
 
 
-### 3.2 **Vibration Motor: Enhancing Safety Measures**
+### 2.2 **Vibration Motor: Enhancing Safety Measures**
 
 In the realm of safety measures, the vibration motor emerges as a crucial component to alert users promptly in various scenarios, such as detecting obstacles or receiving notifications from caregivers.
 
@@ -846,7 +937,7 @@ Connecting the vibration motor to a Raspberry Pi or Arduino is relatively straig
 
 In conclusion, vibration motors are invaluable tools for enhancing safety and providing timely notifications in various applications. Whether it's alerting users to obstacles, ensuring their safety, or facilitating caregiver communication, these compact devices offer versatile solutions with minimal intrusion and maximal effectiveness.
 
-### 3.3 TPU (Tensor Processing Unit)
+### 2.3 TPU (Tensor Processing Unit)
 
 We employ TPU (Tensor Processing Unit) technology to enhance the local execution performance of ML (Machine Learning) Lite models. This implementation not only optimizes the execution speed but also alleviates the computational load on the CPU. This strategic offloading of tasks to the TPU enables us to concurrently run resource-intensive models such as text-to-speech and speech-to-text transformations on the CPU while efficiently managing continuous tasks like object detection on the TPU. This segregation of tasks ensures that each component operates at its peak efficiency, contributing to overall system performance and responsiveness.
 
@@ -880,9 +971,9 @@ Different TPU and board benchmark of MobileNet v1 and MobileNet v2 model inferen
 
 
 Power consumption of different board and coral TPU
-## 2 Software
+## 3 Software
 
-### 2.1 Realtime Tracking:
+### 3.1 Realtime Tracking:
 ![caregiver app](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Mobile_app/assets/images/gdsc/caregiver%20app.png)
 
 Feature
@@ -918,7 +1009,7 @@ Working
     - If the caregiver needs to navigate to the user, they can initiate the navigation feature within the app, which utilizes the Direction API for route guidance.
 
 Overall, this system ensures that caregivers can monitor the Sixth Sense user's location in real-time, enabling them to provide timely assistance and support as needed.
-### 2.2 Geofencing
+### 3.2 Geofencing
 ![geofencing](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20129.png)
 Domain
 Mobile App - React Native
@@ -940,7 +1031,7 @@ In geofence page, User have the ability to select location of the circle fence o
 
 haversineFormula(center of circle, sixth sense user location) > radius of the circle
 
-### 2.2 Messaging 
+### 3.3 Messaging 
 ![message](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Frame%20178.png)
 Domain
 React native - Mobile App
@@ -965,7 +1056,7 @@ React native - Mobile App
 
 This setup provides an efficient way for caregivers to communicate with blind users using text messages, with the app handling message storage, retrieval, and text-to-speech conversion seamlessly.
 
-### 2.4 People
+### 3.4 People
  Feature
 
 Place where caregiver can upload people faces with name. its is used in ml part to recognize who is front of them with emotion
@@ -994,7 +1085,7 @@ Place where caregiver can upload people faces with name. its is used in ml part 
 5. **Output and User Interaction:**
     - The app displays the recognized person's name along with their detected emotions on the user interface.
     - Caregivers can view this information in real-time, helping them understand the emotional state of the individual they are interacting with.
-### 2.5 Multi Language Support 
+### 3.5 Multi Language Support 
 
 ---
 
@@ -1026,7 +1117,7 @@ Enable caregivers to change the language of the mobile app between Hindi and Eng
 By following these steps, caregivers can seamlessly change the language of the React Native mobile app, providing a localized experience for users in Hindi and English, with extensibility to support additional languages in the future.
 
 
-### 2.6 Contact 
+### 3.6 Contact 
 
 **Domain:**
 
