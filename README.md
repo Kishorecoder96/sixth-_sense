@@ -73,43 +73,6 @@ pip install -r requirements.txt
 python main.py —modeldir objDetandGesRec/model/custom_mo
 ```
 ## **Architecture**:
-
-
-The hardware architecture consist of 
-
-- Raspberry Pi 5
-- Pi Camera 2 module
-- Sim 7600X G-H Raspberry Pi hat module
-- Coral USB Accelerator  TPU (Tensor Processing Unit)
-- USB to Aux for headphone
-- Gyroscope (Mpu6050)
-- Vibration Motor
-- 3D Model to house all the components
-
-
-
-
-
- **Hardware Connectivity**
-The diagram illustrates the connectivity of various sensors and modules to the Raspberry Pi 5. Notably, the Coral TPU and earphones are connected to the Pi's USB port, while the SIM7600 for network connectivity utilizes both UART and USB for bidirectional communication. This setup ensures robust network connectivity and seamless data exchange.
-
-The gyroscope employs the I2C interface for communication with the Raspberry Pi, offering precise motion sensing capabilities. Meanwhile, the camera is linked to the Pi via PCIe, facilitating high-speed data transfer and enabling advanced imaging functionalities.
-
-Additionally, the vibration module interfaces with the Pi's GPIO pins, allowing for tactile feedback and enhancing user interaction. This comprehensive integration of diverse communication protocols and interfaces optimizes the Raspberry Pi 5's functionality across various domains.
-
- Challenges Faced
-
-1. We attempted to utilize the M.2 Coral TPU A+E Key (https://coral.ai/products/m2-accelerator-ae) in conjunction with the Pineberry Hat AI (https://pineboards.io/products/hat-ai-for-raspberry-pi-5) as an interface between the TPU and Raspberry Pi. Despite investing over 100 hours in configuration and setup, the Coral TPU failed to register as connected. We made multiple adjustments to the Debian OS configuration file, but the TPU remained undetected in the PCIe channel.
-During startup, an error concerning the MSI PCIe Address was also encountered. After exhaustive troubleshooting attempts, we concluded that the M.2 Coral TPU A+E Key might be faulty. Consequently, we reverted to using the USB Coral TPU, which was already in our possession and functioned seamlessly.
-
-1. Setting up the TPU software for Raspberry Pi presented its own set of challenges, especially considering Google's discontinuation of support since 2019. The PyCoral library, a critical component, was compatible only with Python version 3.9. However, the Picamera2 Python library, essential for camera operations, required Python version 3.11. This compatibility conflict made it impossible to run both libraries simultaneously.
-**Solution**: After extensive research and a night of troubleshooting, we discovered multiple open-source contributions that addressed this issue. These contributions enabled the PyCoral library to function seamlessly on Python version 3.11 and also provided an updated TensorFlow Lite runtime that supported the specific PyCoral version. This breakthrough not only resolved the compatibility hurdles but also ensured smooth integration and operation of the TPU software on the Raspberry Pi.
-2. Initially, obtaining internet connectivity posed a challenge when using the GSM Module. We opted for the Sim 808 Module, which not only facilitated calling, receiving messages, and establishing network connectivity but also offered GPS functionality. However, we encountered limitations with only 2G network access, resulting in sluggish responses from the Gemini API and speech recognition processes.
-    
-    **SIM 808 Module**
-    
-    **Solution:** To address this, we switched to the Sim7600X G-H Raspberry Pi Hat. This alternative not only integrated GPS capabilities but also provided 4G LTE internet connectivity for the Raspberry Pi 5. This upgrade significantly enhanced our system's responsiveness to cloud models, ensuring smoother and faster operations.
-    
     
 ### **Old Architecture**
 ![Old Archictecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Old%20architecture%20(2).png)
@@ -1005,10 +968,33 @@ After downloading and implementing feranick's version of pycoral, I successfully
 We developed our object detection and gesture recognition models as EdgeTPU TFLite models, specifically using uint8 quantization. These models are utilized for object detection; when the system detects a "wrist close" gesture, it activates the object detection function to identify objects. Conversely, when the user opens their wrist, the system stops detecting objects, optimizing resource utilization and response time.
 *Benchmarks**
 
-Different TPU and board benchmark of MobileNet v1 and MobileNet v2 model inference speed.
+### 2.5 Pyapi:
+ Introduction
 
+The PI API serves as the pivotal interface connecting a myriad of sensors and modules seamlessly integrated with the Raspberry Pi 5. These modules encompass critical functionalities tailored to enhance the daily experiences of visually impaired individuals. From facilitating essential communication through call and SMS features to providing real-time alerts via vibration, the PI API ensures swift access to assistance. Moreover, with capabilities like object proximity detection and navigation assistance, it empowers users to navigate their surroundings with confidence. Furthermore, leveraging gyroscope technology, the API swiftly alerts caregivers in the unfortunate event of a fall, prioritizing user safety and well-being. This comprehensive suite of functionalities underscores our commitment to fostering independence and enhancing the quality of life for visually impaired individuals.
 
-Power consumption of different board and coral TPU
+ Requirements
+
+- pynmea2
+- python-gsmmodem-new
+- mpu6050-raspberrypi
+- gpiod
+- **serial**
+- Google Speech Recognition
+- pyttsx3
+
+ Workflow of pyAPI
+
+1. **Initialization:** The **`piAPI`** class is initialized with necessary dependencies such as the voice assistant and database connection. Various modules including GPS, GSM, gyro, and vibration are set up during initialization.
+2. **GPS Setup:** The **`setUpGPS()`** method initializes GPS functionality by establishing a serial connection and activating GPS sessions. Location data is retrieved periodically using the **`getLocation()`** method, which parses NMEA messages to obtain latitude and longitude coordinates.
+3. **GSM Setup:** The **`setupGSM()`** method initializes GSM functionality, allowing the device to make phone calls and send SMS messages. Incoming calls are handled by the **`handleIncomingCall()`** method, which alerts the user and automatically answers after multiple rings.
+4. **Phone Call:** The **`callPhone()`** method initiates a phone call to a specified number. The GPS session is stopped before making the call, and resumed after the call ends.
+5. **SMS Sending:** The **`sendSms()`** method sends an SMS message to a specified number. Similar to phone calls, the GPS session is temporarily stopped during SMS transmission.
+6. **Gyro Setup:** The **`setupGyro()`** method initializes the gyroscope module, which is used to detect falls. Acceleration data is obtained from the MPU6050 sensor, and fall detection is performed based on predefined threshold values.
+7. **Fall Detection:** The **`listenGyro()`** method continuously monitors acceleration data from the gyroscope. If the magnitude of acceleration falls below a predefined threshold, indicating a potential fall, the **`fallDetected`** flag is set.
+8. **Vibration Setup:** The **`setupVibrate()`** method initializes the vibration functionality, allowing the device to provide tactile feedback. Vibration is controlled using GPIO pins, with the **`vibrateMotor()`** method toggling the vibration motor on and off for a specified duration.
+9. **Fall Alert:** If a fall is detected, the device triggers the vibration motor to alert the user. This alert mechanism aims to notify caregivers or nearby individuals in case of emergencies.
+
 ## 3 Software
 
 ### 3.1 Realtime Tracking:
@@ -1191,5 +1177,36 @@ This feature enables blind users (sixth sense users) to make calls to contacts s
 **Enhancements:**
 
 The feature facilitates seamless communication for blind users by leveraging voice commands and advanced hardware capabilities. Future enhancements aim to add more functionalities and improve user interaction, such as adding voice commands for contact saving directly on the sixth sense hardware.
+### 3.7 Step by Step Navigation:
 
+  Introduction
+
+In our system, we seamlessly integrate step-by-step navigation to aid visually challenged individuals in navigating their surroundings. Leveraging requests, geopy, and the Google Maps API, we calculate distances between coordinates, customizing guidance. Through the Google Distance API, we offer personalized route planning based on the user's input obtained via Google Speech Recognition. Additionally, we utilize text-to-speech functionality with pyttsx3, enabling users to receive step-by-step instructions audibly. This comprehensive approach enhances independence, empowering users to confidently navigate to their destinations while considering factors like accessibility and safety. By providing reliable navigation assistance, our system improves mobility and access to essential services, ultimately enhancing the overall quality of life for visually challenged individuals.
+![back](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/navigation-background.png)
+ Requirements
+
+- geopy
+- Google Speech Recognition
+- pyttsx3
+- requests
+
+ Workflow of Navigation
+
+1. **Initialization**:
+    - The **`NavigateUser`** class is initialized with the necessary parameters, including a **`voice_assistant`** object and the user's coordinates.
+2. **Command Initiation**:
+    - Upon receiving the command "Sense navigate," the system triggers the navigation process by calling the **`setupNavigation`** method.
+3. **Setup Navigation**:
+    - When the user requests navigation by providing an address, the **`setupNavigation`** method is called.
+    - The provided address is converted into geographical coordinates using the Mapbox Geocoding API.
+    - Then, the user's current coordinates and the destination coordinates are used to fetch navigation directions from the Mapbox Directions API.
+    - If successful, the navigation steps are extracted, and the voice assistant speaks the first instruction.
+4. **Navigation Process**:
+    - The **`navigate`** method is called iteratively within a loop while the user is navigating.
+    - It checks if step-by-step navigation is active and if there are remaining steps to follow.
+    - For each step, it calculates the distance between the user's current position and the next maneuver location.
+    - If the user is within 20 meters of the next maneuver, the current step is completed, and the voice assistant speaks the next instruction.
+    - Once all steps are completed, the voice assistant announces that the destination is reached, and navigation stops.
+5. **Stop Navigation**:
+    - If the user decides to stop navigation, the **`stopNavigation`** method is called, and the navigation process is terminated.
 
