@@ -96,6 +96,9 @@ python main.py -—modeldir objDetandGesRec/model/custom_model_lite
 ![New Architecture](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/overallArchitecture-background.png)
 ### Features
 ![features](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/Features.png)
+
+### Components:
+![hardware](https://github.com/Kishorecoder96/sixth-_sense/blob/main/Flowchart%20Images/hardware.jpg)
 ### Technology Arsenal:
 
 
